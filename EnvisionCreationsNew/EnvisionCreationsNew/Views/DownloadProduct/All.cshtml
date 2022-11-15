@@ -1,0 +1,52 @@
+﻿@model List<DownloadProductModel>
+@{
+    ViewData["Title"] = "Avalable Models";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Count <= 0)
+{
+    <h2 class="display-4">No</h2>
+}
+@foreach (var product in Model)
+{
+    <tr>
+        <td>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="@product.Name" readonly>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="@product.Description" readonly>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="@product.Vertices" readonly>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="@product.Geometry" readonly>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="@product.Polygons" readonly>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="@product.Category" readonly>
+            </div>
+        </td>
+        <td>
+            <div>
+                <form method="post" asp-route-id="@product.Id">
+                    <button type="submit" class="btn btn-secondary" value="Download" />
+                </form>
+            </div>
+        </td>
+    </tr>
+}

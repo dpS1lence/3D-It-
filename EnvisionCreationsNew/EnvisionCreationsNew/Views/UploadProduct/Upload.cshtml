@@ -1,0 +1,54 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Upload Product";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+    <h1 class="display-4">Upload Product</h1>
+    @using (Html.BeginForm("Upload", "UploadProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="mb-3">
+            <label asp-for="@Model.Name" class="form-label">Name</label>
+            <input asp-for="@Model.Name" class="form-control" aria-required="true" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="@Model.Description" class="form-label">Description</label>
+            <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="@Model.Polygons" class="form-label">Polygons</label>
+            <textarea asp-for="@Model.Polygons" class="form-control" aria-required="true" rows="1"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="@Model.Vertices" class="form-label">Vertices</label>
+            <textarea asp-for="@Model.Vertices" class="form-control" aria-required="true" rows="1"></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="@Model.Geometry" class="form-label">Geometry</label>
+            <textarea asp-for="@Model.Geometry" class="form-control" aria-required="true" rows="1"></textarea>
+        </div>
+        <div class="mb-3">
+            <div class="form-group">
+                <select asp-for="@Model.Category" class="form-control" id="exampleFormControlSelect1">
+                    <option>Category</option>
+                    <option>Art</option>
+                    <option>Material</option>
+                </select>
+            </div>
+@*            <label asp-for="@Model.Category" class="form-label">Category</label>
+            <textarea asp-for="@Model.Category" class="form-control" aria-required="true" rows="5"></textarea>*@
+        </div>
+        <div>
+            <p>Upload file</p>
+            <input asp-for="@Model.AttachmentModel" class="form-control" accept=".blend" type="file" />
+        </div>
+        <div>
+            <p>Upload photo</p>
+            <input asp-for="@Model.Photo" class="form-control" accept=".png" type="file" />
+        </div>
+        <form asp-controller="UploadProduct" asp-action="Upload" class="input-group-sm">
+            <input type="submit" value="Upload" class="fs-6 btn btn-success mb-3 p-2" />
+        </form>
+    }
+</div>
