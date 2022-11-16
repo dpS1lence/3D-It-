@@ -6,27 +6,31 @@
 
 <div class="text-center">
     <h1 class="display-4">Upload Product</h1>
-    @using (Html.BeginForm("Upload", "UploadProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
+    <form enctype="multipart/form-data" asp-action="Upload">
         <div class="mb-3">
             <label asp-for="@Model.Name" class="form-label">Name</label>
             <input asp-for="@Model.Name" class="form-control" aria-required="true" />
+            <span asp-validation-for="@Model.Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="@Model.Description" class="form-label">Description</label>
             <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5"></textarea>
+            <span asp-validation-for="@Model.Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="@Model.Polygons" class="form-label">Polygons</label>
             <textarea asp-for="@Model.Polygons" class="form-control" aria-required="true" rows="1"></textarea>
+            <span asp-validation-for="@Model.Polygons" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="@Model.Vertices" class="form-label">Vertices</label>
             <textarea asp-for="@Model.Vertices" class="form-control" aria-required="true" rows="1"></textarea>
+            <span asp-validation-for="@Model.Vertices" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="@Model.Geometry" class="form-label">Geometry</label>
             <textarea asp-for="@Model.Geometry" class="form-control" aria-required="true" rows="1"></textarea>
+            <span asp-validation-for="@Model.Geometry" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <div class="form-group">
@@ -35,20 +39,21 @@
                     <option>Art</option>
                     <option>Material</option>
                 </select>
+                <span asp-validation-for="@Model.Category" class="text-danger"></span>
             </div>
-@*            <label asp-for="@Model.Category" class="form-label">Category</label>
-            <textarea asp-for="@Model.Category" class="form-control" aria-required="true" rows="5"></textarea>*@
         </div>
         <div>
             <p>Upload file</p>
             <input asp-for="@Model.AttachmentModel" class="form-control" accept=".blend" type="file" />
+            <span asp-validation-for="@Model.AttachmentModel" class="text-danger"></span>
         </div>
         <div>
             <p>Upload photo</p>
             <input asp-for="@Model.Photo" class="form-control" accept=".png" type="file" />
+            <span asp-validation-for="@Model.Photo" class="text-danger"></span>
         </div>
         <form asp-controller="UploadProduct" asp-action="Upload" class="input-group-sm">
             <input type="submit" value="Upload" class="fs-6 btn btn-success mb-3 p-2" />
         </form>
-    }
+    </form>
 </div>

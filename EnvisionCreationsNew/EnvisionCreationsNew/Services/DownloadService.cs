@@ -59,7 +59,8 @@ namespace EnvisionCreationsNew.Services
 
             return product;
         }
-
+        [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
+        [RequestSizeLimit(209715200)]
         public async Task<IActionResult> DownloadAsync(int? id)
         {
             var entity = await context.ProductsContent.FirstOrDefaultAsync(a => a.ProductId == id);
@@ -67,7 +68,7 @@ namespace EnvisionCreationsNew.Services
             var productEntity = await context.Products.FirstOrDefaultAsync(a => a.Id == id);
             try
             {
-                var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == entity.ContentId);
+                var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == 6);
 
                 if (contentEntity == null)
                 {

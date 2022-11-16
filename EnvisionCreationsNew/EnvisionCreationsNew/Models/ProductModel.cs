@@ -8,11 +8,11 @@ namespace EnvisionCreationsNew.Models
 
         public string Description { get; set; } = null!;
 
-        public int Polygons { get; set; }
+        public string Polygons { get; set; } = null!;
 
-        public int Vertices { get; set; }
+        public string Vertices { get; set; } = null!;
 
-        public int Geometry { get; set; }
+        public string Geometry { get; set; } = null!;
 
         public string Category { get; set; } = null!;
 

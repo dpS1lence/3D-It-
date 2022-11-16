@@ -1,6 +1,8 @@
 ﻿using EnvisionCreationsNew.Models;
 using EnvisionCreationsNew.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 
 namespace EnvisionCreationsNew.Controllers
@@ -21,6 +23,8 @@ namespace EnvisionCreationsNew.Controllers
         }
 
         [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
+        [RequestSizeLimit(209715200)]
         public async Task<IActionResult> Upload(ProductModel model)
         {
             if (!ModelState.IsValid)

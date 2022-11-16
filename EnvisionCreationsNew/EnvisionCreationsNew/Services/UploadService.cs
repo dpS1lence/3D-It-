@@ -21,12 +21,11 @@ namespace EnvisionCreationsNew.Services
             {
                 Name = model.Name,
                 Description = model.Description,
-                Polygons = model.Polygons,
-                Vertices = model.Vertices,
-                Geometry = model.Geometry,
+                Polygons = int.Parse(model.Polygons),
+                Vertices = int.Parse(model.Vertices),
+                Geometry = int.Parse(model.Geometry),
                 CategoryId = desiredCategory?.Id ?? 1
             };
-
 
             var contentEntity = new Content();
 
@@ -52,9 +51,6 @@ namespace EnvisionCreationsNew.Services
 
             await context.SaveChangesAsync();
 
-            productEntity = await context.Products.OrderBy(a => a.Id).LastOrDefaultAsync();
-            contentEntity = await context.Content.OrderBy(a => a.Id).LastOrDefaultAsync();
-
             var desiredUser = await context.Users.FirstOrDefaultAsync(a => a.Id == userId);
 
             var applicationUserProductEntity = new ApplicationUserProduct()
@@ -62,15 +58,15 @@ namespace EnvisionCreationsNew.Services
                 ApplicationUser = desiredUser,
                 ApplicationUserId = desiredUser?.Id ?? "-1",
                 Product = productEntity,
-                ProductId = productEntity?.Id ?? 1
+                ProductId = productEntity.Id
             };
 
             var productContentEntity = new ProductContent()
             {
                 Content = contentEntity,
-                ContentId = contentEntity?.Id ?? 1,
+                ContentId = contentEntity.Id,
                 Product = productEntity,
-                ProductId = productEntity?.Id ?? 1
+                ProductId = productEntity.Id
             };
 
             await context.ProductsContent.AddAsync(productContentEntity);
