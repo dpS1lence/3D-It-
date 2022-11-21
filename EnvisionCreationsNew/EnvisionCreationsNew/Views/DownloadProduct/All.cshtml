@@ -1,4 +1,6 @@
-﻿@model List<DownloadProductModel>
+﻿@using static System.Net.Mime.MediaTypeNames
+@using System.Drawing
+@model List<ViewProductModel>
 @{
     ViewData["Title"] = "Avalable Models";
 }
@@ -10,43 +12,41 @@
 }
 @foreach (var product in Model)
 {
-    <tr>
-        <td>
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="@product.Name" readonly>
+    <div class="container py-5">
+        <div class="row text-center text-white mb-5">
+            <div class="col-lg-7 mx-auto">
+                <h1 class="display-4">Product List</h1>
             </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="@product.Description" readonly>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- List group-->
+                <ul class="list-group shadow">
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">@product.Name</h5>
+                                <p class="font-italic text-muted mb-0 small">@product.Description</p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">@product.Category</h6>
+                                    <ul class="list-inline small">
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                                    </ul>
+                                    <form method="post" asp-route-id="@product.Id">
+                                        <button type="submit" class="btn btn-primary">Download</button>
+                                    </form>
+                                </div>
+                            </div><img src="@product.Photo" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                </ul>
             </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="@product.Vertices" readonly>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="@product.Geometry" readonly>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="@product.Polygons" readonly>
-            </div>
-        </td>
-        <td>
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="@product.Category" readonly>
-            </div>
-        </td>
-        <td>
-            <div>
-                <form method="post" asp-route-id="@product.Id">
-                    <button type="submit" class="btn btn-secondary" value="Download" />
-                </form>
-            </div>
-        </td>
-    </tr>
+        </div>
+    </div>
 }

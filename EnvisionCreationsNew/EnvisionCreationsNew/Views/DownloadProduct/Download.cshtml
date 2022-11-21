@@ -3,42 +3,7 @@
     ViewData["Title"] = "Avalable Models";
 }
 <h1>@ViewData["Title"]</h1>
-<tr>
-    <td>
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="@Model.Name" readonly>
-        </div>
-    </td>
-    <td>
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="@Model.Description" readonly>
-        </div>
-    </td>
-    <td>
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="@Model.Vertices" readonly>
-        </div>
-    </td>
-    <td>
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="@Model.Geometry" readonly>
-        </div>
-    </td>
-    <td>
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="@Model.Polygons" readonly>
-        </div>
-    </td>
-    <td>
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="@Model.Category" readonly>
-        </div>
-    </td>
-    <td>
-        <div>
-            <form asp-page-handler="Download" method="post" asp-route-id="@Model.Id">
-                <button class="btn btn-primary rounded" type="submit" value="Download" />
-            </form>
-        </div>
-    </td>
-</tr>
+
+                    <span>@Model.Polygons</span>
+                    <span>@Model.Vertices</span>
+                    <span>@Model.Geometry</span>

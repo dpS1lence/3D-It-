@@ -4,6 +4,7 @@ using EnvisionCreationsNew.Models;
 using EnvisionCreationsNew.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.ContentModel;
 
 namespace EnvisionCreationsNew.Services
 {
@@ -14,27 +15,28 @@ namespace EnvisionCreationsNew.Services
         {
             context = _context;
         }
-        public async Task<List<DownloadProductModel>> GetAllAsync()
+        public async Task<List<ViewProductModel>> GetAllAsync()
         {
             var entities = await context.Products
                 .ToListAsync();
 
-            var products = new List<DownloadProductModel>();
+            var products = new List<ViewProductModel>();
 
             foreach (var item in entities)
             {
                 var desiredCategory = await context.Categories.FirstOrDefaultAsync(a => a.Id == item.CategoryId);
 
-                products.Add(new DownloadProductModel()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Description = item.Description,
-                    Polygons = item.Polygons,
-                    Vertices = item.Vertices,
-                    Geometry = item.Geometry,
-                    Category = desiredCategory?.Name ?? "-1"
-                });
+                    var base64 = Convert.ToBase64String(item.Photo);
+
+                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    products.Add(new ViewProductModel()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        Description = item.Description,
+                        Category = desiredCategory?.Name ?? "-1",
+                        Photo = imgSrc
+                    });
             }
 
             return products;
@@ -46,6 +48,10 @@ namespace EnvisionCreationsNew.Services
 
             var desiredCategory = await context.Categories.FirstOrDefaultAsync(a => a.Id == entity.CategoryId);
 
+            var base64 = Convert.ToBase64String(entity.Photo);
+
+            var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+
             var product = new DownloadProductModel()
             {
                 Id = entity.Id,
@@ -54,7 +60,8 @@ namespace EnvisionCreationsNew.Services
                 Polygons = entity.Polygons,
                 Vertices = entity.Vertices,
                 Geometry = entity.Geometry,
-                Category = desiredCategory?.Name ?? "-1"
+                Category = desiredCategory?.Name ?? "-1",
+                Photo = imgSrc
             };
 
             return product;

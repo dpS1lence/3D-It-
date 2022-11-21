@@ -35,6 +35,9 @@ namespace EnvisionCreationsNew.Data.Models
         [Required]
         public int CategoryId { get; set; }
 
+        [Required]
+        public byte[] Photo { get; set; } = null!;
+
         public ICollection<ApplicationUserProduct> ApplicationUsersProducts { get; set; } = null!;
 
         public ICollection<ProductContent> ProductsContent { get; set; } = null!;

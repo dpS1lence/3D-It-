@@ -15,5 +15,9 @@
         public int Geometry { get; set; }
 
         public string Category { get; set; } = null!;
+
+        public string Photo { get; set; } = null!;
+
+        public IFormFileCollection AttachmentModel { get; set; }
     }
 }
