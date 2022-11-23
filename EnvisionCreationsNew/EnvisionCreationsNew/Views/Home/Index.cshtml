@@ -1,5 +1,8 @@
-﻿@{
+﻿@model List<IndexModel>
+@{
     ViewData["Title"] = "Home Page";
+
+    string value = "";
 }
 
 <style>
@@ -26,12 +29,14 @@
         <h1 class="display-4">Welcome</h1>
     </div>
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search this blog">
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-                <i class="fa fa-search">SEARCH</i>
-            </button>
-        </div>
+        <form method="post" class="form-control">
+            <input asp-for="@value" type="text" placeholder="Search">
+            <input type="submit" value="Search">
+        </form>
+        @foreach (var item in Model)
+        {
+            <p>@item.Name</p>
+        }
     </div>
 </div>
 

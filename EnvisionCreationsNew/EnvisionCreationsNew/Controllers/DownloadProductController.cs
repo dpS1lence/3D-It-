@@ -22,6 +22,12 @@ namespace EnvisionCreationsNew.Controllers
 
             return View(model);
         }
+
+        public IActionResult All(List<DownloadProductModel> model)
+        {
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> All(int? id)
         {
