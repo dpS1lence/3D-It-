@@ -26,14 +26,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DownloadProduct" asp-action="All">All products</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="DownloadProduct" asp-action="All">3D Models</a>
                         </li>
-                        @if (User?.Identity?.IsAuthenticated ?? false)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="UploadProduct" asp-action="Upload">Upload product</a>
-                            </li>
-                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -2,7 +2,37 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    body {
+        background-image: url('https://media.sketchfab.com/models/17875320fc0a4fcd9a2c5a56d825533b/thumbnails/40470eea8b5e432a96f43e3fbcc86198/2df2fd1e5522493686480d749159af0f.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .has-search .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        line-height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        color: #aaa;
+    }
+</style>
+<div class="background">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search this blog">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                <i class="fa fa-search">SEARCH</i>
+            </button>
+        </div>
+    </div>
 </div>
+
+
