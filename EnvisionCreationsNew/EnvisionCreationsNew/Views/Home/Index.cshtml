@@ -29,6 +29,18 @@
         <h1 class="display-4">Welcome</h1>
     </div>
     <div class="input-group">
+        <div class="input-select">
+            <select data-trigger="" name="choices-single-defaul">
+                <option placeholder="">Category</option>
+                <option>New Arrivals</option>
+                <option>Sale</option>
+                <option>Ladies</option>
+                <option>Men</option>
+                <option>Clothing</option>
+                <option>Footwear</option>
+                <option>Accessories</option>
+            </select>
+        </div>
         <form method="post" class="form-control">
             <input asp-for="@value" type="text" placeholder="Search">
             <input type="submit" value="Search">

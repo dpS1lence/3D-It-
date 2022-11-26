@@ -6,47 +6,26 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+<link href="~/css/card.css" rel="stylesheet" />
+
 @if (Model.Count <= 0)
 {
     <h2 class="display-4">No</h2>
 }
-@foreach (var product in Model)
-{
-    <div class="container py-5">
-        <div class="row text-center text-white mb-5">
-            <div class="col-lg-7 mx-auto">
-                <h1 class="display-4">Product List</h1>
+<div class="text-center row">
+    @foreach (var product in Model)
+    {
+        <div class="card">
+            <div class="imgBox">
+                <img src="@product.Photo" class="mouse">
+            </div>
+            <div class="contentBox">
+                <h3>@product.Name</h3>
+                <h2 class="price">>@product.Category</h2>
+                <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
+                    <button type="submit" class="buy">Download</button>
+                </form>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <!-- List group-->
-                <ul class="list-group shadow">
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">@product.Name</h5>
-                                <p class="font-italic text-muted mb-0 small">@product.Description</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">@product.Category</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
-                                    </ul>
-                                    <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
-                                        <button type="submit" class="btn btn-primary">Download</button>
-                                    </form>
-                                </div>
-                            </div><img src="@product.Photo" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                </ul>
-            </div>
-        </div>
-    </div>
-}
+    }
+</div>
