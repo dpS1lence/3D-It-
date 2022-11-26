@@ -1,6 +1,7 @@
 ﻿using EnvisionCreationsNew.Models;
 using EnvisionCreationsNew.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace EnvisionCreationsNew.Controllers
@@ -22,11 +23,16 @@ namespace EnvisionCreationsNew.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Search(string value)
+        public IActionResult Index(string value)
         {
-            var model = await _searchService.SearchProductAsync(value);
+            return RedirectToAction(nameof(FiltersPage), new { value = value });
+        }
 
-            return RedirectToAction("All", "DownloadProduct", model);
+        public async Task<IActionResult> FiltersPage(string value)
+        {
+            var models = await _searchService.SearchProductAsync(value);
+
+            return View(models);
         }
 
         public IActionResult Privacy()

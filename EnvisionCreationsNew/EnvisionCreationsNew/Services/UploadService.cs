@@ -2,6 +2,7 @@
 using EnvisionCreationsNew.Data.Models;
 using EnvisionCreationsNew.Models;
 using EnvisionCreationsNew.Services.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
 
@@ -25,30 +26,17 @@ namespace EnvisionCreationsNew.Services
                 model.Photo[0].CopyTo(target);
 
                 var photo = target.ToArray();
-                try
-                {
-                    Product p = new Product();
-                    p.Name = model.Name;
-                    p.Description = model.Description;
-                    p.Polygons = int.Parse(model.Polygons);
-                    p.Vertices = int.Parse(model.Vertices);
-                    p.Geometry = int.Parse(model.Geometry);
-                    p.CategoryId = desiredCategory?.Id ?? 1;
-                    p.Photo = photo;
-                    productEntity = new Product()
-                    {
-                        Name = model.Name,
-                        Description = model.Description,
-                        Polygons = int.Parse(model.Polygons),
-                        Vertices = int.Parse(model.Vertices),
-                        Geometry = int.Parse(model.Geometry),
-                        CategoryId = desiredCategory?.Id ?? 1,
-                        Photo = photo
-                    };
-                }
-                catch(Exception){
 
-                }
+                productEntity = new Product()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Polygons = int.Parse(model.Polygons),
+                    Vertices = int.Parse(model.Vertices),
+                    Geometry = int.Parse(model.Geometry),
+                    CategoryId = desiredCategory?.Id ?? 1,
+                    Photo = photo
+                };
             }
 
 
@@ -71,10 +59,19 @@ namespace EnvisionCreationsNew.Services
                 };
             }
 
-            await context.Products.AddAsync(productEntity);
             await context.Content.AddAsync(contentEntity);
+            await context.Products.AddAsync(productEntity);
 
-            await context.SaveChangesAsync();
+            try
+            {
+                await context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
 
             var desiredUser = await context.Users.FirstOrDefaultAsync(a => a.Id == userId);
 

@@ -2,13 +2,13 @@
 @using System.Drawing
 @model List<ViewProductModel>
 @{
-    ViewData["Title"] = "Avalable Models";
+    ViewData["Title"] = "Filter Results";
 }
 <h1>@ViewData["Title"]</h1>
 
 @if (Model.Count <= 0)
 {
-    <h2 class="display-4">No</h2>
+    <h2 class="display-4">No matches</h2>
 }
 @foreach (var product in Model)
 {

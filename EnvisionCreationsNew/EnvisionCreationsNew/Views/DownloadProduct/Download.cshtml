@@ -4,6 +4,13 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-                    <span>@Model.Polygons</span>
-                    <span>@Model.Vertices</span>
-                    <span>@Model.Geometry</span>
+<span>@Model.Name</span>
+<span>@Model.Description</span>
+<img src="@Model.Photo" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+<span>@Model.Polygons</span>
+<span>@Model.Vertices</span>
+<span>@Model.Geometry</span>
+
+<form method="post" asp-controller="DownloadProduct" asp-action="GetDownload" asp-route-id="@Model.Id">
+    <button type="submit" class="btn btn-primary">Download</button>
+</form>

@@ -18,6 +18,6 @@
 
         public string Photo { get; set; } = null!;
 
-        public IFormFileCollection AttachmentModel { get; set; }
+        public IFormFileCollection AttachmentModel { get; set; } = null!;
     }
 }

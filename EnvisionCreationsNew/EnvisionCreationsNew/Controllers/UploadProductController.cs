@@ -38,7 +38,7 @@ namespace EnvisionCreationsNew.Controllers
 
                 await uploadService.UploadProductAsync(model, userId);
 
-                return RedirectToPage("All");
+                return RedirectToAction("All", "DownloadProduct");
             }
             catch (Exception)
             {

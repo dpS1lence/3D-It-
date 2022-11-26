@@ -14,7 +14,7 @@ namespace EnvisionCreationsNew.Services
         }
         public async Task<List<ViewProductModel>> SearchProductAsync(string modelName)
         {
-            var matchingProducts = await context.Products.Where(p => p.Name == modelName).ToListAsync();
+            var matchingProducts = await context.Products.Where(p => p.Name.ToLower().Contains(modelName.ToLower())).ToListAsync();
 
             var products = new List<ViewProductModel>();
 

@@ -23,28 +23,18 @@ namespace EnvisionCreationsNew.Controllers
             return View(model);
         }
 
-        public IActionResult All(List<DownloadProductModel> model)
-        {
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> All(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Download(int? id)
         {
             var model = await downloadService.GetOneAsync(id);
 
-            return RedirectToAction(nameof(Download), model);
-        }
-        [HttpGet]
-        public IActionResult Download(DownloadProductModel model)
-        {
             return View(model);
         }
 
         [HttpPost]
         [RequestSizeLimit(209715200)]
         [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
-        public async Task<IActionResult> Download(int? id)
+        public async Task<IActionResult> GetDownload(int? id)
         {
             var file = await downloadService.DownloadAsync(id);
 
