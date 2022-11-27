@@ -18,6 +18,10 @@ namespace EnvisionCreationsNew.Models
 
         public IFormFileCollection AttachmentModel { get; set; } = null!;
 
-        public IFormFileCollection Photo { get; set; } = null!;
+        public IFormFileCollection CoverPhoto { get; set; } = null!;
+
+        public IFormFileCollection Photos { get; set; } = null!;
+
+        public IFormFileCollection PhotosZip { get; set; } = null!;
     }
 }

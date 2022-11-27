@@ -7,7 +7,10 @@ namespace EnvisionCreationsNew.Data.Models
         public Product()
         {
             ApplicationUsersProducts = new HashSet<ApplicationUserProduct>();
+
             ProductsContent = new HashSet<ProductContent>();
+
+            ProductPhotos = new HashSet<ProductPhoto>();
         }
 
         [Key]
@@ -41,5 +44,7 @@ namespace EnvisionCreationsNew.Data.Models
         public ICollection<ApplicationUserProduct> ApplicationUsersProducts { get; set; } = null!;
 
         public ICollection<ProductContent> ProductsContent { get; set; } = null!;
+
+        public ICollection<ProductPhoto> ProductPhotos { get; set; } = null!;
     }
 }

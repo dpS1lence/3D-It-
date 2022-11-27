@@ -43,14 +43,24 @@
             </div>
         </div>
         <div>
-            <p>Upload file</p>
+            <p>Upload blender file</p>
             <input asp-for="@Model.AttachmentModel" class="form-control" accept=".blend" type="file" />
             <span asp-validation-for="@Model.AttachmentModel" class="text-danger"></span>
         </div>
         <div>
-            <p>Upload photo</p>
-            <input asp-for="@Model.Photo" class="form-control" accept=".png" type="file" />
-            <span asp-validation-for="@Model.Photo" class="text-danger"></span>
+            <p>Upload cover photo</p>
+            <input asp-for="@Model.CoverPhoto" class="form-control" accept=".png" type="file" />
+            <span asp-validation-for="@Model.CoverPhoto" class="text-danger"></span>
+        </div>
+        <div>
+            <p>Upload additional photos</p>
+            <input asp-for="@Model.Photos" class="form-control" accept=".png" type="file" multiple />
+            <span asp-validation-for="@Model.Photos" class="text-danger"></span>
+        </div>
+        <div>
+            <p>Upload textures zip</p>
+            <input asp-for="@Model.PhotosZip" class="form-control" accept=".zip" type="file" />
+            <span asp-validation-for="@Model.PhotosZip" class="text-danger"></span>
         </div>
         <form asp-controller="UploadProduct" asp-action="Upload" class="input-group-sm">
             <input type="submit" value="Upload" class="fs-6 btn btn-success mb-3 p-2" />

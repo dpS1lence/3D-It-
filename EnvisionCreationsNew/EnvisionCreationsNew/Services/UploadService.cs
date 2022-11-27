@@ -23,9 +23,9 @@ namespace EnvisionCreationsNew.Services
 
             using (var target = new MemoryStream())
             {
-                model.Photo[0].CopyTo(target);
+                model.CoverPhoto[0].CopyTo(target);
 
-                var photo = target.ToArray();
+                var coverPhoto = target.ToArray();
 
                 productEntity = new Product()
                 {
@@ -35,10 +35,9 @@ namespace EnvisionCreationsNew.Services
                     Vertices = int.Parse(model.Vertices),
                     Geometry = int.Parse(model.Geometry),
                     CategoryId = desiredCategory?.Id ?? 1,
-                    Photo = photo
+                    Photo = coverPhoto
                 };
             }
-
 
             var contentEntity = new Content();
 
@@ -48,14 +47,14 @@ namespace EnvisionCreationsNew.Services
 
                 var attachmentModel = target.ToArray();
 
-                model.Photo[0].CopyTo(target);
+                model.PhotosZip[0].CopyTo(target);
 
-                var photo = target.ToArray();
+                var photosCollection = target.ToArray();
 
                 contentEntity = new Content()
                 {
                     AttachmentModel = attachmentModel,
-                    Photo = photo
+                    PhotosZip = photosCollection
                 };
             }
 
@@ -71,6 +70,48 @@ namespace EnvisionCreationsNew.Services
             {
 
             }
+
+            var photo = new Photo();
+            var productPhoto = new ProductPhoto();
+
+            var stream = new MemoryStream();
+
+            foreach (var item in model.Photos)
+            {
+                stream = new MemoryStream();
+
+                item.CopyTo(stream);
+
+                var photoResult = stream.ToArray();
+
+                photo = new Photo()
+                {
+                    PhotoFile = photoResult
+                };
+
+                await context.Photos.AddAsync(photo);
+
+                try
+                {
+                    await context.SaveChangesAsync();
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                productPhoto = new ProductPhoto()
+                {
+                    Photo = photo,
+                    PhotoId = photo.Id,
+                    Product = productEntity,
+                    ProductId = productEntity.Id
+                };
+
+                await context.ProductPhotos.AddAsync(productPhoto);
+            }
+
 
 
             var desiredUser = await context.Users.FirstOrDefaultAsync(a => a.Id == userId);

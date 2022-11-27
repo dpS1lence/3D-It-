@@ -34,9 +34,26 @@ namespace EnvisionCreationsNew.Controllers
         [HttpPost]
         [RequestSizeLimit(209715200)]
         [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
-        public async Task<IActionResult> GetDownload(int? id)
+        public async Task<IActionResult> GetDownloadModel(int? id)
         {
-            var file = await downloadService.DownloadAsync(id);
+            var file = await downloadService.DownloadModelAsync(id);
+
+            if (file == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return file;
+            }
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(209715200)]
+        [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
+        public async Task<IActionResult> GetDownloadZip(int? id)
+        {
+            var file = await downloadService.DownloadZipAsync(id);
 
             if (file == null)
             {

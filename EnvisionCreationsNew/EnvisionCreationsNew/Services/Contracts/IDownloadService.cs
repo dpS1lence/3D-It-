@@ -7,8 +7,11 @@ namespace EnvisionCreationsNew.Services.Contracts
     public interface IDownloadService
     {
         Task<List<ViewProductModel>> GetAllAsync();
+
         Task<DownloadProductModel> GetOneAsync(int? id);
 
-        Task<IActionResult> DownloadAsync(int? id);
+        Task<IActionResult> DownloadModelAsync(int? id);
+
+        Task<IActionResult> DownloadZipAsync(int? id);
     }
 }

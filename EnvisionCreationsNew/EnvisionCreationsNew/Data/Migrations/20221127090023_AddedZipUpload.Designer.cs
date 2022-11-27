@@ -4,6 +4,7 @@ using EnvisionCreationsNew.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnvisionCreationsNew.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221127090023_AddedZipUpload")]
+    partial class AddedZipUpload
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,23 +143,6 @@ namespace EnvisionCreationsNew.Data.Migrations
                     b.ToTable("Content");
                 });
 
-            modelBuilder.Entity("EnvisionCreationsNew.Data.Models.Photo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<byte[]>("PhotoFile")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Photos");
-                });
-
             modelBuilder.Entity("EnvisionCreationsNew.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -213,21 +198,6 @@ namespace EnvisionCreationsNew.Data.Migrations
                     b.HasIndex("ContentId");
 
                     b.ToTable("ProductsContent");
-                });
-
-            modelBuilder.Entity("EnvisionCreationsNew.Data.Models.ProductPhoto", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhotoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "PhotoId");
-
-                    b.HasIndex("PhotoId");
-
-                    b.ToTable("ProductPhotos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -401,25 +371,6 @@ namespace EnvisionCreationsNew.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Content");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("EnvisionCreationsNew.Data.Models.ProductPhoto", b =>
-                {
-                    b.HasOne("EnvisionCreationsNew.Data.Models.Photo", "Photo")
-                        .WithMany()
-                        .HasForeignKey("PhotoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EnvisionCreationsNew.Data.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Photo");
 
                     b.Navigation("Product");
                 });

@@ -15,9 +15,13 @@ namespace EnvisionCreationsNew.Data
 
         public DbSet<Product> Products { get; set; } = null!;
 
-        public DbSet<ProductContent> ProductsContent { get; set; } = null!;
+        public DbSet<Photo> Photos { get; set; } = null!;
 
         public DbSet<Category> Categories { get; set; } = null!;
+
+        public DbSet<ProductContent> ProductsContent { get; set; } = null!;
+
+        public DbSet<ProductPhoto> ProductPhotos { get; set; } = null!;
 
         public DbSet<ApplicationUserProduct> ApplicationUsersProducts { get; set; } = null!;
 
@@ -33,6 +37,12 @@ namespace EnvisionCreationsNew.Data
             {
                 key.ProductId,
                 key.ContentId
+            });
+
+            builder.Entity<ProductPhoto>().HasKey(key => new
+            {
+                key.ProductId,
+                key.PhotoId
             });
 
             base.OnModelCreating(builder);

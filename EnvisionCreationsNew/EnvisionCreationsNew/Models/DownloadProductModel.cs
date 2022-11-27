@@ -16,7 +16,9 @@
 
         public string Category { get; set; } = null!;
 
-        public string Photo { get; set; } = null!;
+        public string CoverPhoto { get; set; } = null!;
+
+        public List<string> Photos { get; set; } = null!;
 
         public IFormFileCollection AttachmentModel { get; set; } = null!;
     }

@@ -2,15 +2,12 @@
 
 namespace EnvisionCreationsNew.Data.Models
 {
-    public class Content
+    public class Photo
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public byte[] AttachmentModel { get; set; } = null!;
-
-        [Required]
-        public byte[] PhotosZip { get; set; } = null!;
+        public byte[] PhotoFile { get; set; } = null!;
     }
 }
