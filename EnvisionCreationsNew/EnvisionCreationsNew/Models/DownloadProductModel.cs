@@ -18,6 +18,10 @@
 
         public string CoverPhoto { get; set; } = null!;
 
+        public string UserId { get; set; } = null!;
+
+        public string UserName { get; set; } = null!;
+
         public List<string> Photos { get; set; } = null!;
 
         public IFormFileCollection AttachmentModel { get; set; } = null!;

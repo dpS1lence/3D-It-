@@ -48,15 +48,11 @@ namespace EnvisionCreationsNew.Services
 
             var desiredCategory = await context.Categories.FirstOrDefaultAsync(a => a.Id == productEntity.CategoryId);
 
-            var productPhotos = new List<ProductPhoto>();
-            try
-            {
-                productPhotos = await context.ProductPhotos.Where(a => a.ProductId == productEntity.Id).ToListAsync();
-            }
-            catch(Exception ex)
-            {
+            var productPhotos = await context.ProductPhotos.Where(a => a.ProductId == productEntity.Id).ToListAsync();
 
-            }
+            var applicationUserProduct = await context.ApplicationUsersProducts.FirstOrDefaultAsync(a => a.ProductId == productEntity.Id);
+
+            var user = await context.Users.FirstOrDefaultAsync(a => a.Id == applicationUserProduct.ApplicationUserId);
 
             var convertedPhoto = Convert.ToBase64String(productEntity.Photo);
 
@@ -83,6 +79,8 @@ namespace EnvisionCreationsNew.Services
                 Polygons = productEntity.Polygons,
                 Vertices = productEntity.Vertices,
                 Geometry = productEntity.Geometry,
+                UserId = user.Id,
+                UserName = user.UserName,
                 Category = desiredCategory?.Name ?? "-1",
                 CoverPhoto = imgSrc,
                 Photos = photos
