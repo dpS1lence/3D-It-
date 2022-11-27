@@ -1,16 +1,33 @@
 ﻿@model UserProfileModel
 @{
-    ViewData["Title"] = "Avalable Models";
+    ViewData["Title"] = $"{Model.UserName}'s profile";
 }
 <h1>@ViewData["Title"]</h1>
 
 <span>@Model.UserName</span>
 <span>@Model.Bio</span>
 
-@foreach (var item in Model.UserModels)
-{
-    <span>@item.Name</span>
-    <span>@item.Description</span>
-    <img src="@item.CoverPhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-    <span>@item.Category</span>
-}
+<div class="text-center row">
+    @foreach (var item in Model.UserModels)
+    {
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-body order-2 order-lg-1">
+                <h5 class="mt-0 font-weight-bold mb-2">@item.Name</h5>
+                <p class="font-italic text-muted mb-0 small">@item.Description</p>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">@item.Category</h6>
+                    <ul class="list-inline small">
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                    </ul>
+                    <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@item.Id">
+                        <button type="submit" class="btn btn-primary">Download</button>
+                    </form>
+                </div>
+            </div><img src="@item.CoverPhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">     
+        </div>
+    }
+</div>
