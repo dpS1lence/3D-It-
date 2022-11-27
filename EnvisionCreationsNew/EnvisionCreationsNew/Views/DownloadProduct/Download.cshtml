@@ -9,7 +9,9 @@
 <span>@Model.Polygons</span>
 <span>@Model.Vertices</span>
 <span>@Model.Geometry</span>
-<span>@Model.UserName</span>
+@*<form method="post" asp-controller="User" asp-action="UserProfile" asp-route="@Model.UserId">
+    <button type="submit" class="text-black">@Model.UserName</button>
+</form>*@
 <img src="@Model.CoverPhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
 @foreach (var item in Model.Photos)
 {

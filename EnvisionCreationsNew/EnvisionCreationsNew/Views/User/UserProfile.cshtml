@@ -1,0 +1,16 @@
+﻿@model UserProfileModel
+@{
+    ViewData["Title"] = "Avalable Models";
+}
+<h1>@ViewData["Title"]</h1>
+
+<span>@Model.UserName</span>
+<span>@Model.Bio</span>
+
+@foreach (var item in Model.UserModels)
+{
+    <span>@item.Name</span>
+    <span>@item.Description</span>
+    <img src="@item.CoverPhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+    <span>@item.Category</span>
+}

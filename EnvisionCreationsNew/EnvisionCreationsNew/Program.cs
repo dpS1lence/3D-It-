@@ -24,6 +24,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IDownloadService, DownloadService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
