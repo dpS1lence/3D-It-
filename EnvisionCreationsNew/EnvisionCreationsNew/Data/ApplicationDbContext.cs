@@ -13,6 +13,8 @@ namespace EnvisionCreationsNew.Data
 
         public DbSet<Content> Content { get; set; } = null!;
 
+        public DbSet<Challange> Challenges { get; set; } = null!;
+
         public DbSet<Product> Products { get; set; } = null!;
 
         public DbSet<Photo> Photos { get; set; } = null!;

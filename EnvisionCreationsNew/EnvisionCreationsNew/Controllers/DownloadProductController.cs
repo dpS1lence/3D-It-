@@ -3,6 +3,7 @@ using EnvisionCreationsNew.Models;
 using EnvisionCreationsNew.Services;
 using EnvisionCreationsNew.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System.IO.Compression;
 
 namespace EnvisionCreationsNew.Controllers
 {

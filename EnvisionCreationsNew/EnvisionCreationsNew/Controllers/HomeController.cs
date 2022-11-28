@@ -8,12 +8,10 @@ namespace EnvisionCreationsNew.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ISearchService _searchService;
 
-        public HomeController(ILogger<HomeController> logger, ISearchService searchService)
+        public HomeController(ISearchService searchService)
         {
-            _logger = logger;
             _searchService = searchService;
         }
 

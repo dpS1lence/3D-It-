@@ -5,6 +5,7 @@ using EnvisionCreationsNew.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.ContentModel;
+using System.IO.Compression;
 
 namespace EnvisionCreationsNew.Services
 {
@@ -144,10 +145,11 @@ namespace EnvisionCreationsNew.Services
                 }
 
                 byte[] byteArr = contentEntity?.PhotosZip ?? null!;
-                string mimeType = "application/zip";
+                string mimeType = "application/rar";
+
                 return new FileContentResult(byteArr, mimeType)
                 {
-                    FileDownloadName = $"3DIt!_{productEntity?.Name.Replace(" ", "_")}_textures.zip"
+                    FileDownloadName = $"3DIt!_{productEntity?.Name.Replace(" ", "_")}_textures.rar"
                 };
 
             }

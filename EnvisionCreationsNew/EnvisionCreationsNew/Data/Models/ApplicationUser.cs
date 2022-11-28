@@ -8,6 +8,6 @@ namespace EnvisionCreationsNew.Data.Models
         {
             ProductsData = new HashSet<ApplicationUserProduct>();
         }
-        public virtual ICollection<ApplicationUserProduct> ProductsData { get; set; } = null!;
+        public virtual ICollection<ApplicationUserProduct> ProductsData { get; set; }
     }
 }

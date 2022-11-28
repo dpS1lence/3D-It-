@@ -41,10 +41,10 @@ namespace EnvisionCreationsNew.Data.Models
         [Required]
         public byte[] Photo { get; set; } = null!;
 
-        public ICollection<ApplicationUserProduct> ApplicationUsersProducts { get; set; } = null!;
-
-        public ICollection<ProductContent> ProductsContent { get; set; } = null!;
-
-        public ICollection<ProductPhoto> ProductPhotos { get; set; } = null!;
+        public virtual ICollection<ApplicationUserProduct> ApplicationUsersProducts { get; set; }
+               
+        public virtual ICollection<ProductContent> ProductsContent { get; set; }
+               
+        public virtual ICollection<ProductPhoto> ProductPhotos { get; set; }
     }
 }
