@@ -12,9 +12,9 @@ namespace EnvisionCreationsNew.Controllers
             _userService = userService;
         }
 
-        public async Task<IActionResult> UserProfile(string userId)
+        public async Task<IActionResult> UserProfile(string userName)
         {
-            var model = await _userService.GetUserData(userId);
+            var model = await _userService.GetUserData(userName);
 
             return View(model);
         }

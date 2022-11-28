@@ -13,11 +13,11 @@ namespace EnvisionCreationsNew.Services
         {
             context = _context;
         }
-        public async Task<UserProfileModel> GetUserData(string userId)
+        public async Task<UserProfileModel> GetUserData(string userName)
         {
-            var user = await context.Users.FindAsync(userId);
+            var user = await context.Users.FirstOrDefaultAsync(a => a.UserName == userName);
 
-            var usersProducts = await context.ApplicationUsersProducts.Where(a => a.ApplicationUserId == userId).ToListAsync();
+            var usersProducts = await context.ApplicationUsersProducts.Where(a => a.ApplicationUserId == user.Id).ToListAsync();
 
             var userProducts = new List<UserProductModel>();
 
@@ -43,9 +43,9 @@ namespace EnvisionCreationsNew.Services
 
             var model = new UserProfileModel()
             {
-                Id = userId,
-                UserName = user.UserName,
-                Bio = user.Email,
+                Id = user.Id,
+                UserName = user?.UserName,
+                Bio = user?.Email,
                 UserModels = userProducts
             };
 
