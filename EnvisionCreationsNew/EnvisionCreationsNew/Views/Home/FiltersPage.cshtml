@@ -6,47 +6,35 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+<link href="~/css/finalcard.css" rel="stylesheet" />
+
 @if (Model.Count <= 0)
 {
     <h2 class="display-4">No matches</h2>
 }
 @foreach (var product in Model)
 {
-    <div class="container py-5">
-        <div class="row text-center text-white mb-5">
-            <div class="col-lg-7 mx-auto">
-                <h1 class="display-4">Product List</h1>
+            <div class="card">
+            <div class="card-header">
+                <img src="@product.Photo" alt="rover" />
+            </div>
+            <div class="card-body">
+                <span class="tag tag-teal">@product.Category</span>
+                <h4>
+                    @product.Name
+                </h4>
+                <span>
+                <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
+                    <button type="submit" class="buttonTag buttonTag-teal">Download</button>
+                </form>
+                </span>
+                <div class="user">
+                    <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
+                    <div class="user-info">
+                        <h5>July Dec</h5>
+                        <small>2h ago</small>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <!-- List group-->
-                <ul class="list-group shadow">
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">@product.Name</h5>
-                                <p class="font-italic text-muted mb-0 small">@product.Description</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">@product.Category</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
-                                    </ul>
-                                    <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
-                                        <button type="submit" class="btn btn-primary">Download</button>
-                                    </form>
-                                </div>
-                            </div><img src="@product.Photo" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                </ul>
-            </div>
-        </div>
-    </div>
 }

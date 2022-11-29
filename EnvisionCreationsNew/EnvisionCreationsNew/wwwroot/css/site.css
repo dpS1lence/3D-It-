@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Sucrose Bold Two';
+    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sucrose.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'IM Fell French Canon Pro';
+}
+
+* {
+    font-family: 'Sucrose Bold Two';
+}
+
 html {
     font-size: 14px;
     position: relative;
@@ -11,5 +24,10 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url(https://img.freepik.com/free-vector/copy-space-wavy-white-background-layers_23-2148845469.jpg?w=2000);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: auto;
 }
