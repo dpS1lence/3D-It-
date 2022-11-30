@@ -8,6 +8,8 @@
 
         public string? Bio { get; set; }
 
+        public string? ProfilePhoto { get; set; }
+
         public List<UserProductModel> UserModels { get; set; } = null!;
     }
 }

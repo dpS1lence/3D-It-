@@ -1,11 +1,19 @@
-﻿@model UserProfileModel
+﻿@using System.Security.Claims
+
+@model UserProfileModel
 @{
     ViewData["Title"] = $"{Model.UserName}'s profile";
+
+    var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 }
 <h1>@ViewData["Title"]</h1>
 
 <link href="~/css/finalcard.css" rel="stylesheet" />
 
+@if (Model.Id == userId)
+{
+    <h1>Your Profile</h1>
+}
 <span>@Model.UserName</span>
 <span>@Model.Bio</span>
 
@@ -21,14 +29,20 @@
                 <h4>
                     @product.Name
                 </h4>
-                <span>
+                <span style="display: flex">
+                    @if (Model.Id == userId)
+                    {
+                        <form method="post" asp-controller="User" asp-action="UserProfile" asp-route-id="@product.Id">
+                            <button type="submit" class="buttonTag buttonTag-delete">Delete</button>
+                        </form>
+                    }
                     <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
                         <button type="submit" class="buttonTag buttonTag-teal">View</button>
                     </form>
                 </span>
                 <div class="user">
-                        <h5>July Dec</h5>
-                        <small>2h ago</small>
+                    <h5>July Dec</h5>
+                    <small>2h ago</small>
                 </div>
             </div>
         </div>
