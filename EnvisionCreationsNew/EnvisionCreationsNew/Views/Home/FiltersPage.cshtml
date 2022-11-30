@@ -12,9 +12,10 @@
 {
     <h2 class="display-4">No matches</h2>
 }
-@foreach (var product in Model)
-{
-            <div class="card">
+<div class="text-center row">
+    @foreach (var product in Model)
+    {
+        <div class="card">
             <div class="card-header">
                 <img src="@product.Photo" alt="rover" />
             </div>
@@ -24,9 +25,9 @@
                     @product.Name
                 </h4>
                 <span>
-                <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
-                    <button type="submit" class="buttonTag buttonTag-teal">Download</button>
-                </form>
+                    <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
+                        <button type="submit" class="buttonTag buttonTag-teal">Download</button>
+                    </form>
                 </span>
                 <div class="user">
                     <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
@@ -37,4 +38,5 @@
                 </div>
             </div>
         </div>
-}
+    }
+</div>

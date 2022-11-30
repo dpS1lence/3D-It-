@@ -4,6 +4,8 @@ using EnvisionCreationsNew.Services.Contracts;
 using EnvisionCreationsNew.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using EnvisionCreationsNew.Repositories.Contracts;
+using EnvisionCreationsNew.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,7 @@ builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IDownloadService, DownloadService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 

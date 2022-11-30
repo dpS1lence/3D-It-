@@ -1,6 +1,7 @@
 ﻿using EnvisionCreationsNew.Data;
 using EnvisionCreationsNew.Data.Models;
 using EnvisionCreationsNew.Models;
+using EnvisionCreationsNew.Repositories.Contracts;
 using EnvisionCreationsNew.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,11 @@ namespace EnvisionCreationsNew.Services
 {
     public class UserService : IUserService
     {
+        /*private readonly IRepository repository;
+        public UserService(IRepository _repository)
+        {
+            repository = _repository;
+        }*/
         private readonly ApplicationDbContext context;
         public UserService(ApplicationDbContext _context)
         {
@@ -18,6 +24,7 @@ namespace EnvisionCreationsNew.Services
         public async Task<ApplicationUser> GetUserById(string userId)
         {
             var user = await context.Users.FirstOrDefaultAsync(a => a.Id == userId);
+            //var user = await repository.GetByIdAsync<ApplicationUser>(userId);
 
             return user;
         }
