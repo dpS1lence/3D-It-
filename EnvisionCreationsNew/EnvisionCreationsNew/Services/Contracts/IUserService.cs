@@ -10,5 +10,7 @@ namespace EnvisionCreationsNew.Services.Contracts
         Task<UserProfileModel> RemoveUserUploadAsync(string userId, int productId);
 
         Task<ApplicationUser> GetUserById(string userId);
+
+        Task<UserProfileModel> EditUserUploadAsync(string userId, int productId);
     }
 }

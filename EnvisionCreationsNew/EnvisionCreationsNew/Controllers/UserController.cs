@@ -28,5 +28,15 @@ namespace EnvisionCreationsNew.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UserEditProfile(int id)
+        {
+            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            var model = await _userService.RemoveUserUploadAsync(userId, id);
+
+            return RedirectToAction("All", "UploadProduct");
+        }
     }
 }

@@ -35,6 +35,9 @@
                         <form method="post" asp-controller="User" asp-action="UserProfile" asp-route-id="@product.Id">
                             <button type="submit" class="buttonTag buttonTag-delete">Delete</button>
                         </form>
+                        <form method="post" asp-controller="User" asp-action="UserEditProfile" asp-route-id="@product.Id">
+                            <button type="submit" class="buttonTag buttonTag-delete">Delete</button>
+                        </form>
                     }
                     <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
                         <button type="submit" class="buttonTag buttonTag-teal">View</button>
