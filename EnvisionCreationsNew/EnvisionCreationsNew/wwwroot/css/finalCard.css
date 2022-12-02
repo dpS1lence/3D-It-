@@ -63,6 +63,9 @@
 .buttonTag-delete {
     background-color: #FFA07A;
 }
+.buttonTag-edit {
+    background-color: #FFEA00;
+}
 
 .card-body p {
     font-size: 13px;

@@ -11,6 +11,8 @@ namespace EnvisionCreationsNew.Services.Contracts
 
         Task<ApplicationUser> GetUserById(string userId);
 
-        Task<UserProfileModel> EditUserUploadAsync(string userId, int productId);
+        Task<EditProductModel> EditUserUploadAsync(int productId);
+
+        Task EditUserUploadAsync(EditProductModel model);
     }
 }

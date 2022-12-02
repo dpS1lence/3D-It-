@@ -156,5 +156,36 @@ namespace EnvisionCreationsNew.Services
 
             return model;
         }
+
+        public async Task<EditProductModel> EditUserUploadAsync(int productId)
+        {
+            var desiredProduct = await context.Products.FirstOrDefaultAsync(a => a.Id == productId);
+
+            var model = new EditProductModel()
+            {
+                Id = desiredProduct.Id,
+                Name = desiredProduct.Name,
+                Description = desiredProduct.Description
+            };
+
+            return model;
+        }
+
+        public async Task EditUserUploadAsync(EditProductModel model)
+        {
+            var desiredProduct = await context.Products.FirstOrDefaultAsync(a => a.Id == model.Id);
+
+            if(desiredProduct == null)
+            {
+
+            }
+
+            desiredProduct.Name = model.Name;
+            desiredProduct.Description = model.Description;
+
+            context.Products.Update(desiredProduct);
+
+            await context.SaveChangesAsync();
+        }
     }
 }

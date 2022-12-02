@@ -1,4 +1,5 @@
-﻿using EnvisionCreationsNew.Services.Contracts;
+﻿using EnvisionCreationsNew.Models;
+using EnvisionCreationsNew.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -30,13 +31,18 @@ namespace EnvisionCreationsNew.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UserEditProfile(int id)
+        public async Task<IActionResult> EditProduct(int id)
         {
-            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
+            var model = await _userService.EditUserUploadAsync(id);
 
-            var model = await _userService.RemoveUserUploadAsync(userId, id);
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProductModel(int id, EditProductModel model)
+        {
+            await _userService.EditUserUploadAsync(model);
 
-            return RedirectToAction("All", "UploadProduct");
+            return RedirectToAction("All", "DownloadProduct");
         }
     }
 }
