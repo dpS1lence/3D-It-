@@ -1,8 +1,8 @@
-﻿using EnvisionCreationsNew.Data.Models;
-using EnvisionCreationsNew.Models;
+﻿using BlenderParadise.Data.Models;
+using BlenderParadise.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EnvisionCreationsNew.Services.Contracts
+namespace BlenderParadise.Services.Contracts
 {
     public interface IDownloadService
     {

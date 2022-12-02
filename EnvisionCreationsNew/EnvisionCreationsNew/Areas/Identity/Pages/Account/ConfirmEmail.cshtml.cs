@@ -6,14 +6,14 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EnvisionCreationsNew.Data.Models;
+using BlenderParadise.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace EnvisionCreationsNew.Areas.Identity.Pages.Account
+namespace BlenderParadise.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {

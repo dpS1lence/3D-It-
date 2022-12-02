@@ -1,4 +1,4 @@
-﻿namespace EnvisionCreationsNew.Models
+﻿namespace BlenderParadise.Models
 {
     public class DownloadProductModel
     {

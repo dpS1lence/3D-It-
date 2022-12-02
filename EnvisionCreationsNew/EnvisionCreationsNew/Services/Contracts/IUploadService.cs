@@ -1,6 +1,6 @@
-﻿using EnvisionCreationsNew.Models;
+﻿using BlenderParadise.Models;
 
-namespace EnvisionCreationsNew.Services.Contracts
+namespace BlenderParadise.Services.Contracts
 {
     public interface IUploadService
     {

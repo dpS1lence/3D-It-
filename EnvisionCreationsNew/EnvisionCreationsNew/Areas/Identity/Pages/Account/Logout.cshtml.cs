@@ -4,14 +4,14 @@
 
 using System;
 using System.Threading.Tasks;
-using EnvisionCreationsNew.Data.Models;
+using BlenderParadise.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace EnvisionCreationsNew.Areas.Identity.Pages.Account
+namespace BlenderParadise.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {

@@ -1,10 +1,10 @@
-﻿using EnvisionCreationsNew.Data.Models;
-using EnvisionCreationsNew.Models;
+﻿using BlenderParadise.Data.Models;
+using BlenderParadise.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EnvisionCreationsNew.Controllers
+namespace BlenderParadise.Controllers
 {
     public class ApplicationUserController : Controller
     {
@@ -34,7 +34,9 @@ namespace EnvisionCreationsNew.Controllers
             var user = new ApplicationUser()
             {
                 Email = model.Email,
-                UserName = model.UserName
+                UserName = model.UserName,
+                Description = model.Description,
+                ProfilePicture = model.ProfilePicture
             };
 
             var result = await userManager.CreateAsync(user, model.Password);

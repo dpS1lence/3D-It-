@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EnvisionCreationsNew.Models
+namespace BlenderParadise.Models
 {
     public class ProductModel
     {

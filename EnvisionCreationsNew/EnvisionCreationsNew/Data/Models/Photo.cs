@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EnvisionCreationsNew.Data.Models
+namespace BlenderParadise.Data.Models
 {
     public class Photo
     {

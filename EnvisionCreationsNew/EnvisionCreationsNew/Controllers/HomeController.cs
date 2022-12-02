@@ -1,10 +1,10 @@
-﻿using EnvisionCreationsNew.Models;
-using EnvisionCreationsNew.Services.Contracts;
+﻿using BlenderParadise.Models;
+using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace EnvisionCreationsNew.Controllers
+namespace BlenderParadise.Controllers
 {
     public class HomeController : Controller
     {

@@ -14,9 +14,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using EnvisionCreationsNew.Data.Models;
+using BlenderParadise.Data.Models;
 
-namespace EnvisionCreationsNew.Areas.Identity.Pages.Account
+namespace BlenderParadise.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {

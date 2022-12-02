@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EnvisionCreationsNew.Models
+namespace BlenderParadise.Models
 {
     public class RegisterViewModel
     {
@@ -12,6 +12,14 @@ namespace EnvisionCreationsNew.Models
         [StringLength(60, MinimumLength = 8)]
         [EmailAddress]
         public string Email { get; set; } = null!;
+
+        [Required]
+        public string Description { get; set; } = null!;
+
+
+        [Required]
+        [StringLength(60, MinimumLength = 8)]
+        public string ProfilePicture { get; set; } = null!;
 
         [Required]
         [StringLength(60, MinimumLength = 8)]

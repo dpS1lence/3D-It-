@@ -1,9 +1,9 @@
-﻿using EnvisionCreationsNew.Models;
-using EnvisionCreationsNew.Services.Contracts;
+﻿using BlenderParadise.Models;
+using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace EnvisionCreationsNew.Controllers
+namespace BlenderParadise.Controllers
 {
     public class UserController : Controller
     {

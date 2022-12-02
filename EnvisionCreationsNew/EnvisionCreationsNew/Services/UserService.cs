@@ -1,13 +1,13 @@
-﻿using EnvisionCreationsNew.Data;
-using EnvisionCreationsNew.Data.Models;
-using EnvisionCreationsNew.Models;
-using EnvisionCreationsNew.Repositories.Contracts;
-using EnvisionCreationsNew.Services.Contracts;
+﻿using BlenderParadise.Data;
+using BlenderParadise.Data.Models;
+using BlenderParadise.Models;
+using BlenderParadise.Repositories.Contracts;
+using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
-namespace EnvisionCreationsNew.Services
+namespace BlenderParadise.Services
 {
     public class UserService : IUserService
     {
@@ -60,7 +60,8 @@ namespace EnvisionCreationsNew.Services
             {
                 Id = user.Id,
                 UserName = user?.UserName,
-                Bio = user?.Email,
+                Bio = user?.Description,
+                ProfilePhoto = user?.ProfilePicture,
                 UserModels = userProducts
             };
 

@@ -1,11 +1,11 @@
-﻿using EnvisionCreationsNew.Data.Models;
-using EnvisionCreationsNew.Models;
-using EnvisionCreationsNew.Services;
-using EnvisionCreationsNew.Services.Contracts;
+﻿using BlenderParadise.Data.Models;
+using BlenderParadise.Models;
+using BlenderParadise.Services;
+using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.IO.Compression;
 
-namespace EnvisionCreationsNew.Controllers
+namespace BlenderParadise.Controllers
 {
     public class DownloadProductController : Controller
     {

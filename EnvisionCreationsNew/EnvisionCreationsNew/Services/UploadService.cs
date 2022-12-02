@@ -1,12 +1,12 @@
-﻿using EnvisionCreationsNew.Data;
-using EnvisionCreationsNew.Data.Models;
-using EnvisionCreationsNew.Models;
-using EnvisionCreationsNew.Services.Contracts;
+﻿using BlenderParadise.Data;
+using BlenderParadise.Data.Models;
+using BlenderParadise.Models;
+using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
 
-namespace EnvisionCreationsNew.Services
+namespace BlenderParadise.Services
 {
     public class UploadService : IUploadService
     {

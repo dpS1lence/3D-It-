@@ -1,11 +1,11 @@
-using EnvisionCreationsNew.Data;
-using EnvisionCreationsNew.Data.Models;
-using EnvisionCreationsNew.Services.Contracts;
-using EnvisionCreationsNew.Services;
+using BlenderParadise.Data;
+using BlenderParadise.Data.Models;
+using BlenderParadise.Services.Contracts;
+using BlenderParadise.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using EnvisionCreationsNew.Repositories.Contracts;
-using EnvisionCreationsNew.Repositories;
+using BlenderParadise.Repositories.Contracts;
+using BlenderParadise.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

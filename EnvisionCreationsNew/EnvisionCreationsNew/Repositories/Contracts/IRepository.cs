@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace EnvisionCreationsNew.Repositories.Contracts
+namespace BlenderParadise.Repositories.Contracts
 {
     public interface IRepository
     {

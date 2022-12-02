@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace EnvisionCreationsNew.Data.Migrations
+namespace BlenderParadise.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

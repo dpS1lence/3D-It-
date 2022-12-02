@@ -1,9 +1,9 @@
-﻿using EnvisionCreationsNew.Data;
-using EnvisionCreationsNew.Models;
-using EnvisionCreationsNew.Services.Contracts;
+﻿using BlenderParadise.Data;
+using BlenderParadise.Models;
+using BlenderParadise.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace EnvisionCreationsNew.Services
+namespace BlenderParadise.Services
 {
     public class SearchService : ISearchService
     {

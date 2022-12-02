@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using EnvisionCreationsNew.Data.Models;
+using BlenderParadise.Data.Models;
 
-namespace EnvisionCreationsNew.Data
+namespace BlenderParadise.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -1,11 +1,11 @@
-﻿using EnvisionCreationsNew.Models;
-using EnvisionCreationsNew.Services.Contracts;
+﻿using BlenderParadise.Models;
+using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 
-namespace EnvisionCreationsNew.Controllers
+namespace BlenderParadise.Controllers
 {
     public class UploadProductController : Controller
     {

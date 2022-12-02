@@ -1,10 +1,10 @@
-﻿using EnvisionCreationsNew.Repositories.Contracts;
+﻿using BlenderParadise.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using EnvisionCreationsNew.Data;
+using BlenderParadise.Data;
 
-namespace EnvisionCreationsNew.Repositories
+namespace BlenderParadise.Repositories
 {
     public class Repository : IRepository
     {

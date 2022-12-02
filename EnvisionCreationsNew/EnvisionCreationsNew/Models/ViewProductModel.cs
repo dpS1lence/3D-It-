@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 
-namespace EnvisionCreationsNew.Models
+namespace BlenderParadise.Models
 {
     public class ViewProductModel
     {

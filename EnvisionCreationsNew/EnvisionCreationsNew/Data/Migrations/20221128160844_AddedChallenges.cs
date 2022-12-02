@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace EnvisionCreationsNew.Data.Migrations
+namespace BlenderParadise.Data.Migrations
 {
     public partial class AddedChallenges : Migration
     {
