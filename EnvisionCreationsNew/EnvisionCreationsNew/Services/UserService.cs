@@ -3,7 +3,9 @@ using BlenderParadise.Data.Models;
 using BlenderParadise.Models;
 using BlenderParadise.Repositories.Contracts;
 using BlenderParadise.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
@@ -11,36 +13,33 @@ namespace BlenderParadise.Services
 {
     public class UserService : IUserService
     {
-        /*private readonly IRepository repository;
-        public UserService(IRepository _repository)
+        private readonly IRepository _repository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UserService(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            repository = _repository;
-        }*/
-        private readonly ApplicationDbContext context;
-        public UserService(ApplicationDbContext _context)
-        {
-            context = _context;
+            _repository = repository;
+            _userManager = userManager;
         }
+
         public async Task<ApplicationUser> GetUserById(string userId)
         {
-            var user = await context.Users.FirstOrDefaultAsync(a => a.Id == userId);
-            //var user = await repository.GetByIdAsync<ApplicationUser>(userId);
+            var user = await _repository.GetByIdAsync<ApplicationUser>(userId);
 
             return user;
         }
         public async Task<UserProfileModel> GetUserData(string userName)
         {
-            var user = await context.Users.FirstOrDefaultAsync(a => a.UserName == userName);
+            var user = await _userManager.FindByNameAsync(userName);
 
-            var usersProducts = await context.ApplicationUsersProducts.Where(a => a.ApplicationUserId == user.Id).ToListAsync();
+            var usersProducts = _repository.All<ApplicationUserProduct>().Where(a => a.ApplicationUserId == user.Id);
 
             var userProducts = new List<UserProductModel>();
 
             foreach (var userProduct in usersProducts)
             {
-                var product = await context.Products.FirstOrDefaultAsync(a => a.Id == userProduct.ProductId);
+                var product = await _repository.GetByIdAsync<Product>(userProduct.ProductId);
 
-                var category = await context.Categories.FirstOrDefaultAsync(a => a.Id == product.CategoryId);
+                var category = await _repository.GetByIdAsync<Category>(product.CategoryId);
 
                 var photoStr = Convert.ToBase64String(product.Photo);
 
@@ -58,7 +57,7 @@ namespace BlenderParadise.Services
 
             var model = new UserProfileModel()
             {
-                Id = user.Id,
+                Id = user?.Id,
                 UserName = user?.UserName,
                 Bio = user?.Description,
                 ProfilePhoto = user?.ProfilePicture,
@@ -70,7 +69,10 @@ namespace BlenderParadise.Services
 
         public async Task<UserProfileModel> RemoveUserUploadAsync(string userId, int productId)
         {
-            var user = await context.Users.Include(a => a.ProductsData).FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _userManager.Users
+                .Include(a => a.ProductsData)
+                .Where(a => a.Id == userId)
+                .FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -79,80 +81,33 @@ namespace BlenderParadise.Services
 
             var userProduct = user.ProductsData.FirstOrDefault(p => p.ProductId == productId);
 
-            var product = await context.Products.FirstOrDefaultAsync(a => a.Id == userProduct.ProductId);
+            var product = await _repository.GetByIdAsync<Product>(userProduct.ProductId);
 
-            var productContent = await context.ProductsContent.FirstOrDefaultAsync(c => c.ProductId == userProduct.ProductId);
+            var productContent = await _repository.All<ProductContent>().Where(a => a.ProductId == product.Id).FirstOrDefaultAsync();
 
-            var content = await context.Content.FirstOrDefaultAsync(c => c.Id == productContent.ContentId);
+            var content = await _repository.GetByIdAsync<Content>(productContent.ContentId);
 
-            var productPhotos = context.ProductPhotos.Where(p => p.ProductId == userProduct.ProductId);
+            var productPhotos = _repository.All<ProductPhoto>().Where(p => p.ProductId == userProduct.ProductId);
 
             foreach (var productPhoto in productPhotos)
             {
-                var photo = await context.Photos.FirstOrDefaultAsync(p => p.Id == productPhoto.PhotoId);
+                var photo = await _repository.GetByIdAsync<Photo>(productPhoto.PhotoId);
 
-                context.ProductPhotos.Remove(productPhoto);
-
-                context.Photos.Remove(photo);
+                _repository.Delete(productPhoto);
+                _repository.Delete(photo);
             }
 
-            context.ProductsContent.Remove(productContent);
-
-            context.Content.Remove(content);
-
-            context.Products.Remove(product);
+            _repository.Delete(productContent);
+            _repository.Delete(content);
+            _repository.Delete(product);
 
             if (userProduct != null)
             {
                 user.ProductsData.Remove(userProduct);
 
-                await context.SaveChangesAsync();
-            }
-            var model = await GetUserData(user.UserName);
-
-            return model;
-        }
-
-        public async Task<UserProfileModel> EditUserUploadAsync(string userId, int productId)
-        {
-            var user = await context.Users.Include(a => a.ProductsData).FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user == null)
-            {
-                throw new ArgumentException("Invalid user ID");
+                await _repository.SaveChangesAsync();
             }
 
-            var userProduct = user.ProductsData.FirstOrDefault(p => p.ProductId == productId);
-
-            var product = await context.Products.FirstOrDefaultAsync(a => a.Id == userProduct.ProductId);
-
-            var productContent = await context.ProductsContent.FirstOrDefaultAsync(c => c.ProductId == userProduct.ProductId);
-
-            var content = await context.Content.FirstOrDefaultAsync(c => c.Id == productContent.ContentId);
-
-            var productPhotos = context.ProductPhotos.Where(p => p.ProductId == userProduct.ProductId);
-
-            foreach (var productPhoto in productPhotos)
-            {
-                var photo = await context.Photos.FirstOrDefaultAsync(p => p.Id == productPhoto.PhotoId);
-
-                context.ProductPhotos.Remove(productPhoto);
-
-                context.Photos.Remove(photo);
-            }
-
-            context.ProductsContent.Remove(productContent);
-
-            context.Content.Remove(content);
-
-            context.Products.Remove(product);
-
-            if (userProduct != null)
-            {
-                user.ProductsData.Remove(userProduct);
-
-                await context.SaveChangesAsync();
-            }
             var model = await GetUserData(user.UserName);
 
             return model;
@@ -160,7 +115,7 @@ namespace BlenderParadise.Services
 
         public async Task<EditProductModel> EditUserUploadAsync(int productId)
         {
-            var desiredProduct = await context.Products.FirstOrDefaultAsync(a => a.Id == productId);
+            var desiredProduct = await _repository.GetByIdAsync<Product>(productId);
 
             var model = new EditProductModel()
             {
@@ -174,9 +129,9 @@ namespace BlenderParadise.Services
 
         public async Task EditUserUploadAsync(EditProductModel model)
         {
-            var desiredProduct = await context.Products.FirstOrDefaultAsync(a => a.Id == model.Id);
+            var desiredProduct = await _repository.GetByIdAsync<Product>(model.Id);
 
-            if(desiredProduct == null)
+            if (desiredProduct == null)
             {
 
             }
@@ -184,9 +139,9 @@ namespace BlenderParadise.Services
             desiredProduct.Name = model.Name;
             desiredProduct.Description = model.Description;
 
-            context.Products.Update(desiredProduct);
+            _repository.Update(desiredProduct);
 
-            await context.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
         }
     }
 }

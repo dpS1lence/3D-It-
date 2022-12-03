@@ -25,7 +25,7 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Download(int? id)
+        public async Task<IActionResult> Download(int id)
         {
             var model = await downloadService.GetOneAsync(id);
 
@@ -35,7 +35,7 @@ namespace BlenderParadise.Controllers
         [HttpPost]
         [RequestSizeLimit(209715200)]
         [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
-        public async Task<IActionResult> GetDownloadModel(int? id)
+        public async Task<IActionResult> GetDownloadModel(int id)
         {
             var file = await downloadService.DownloadModelAsync(id);
 
@@ -52,7 +52,7 @@ namespace BlenderParadise.Controllers
         [HttpPost]
         [RequestSizeLimit(209715200)]
         [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
-        public async Task<IActionResult> GetDownloadZip(int? id)
+        public async Task<IActionResult> GetDownloadZip(int id)
         {
             var file = await downloadService.DownloadZipAsync(id);
 

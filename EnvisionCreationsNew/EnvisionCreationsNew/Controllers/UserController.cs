@@ -30,7 +30,7 @@ namespace BlenderParadise.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> EditProduct(int id)
         {
             var model = await _userService.EditUserUploadAsync(id);
@@ -38,7 +38,7 @@ namespace BlenderParadise.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> EditProductModel(int id, EditProductModel model)
+        public async Task<IActionResult> EditProduct(int id, EditProductModel model)
         {
             await _userService.EditUserUploadAsync(model);
 

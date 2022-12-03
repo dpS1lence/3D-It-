@@ -1,14 +1,14 @@
-@font-face {
-    font-family: 'Sucrose Bold Two';
-    src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/sucrose.woff2') format('woff2');
-}
 
+@font-face {
+    font-family: '13210-fontps';
+    src: url('13210-fontps.ttf') format('truetype');
+}
 @font-face {
     font-family: 'IM Fell French Canon Pro';
 }
 
 * {
-    font-family: 'Sucrose Bold Two';
+    font-family: '13210-fontps';
 }
 
 html {

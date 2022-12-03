@@ -8,10 +8,10 @@ namespace BlenderParadise.Services.Contracts
     {
         Task<List<ViewProductModel>> GetAllAsync();
 
-        Task<DownloadProductModel> GetOneAsync(int? id);
+        Task<DownloadProductModel> GetOneAsync(int id);
 
-        Task<IActionResult> DownloadModelAsync(int? id);
+        Task<IActionResult> DownloadModelAsync(int id);
 
-        Task<IActionResult> DownloadZipAsync(int? id);
+        Task<IActionResult> DownloadZipAsync(int id);
     }
 }

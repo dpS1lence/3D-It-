@@ -1,7 +1,9 @@
 ﻿using BlenderParadise.Data;
 using BlenderParadise.Data.Models;
 using BlenderParadise.Models;
+using BlenderParadise.Repositories.Contracts;
 using BlenderParadise.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
@@ -10,14 +12,16 @@ namespace BlenderParadise.Services
 {
     public class UploadService : IUploadService
     {
-        private readonly ApplicationDbContext context;
-        public UploadService(ApplicationDbContext _context)
+        private readonly IRepository _repository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UploadService(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            context = _context;
+            _repository = repository;
+            _userManager = userManager;
         }
         public async Task UploadProductAsync(ProductModel model, string userId)
         {
-            var desiredCategory = await context.Categories.FirstOrDefaultAsync(a => a.Name == model.Category);
+            var desiredCategory = await _repository.All<Category>().Where(a => a.Name == model.Category).FirstOrDefaultAsync();
 
             var productEntity = new Product();
 
@@ -57,13 +61,14 @@ namespace BlenderParadise.Services
                     PhotosZip = photosCollection
                 };
             }
-
-            await context.Content.AddAsync(contentEntity);
-            await context.Products.AddAsync(productEntity);
+            
+            
+            await _repository.AddAsync(contentEntity);
+            await _repository.AddAsync(productEntity);
 
             try
             {
-                await context.SaveChangesAsync();
+                await _repository.SaveChangesAsync();
 
             }
             catch (Exception ex)
@@ -89,11 +94,11 @@ namespace BlenderParadise.Services
                     PhotoFile = photoResult
                 };
 
-                await context.Photos.AddAsync(photo);
+                await _repository.AddAsync(photo);
 
                 try
                 {
-                    await context.SaveChangesAsync();
+                    await _repository.SaveChangesAsync();
 
                 }
                 catch (Exception ex)
@@ -109,12 +114,10 @@ namespace BlenderParadise.Services
                     ProductId = productEntity.Id
                 };
 
-                await context.ProductPhotos.AddAsync(productPhoto);
+                await _repository.AddAsync(productPhoto);
             }
 
-
-
-            var desiredUser = await context.Users.FirstOrDefaultAsync(a => a.Id == userId);
+            var desiredUser = await _userManager.FindByIdAsync(userId);
 
             var applicationUserProductEntity = new ApplicationUserProduct()
             {
@@ -132,10 +135,10 @@ namespace BlenderParadise.Services
                 ProductId = productEntity.Id
             };
 
-            await context.ProductsContent.AddAsync(productContentEntity);
-            await context.ApplicationUsersProducts.AddAsync(applicationUserProductEntity);
+            await _repository.AddAsync(productContentEntity);
+            await _repository.AddAsync(applicationUserProductEntity);
 
-            await context.SaveChangesAsync();
+            await _repository.SaveChangesAsync();
         }
     }
 }

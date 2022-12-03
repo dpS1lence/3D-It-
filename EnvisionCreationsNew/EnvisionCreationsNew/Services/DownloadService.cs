@@ -1,7 +1,9 @@
 ﻿using BlenderParadise.Data;
 using BlenderParadise.Data.Models;
 using BlenderParadise.Models;
+using BlenderParadise.Repositories.Contracts;
 using BlenderParadise.Services.Contracts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.ContentModel;
@@ -11,49 +13,53 @@ namespace BlenderParadise.Services
 {
     public class DownloadService : IDownloadService
     {
-        private readonly ApplicationDbContext context;
-        public DownloadService(ApplicationDbContext _context)
+        private readonly IRepository _repository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public DownloadService(IRepository repository, UserManager<ApplicationUser> userManager)
         {
-            context = _context;
+            _repository = repository;
+            _userManager = userManager;
         }
         public async Task<List<ViewProductModel>> GetAllAsync()
         {
-            var entities = await context.Products
+            var entities = await _repository.All<Product>()
                 .ToListAsync();
 
             var products = new List<ViewProductModel>();
 
             foreach (var item in entities)
             {
-                var desiredCategory = await context.Categories.FirstOrDefaultAsync(a => a.Id == item.CategoryId);
+                var desiredCategory = await _repository.GetByIdAsync<Category>(item.CategoryId);
 
-                    var base64 = Convert.ToBase64String(item.Photo);
+                var base64 = Convert.ToBase64String(item.Photo);
 
-                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
-                    products.Add(new ViewProductModel()
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Description = item.Description,
-                        Category = desiredCategory?.Name ?? "-1",
-                        Photo = imgSrc
-                    });
+                var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                products.Add(new ViewProductModel()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Description = item.Description,
+                    Category = desiredCategory?.Name ?? "-1",
+                    Photo = imgSrc
+                });
             }
 
             return products;
         }
 
-        public async Task<DownloadProductModel> GetOneAsync(int? id)
+        public async Task<DownloadProductModel> GetOneAsync(int id)
         {
-            var productEntity = await context.Products.FirstOrDefaultAsync(a => a.Id == id);
+            var productEntity = await _repository.GetByIdAsync<Product>(id);
 
-            var desiredCategory = await context.Categories.FirstOrDefaultAsync(a => a.Id == productEntity.CategoryId);
+            var desiredCategory = await _repository.GetByIdAsync<Category>(productEntity.CategoryId);
 
-            var productPhotos = await context.ProductPhotos.Where(a => a.ProductId == productEntity.Id).ToListAsync();
+            var productPhotos = await _repository.All<ProductPhoto>().Where(a => a.ProductId == productEntity.Id).ToListAsync();
 
-            var applicationUserProduct = await context.ApplicationUsersProducts.FirstOrDefaultAsync(a => a.ProductId == productEntity.Id);
+            var applicationUserProduct = await _repository.All<ApplicationUserProduct>()
+                .Where(a => a.ProductId == productEntity.Id)
+                .FirstOrDefaultAsync();
 
-            var user = await context.Users.FirstOrDefaultAsync(a => a.Id == applicationUserProduct.ApplicationUserId);
+            var user = await _userManager.FindByIdAsync(applicationUserProduct.ApplicationUserId);
 
             var convertedPhoto = Convert.ToBase64String(productEntity.Photo);
 
@@ -63,7 +69,7 @@ namespace BlenderParadise.Services
 
             foreach (var item in productPhotos)
             {
-                var photo = await context.Photos.FirstOrDefaultAsync(a => a.Id == item.PhotoId);
+                var photo = await _repository.GetByIdAsync<Photo>(item.PhotoId);
 
                 var photoStr = Convert.ToBase64String(photo.PhotoFile);
 
@@ -90,16 +96,18 @@ namespace BlenderParadise.Services
             return product;
         }
 
-        public async Task<IActionResult> DownloadModelAsync(int? id)
+        public async Task<IActionResult> DownloadModelAsync(int id)
         {
-            var entity = await context.ProductsContent.FirstOrDefaultAsync(a => a.ProductId == id);
+            var entity = await _repository.All<ProductContent>()
+                .Where(a => a.ProductId == id)
+                .FirstOrDefaultAsync();
 
-            var productEntity = await context.Products.FirstOrDefaultAsync(a => a.Id == id);
+            var productEntity = await _repository.GetByIdAsync<Product>(id);
 
             try
             {
                 //var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == entity.ContentId);
-                var contentEntity = context.Content.FirstOrDefault(a => a.Id == entity.ContentId);
+                var contentEntity = await _repository.GetByIdAsync<Content>(entity.ContentId);
 
                 if (contentEntity == null)
                 {
@@ -124,16 +132,18 @@ namespace BlenderParadise.Services
             }
         }
 
-        public async Task<IActionResult> DownloadZipAsync(int? id)
+        public async Task<IActionResult> DownloadZipAsync(int id)
         {
-            var entity = await context.ProductsContent.FirstOrDefaultAsync(a => a.ProductId == id);
+            var entity = await _repository.All<ProductContent>()
+                .Where(a => a.ProductId == id)
+                .FirstOrDefaultAsync();
 
-            var productEntity = await context.Products.FirstOrDefaultAsync(a => a.Id == id);
+            var productEntity = await _repository.GetByIdAsync<Product>(id);
 
             try
             {
                 //var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == entity.ContentId);
-                var contentEntity = context.Content.FirstOrDefault(a => a.Id == entity.ContentId);
+                var contentEntity = await _repository.GetByIdAsync<Content>(entity.ContentId);
 
                 if (contentEntity == null)
                 {
