@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise", "BlenderParadise\BlenderParadise.csproj", "{1CD72DF5-D25F-4F49-A8AF-D847C7262411}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise.Core", "BlenderParadise.Core\BlenderParadise.Core.csproj", "{4EFBCBA0-44BC-4AE1-A31B-FF60C4B10424}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{1CD72DF5-D25F-4F49-A8AF-D847C7262411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD72DF5-D25F-4F49-A8AF-D847C7262411}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD72DF5-D25F-4F49-A8AF-D847C7262411}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EFBCBA0-44BC-4AE1-A31B-FF60C4B10424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EFBCBA0-44BC-4AE1-A31B-FF60C4B10424}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EFBCBA0-44BC-4AE1-A31B-FF60C4B10424}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EFBCBA0-44BC-4AE1-A31B-FF60C4B10424}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

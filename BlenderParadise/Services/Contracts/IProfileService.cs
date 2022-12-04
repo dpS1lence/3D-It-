@@ -5,7 +5,7 @@ namespace BlenderParadise.Services.Contracts
 {
     public interface IProfileService
     {
-        Task<UserProfileModel> GetUserData(string userId);
+        Task<UserProfileModel> GetUserData(string userName);
 
         Task<UserProfileModel> RemoveUserUploadAsync(string userId, int productId);
 

@@ -11,11 +11,9 @@ namespace BlenderParadise.Services
     public class SearchService : ISearchService
     {
         private readonly IRepository _repository;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public SearchService(IRepository repository, UserManager<ApplicationUser> userManager)
+        public SearchService(IRepository repository)
         {
             _repository = repository;
-            _userManager = userManager;
         }
         public async Task<List<ViewProductModel>> SearchProductAsync(string modelName)
         {
