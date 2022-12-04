@@ -81,18 +81,43 @@ namespace BlenderParadise.Services
 
             if (user == null)
             {
-                throw new ArgumentException("Invalid user ID");
+                return null;
             }
 
             var userProduct = user.ProductsData.FirstOrDefault(p => p.ProductId == productId);
 
+            if (userProduct == null)
+            {
+                return null;
+            }
+
             var product = await _repository.GetByIdAsync<Product>(userProduct.ProductId);
+
+            if (product == null)
+            {
+                return null;
+            }
 
             var productContent = await _repository.All<ProductContent>().Where(a => a.ProductId == product.Id).FirstOrDefaultAsync();
 
+            if (productContent == null)
+            {
+                return null;
+            }
+
             var content = await _repository.GetByIdAsync<Content>(productContent.ContentId);
 
+            if (content == null)
+            {
+                return null;
+            }
+
             var productPhotos = _repository.All<ProductPhoto>().Where(p => p.ProductId == userProduct.ProductId);
+
+            if (productPhotos == null)
+            {
+                return null;
+            }
 
             foreach (var productPhoto in productPhotos)
             {

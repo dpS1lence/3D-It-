@@ -37,6 +37,11 @@ namespace BlenderParadise.Controllers
 
             var model = await _profileService.RemoveUserUploadAsync(userId, id);
 
+            if(model == null)
+            {
+                return NotFound();
+            }
+
             return View(model);
         }
 
