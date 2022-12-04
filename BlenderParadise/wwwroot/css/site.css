@@ -1,14 +1,14 @@
 
 @font-face {
-    font-family: '13210-fontps';
-    src: url('13210-fontps.ttf') format('truetype');
+    font-family: '3846-font';
+    src: url('3846-font.ttf') format('truetype');
 }
 @font-face {
     font-family: 'IM Fell French Canon Pro';
 }
 
 * {
-    font-family: '13210-fontps';
+    font-family: '3846-font';
 }
 
 html {

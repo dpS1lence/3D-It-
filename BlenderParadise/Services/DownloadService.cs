@@ -6,8 +6,6 @@ using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NuGet.ContentModel;
-using System.IO.Compression;
 
 namespace BlenderParadise.Services
 {
