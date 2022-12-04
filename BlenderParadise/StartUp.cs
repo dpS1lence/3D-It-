@@ -26,7 +26,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IDownloadService, DownloadService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
@@ -35,6 +35,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
+    app.UseStatusCodePages();
 }
 else
 {

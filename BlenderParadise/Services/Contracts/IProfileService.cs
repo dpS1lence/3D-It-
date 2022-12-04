@@ -3,7 +3,7 @@ using BlenderParadise.Models;
 
 namespace BlenderParadise.Services.Contracts
 {
-    public interface IUserService
+    public interface IProfileService
     {
         Task<UserProfileModel> GetUserData(string userId);
 
@@ -13,6 +13,6 @@ namespace BlenderParadise.Services.Contracts
 
         Task<EditProductModel> EditUserUploadAsync(int productId);
 
-        Task EditUserUploadAsync(EditProductModel model);
+        Task<bool> EditUserUploadAsync(EditProductModel model);
     }
 }

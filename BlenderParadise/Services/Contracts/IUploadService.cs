@@ -4,6 +4,6 @@ namespace BlenderParadise.Services.Contracts
 {
     public interface IUploadService
     {
-        Task UploadProductAsync(ProductModel model, string userId);
+        Task<bool> UploadProductAsync(ProductModel model, string userId);
     }
 }

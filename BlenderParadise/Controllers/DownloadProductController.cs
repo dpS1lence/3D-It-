@@ -29,6 +29,11 @@ namespace BlenderParadise.Controllers
         {
             var model = await downloadService.GetOneAsync(id);
 
+            if (model == null)
+            {
+                return NotFound();
+            }
+
             return View(model);
         }
 

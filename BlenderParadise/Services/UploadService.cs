@@ -19,10 +19,18 @@ namespace BlenderParadise.Services
             _repository = repository;
             _userManager = userManager;
         }
-        public async Task UploadProductAsync(ProductModel model, string userId)
+        public async Task<bool> UploadProductAsync(ProductModel model, string userId)
         {
+            if (model == null || userId == null)
+            {
+                return false;
+            }
             var desiredCategory = await _repository.All<Category>().Where(a => a.Name == model.Category).FirstOrDefaultAsync();
 
+            if(desiredCategory == null)
+            {
+                return false;
+            }
             var productEntity = new Product();
 
             using (var target = new MemoryStream())
@@ -71,9 +79,9 @@ namespace BlenderParadise.Services
                 await _repository.SaveChangesAsync();
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
+                return false;
             }
 
             var photo = new Photo();
@@ -101,9 +109,9 @@ namespace BlenderParadise.Services
                     await _repository.SaveChangesAsync();
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
+                    return false;
                 }
 
                 productPhoto = new ProductPhoto()
@@ -139,6 +147,8 @@ namespace BlenderParadise.Services
             await _repository.AddAsync(applicationUserProductEntity);
 
             await _repository.SaveChangesAsync();
+
+            return true;
         }
     }
 }

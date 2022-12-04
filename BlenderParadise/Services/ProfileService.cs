@@ -11,11 +11,11 @@ using System.Net;
 
 namespace BlenderParadise.Services
 {
-    public class UserService : IUserService
+    public class ProfileService : IProfileService
     {
         private readonly IRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserService(IRepository repository, UserManager<ApplicationUser> userManager)
+        public ProfileService(IRepository repository, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
             _userManager = userManager;
@@ -30,6 +30,11 @@ namespace BlenderParadise.Services
         public async Task<UserProfileModel> GetUserData(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
+
+            if(user == null)
+            {
+                return null;
+            }
 
             var usersProducts = _repository.All<ApplicationUserProduct>().Where(a => a.ApplicationUserId == user.Id);
 
@@ -117,6 +122,11 @@ namespace BlenderParadise.Services
         {
             var desiredProduct = await _repository.GetByIdAsync<Product>(productId);
 
+            if (desiredProduct == null)
+            {
+                return null;
+            }
+
             var model = new EditProductModel()
             {
                 Id = desiredProduct.Id,
@@ -127,13 +137,13 @@ namespace BlenderParadise.Services
             return model;
         }
 
-        public async Task EditUserUploadAsync(EditProductModel model)
+        public async Task<bool> EditUserUploadAsync(EditProductModel model)
         {
             var desiredProduct = await _repository.GetByIdAsync<Product>(model.Id);
 
             if (desiredProduct == null)
             {
-
+                return false;
             }
 
             desiredProduct.Name = model.Name;
@@ -142,6 +152,8 @@ namespace BlenderParadise.Services
             _repository.Update(desiredProduct);
 
             await _repository.SaveChangesAsync();
+
+            return true;
         }
     }
 }

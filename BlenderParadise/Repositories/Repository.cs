@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using BlenderParadise.Data;
+using BlenderParadise.Data.Models;
 
 namespace BlenderParadise.Repositories
 {
@@ -131,6 +132,16 @@ namespace BlenderParadise.Repositories
         public async Task<T> GetByIdAsync<T>(object id) where T : class
         {
             return await DbSet<T>().FindAsync(id);
+        }
+
+        /// <summary>
+        /// Gets specific record from database by primary key
+        /// </summary>
+        /// <param name="id">record identificator</param>
+        /// <returns>Single record</returns>
+        public Content GetDownloadById(int id)
+        {
+            return DbSet<Content>().Where(a => a.Id == id).FirstOrDefault();
         }
 
         public async Task<T> GetByIdsAsync<T>(object[] id) where T : class

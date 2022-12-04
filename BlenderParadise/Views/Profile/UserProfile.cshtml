@@ -32,10 +32,10 @@
                 <span style="display: flex">
                     @if (Model.Id == userId)
                     {
-                        <form method="post" asp-controller="User" asp-action="UserProfile" asp-route-id="@product.Id">
+                        <form method="post" asp-controller="Profile" asp-action="DeleteProduct" asp-route-id="@product.Id">
                             <button type="submit" class="buttonTag buttonTag-delete">Delete</button>
                         </form>
-                        <form method="post" asp-controller="User" asp-action="EditProduct" asp-route-id="@product.Id">
+                        <form method="get" asp-controller="Profile" asp-action="EditProduct" asp-route-id="@product.Id">
                             <button type="submit" class="buttonTag buttonTag-edit">Edit</button>
                         </form>
                     }

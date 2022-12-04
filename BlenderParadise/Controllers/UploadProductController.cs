@@ -36,7 +36,10 @@ namespace BlenderParadise.Controllers
             {
                 var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
-                await uploadService.UploadProductAsync(model, userId);
+                if((await uploadService.UploadProductAsync(model, userId)).Equals(false))
+                {
+                    return NotFound();
+                }
 
                 return RedirectToAction("All", "DownloadProduct");
             }

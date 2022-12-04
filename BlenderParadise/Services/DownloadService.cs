@@ -49,15 +49,40 @@ namespace BlenderParadise.Services
         {
             var productEntity = await _repository.GetByIdAsync<Product>(id);
 
+            if (productEntity == null)
+            {
+                return null;
+            }
+
             var desiredCategory = await _repository.GetByIdAsync<Category>(productEntity.CategoryId);
 
+            if (desiredCategory == null)
+            {
+                return null;
+            }
+
             var productPhotos = await _repository.All<ProductPhoto>().Where(a => a.ProductId == productEntity.Id).ToListAsync();
+
+            if (productPhotos == null)
+            {
+                return null;
+            }
 
             var applicationUserProduct = await _repository.All<ApplicationUserProduct>()
                 .Where(a => a.ProductId == productEntity.Id)
                 .FirstOrDefaultAsync();
 
+            if (applicationUserProduct == null)
+            {
+                return null;
+            }
+
             var user = await _userManager.FindByIdAsync(applicationUserProduct.ApplicationUserId);
+
+            if(user == null)
+            {
+                return null;
+            }
 
             var convertedPhoto = Convert.ToBase64String(productEntity.Photo);
 
@@ -105,7 +130,7 @@ namespace BlenderParadise.Services
             try
             {
                 //var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == entity.ContentId);
-                var contentEntity = await _repository.GetByIdAsync<Content>(entity.ContentId);
+                var contentEntity = _repository.GetDownloadById(entity.ContentId);
 
                 if (contentEntity == null)
                 {
@@ -124,9 +149,9 @@ namespace BlenderParadise.Services
                 };
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                return null;
             }
         }
 
@@ -141,7 +166,7 @@ namespace BlenderParadise.Services
             try
             {
                 //var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == entity.ContentId);
-                var contentEntity = await _repository.GetByIdAsync<Content>(entity.ContentId);
+                var contentEntity = _repository.GetDownloadById(entity.ContentId);
 
                 if (contentEntity == null)
                 {
@@ -161,9 +186,9 @@ namespace BlenderParadise.Services
                 };
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                return null;
             }
         }
     }
