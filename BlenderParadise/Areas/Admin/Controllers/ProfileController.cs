@@ -3,7 +3,7 @@ using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace BlenderParadise.Controllers
+namespace BlenderParadise.Areas.Admin.Controllers
 {
     public class ProfileController : Controller
     {
@@ -14,8 +14,7 @@ namespace BlenderParadise.Controllers
             _profileService = profileService;
         }
         [HttpGet]
-        [Route("{userName}")]
-        public async Task<IActionResult> UserProfile(string userName)
+        public async Task<IActionResult> Profile(string userName)
         {
             var model = await _profileService.GetUserData(userName);
 
@@ -27,7 +26,7 @@ namespace BlenderParadise.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
@@ -47,7 +46,7 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditProduct(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             var model = await _profileService.EditUserUploadAsync(id);
 
@@ -59,7 +58,7 @@ namespace BlenderParadise.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> EditProduct(EditProductModel model)
+        public async Task<IActionResult> Edit(EditProductModel model)
         {
             if((await _profileService.EditUserUploadAsync(model)).Equals(false))
             {

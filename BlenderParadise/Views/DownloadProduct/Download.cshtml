@@ -19,9 +19,9 @@
     <img src="@item" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
 }
 
-<form method="post" asp-controller="DownloadProduct" asp-action="GetDownloadModel" asp-route-id="@Model.Id">
+<form method="post" asp-area="" asp-controller="DownloadProduct" asp-action="GetDownloadModel" asp-route-id="@Model.Id">
     <button type="submit" class="btn btn-primary">Download Model</button>
 </form>
-<form method="post" asp-controller="DownloadProduct" asp-action="GetDownloadZip" asp-route-id="@Model.Id">
+<form method="post" asp-area="" asp-controller="DownloadProduct" asp-action="GetDownloadZip" asp-route-id="@Model.Id">
     <button type="submit" class="btn btn-primary">Download Zip</button>
 </form>

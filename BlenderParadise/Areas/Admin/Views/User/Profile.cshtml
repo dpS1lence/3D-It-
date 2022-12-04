@@ -8,13 +8,12 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<link href="~/css/finalCard.css" rel="stylesheet" />
+<link href="~/css/finalcard.css" rel="stylesheet" />
 
 @if (Model.Id == userId)
 {
     <h1>Your Profile</h1>
 }
-<img src="@Model.ProfilePhoto"/>
 <span>@Model.UserName</span>
 <span>@Model.Bio</span>
 
@@ -23,7 +22,7 @@
     {
         <div class="card">
             <div class="card-header">
-                <img class="profilePic" src="@product.CoverPhoto" alt="rover" />
+                <img src="@product.CoverPhoto" alt="rover" />
             </div>
             <div class="card-body">
                 <span class="tag tag-teal">@product.Category</span>
@@ -33,14 +32,14 @@
                 <span style="display: flex">
                     @if (Model.Id == userId)
                     {
-                        <form method="post" asp-area="" asp-controller="Profile" asp-action="DeleteProduct" asp-route-id="@product.Id">
+                        <form method="post" asp-controller="Profile" asp-action="DeleteProduct" asp-route-id="@product.Id">
                             <button type="submit" class="buttonTag buttonTag-delete">Delete</button>
                         </form>
-                        <form method="get" asp-area="" asp-controller="Profile" asp-action="EditProduct" asp-route-id="@product.Id">
+                        <form method="get" asp-controller="Profile" asp-action="EditProduct" asp-route-id="@product.Id">
                             <button type="submit" class="buttonTag buttonTag-edit">Edit</button>
                         </form>
                     }
-                    <form method="get" asp-area="" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
+                    <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
                         <button type="submit" class="buttonTag buttonTag-teal">View</button>
                     </form>
                 </span>
