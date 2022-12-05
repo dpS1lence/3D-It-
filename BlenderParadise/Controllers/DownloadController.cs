@@ -7,34 +7,13 @@ using System.IO.Compression;
 
 namespace BlenderParadise.Controllers
 {
-    public class DownloadProductController : Controller
+    public class DownloadController : Controller
     {
         private readonly IDownloadService downloadService;
 
-        public DownloadProductController(IDownloadService downloadService)
+        public DownloadController(IDownloadService downloadService)
         {
             this.downloadService = downloadService;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> All()
-        {
-            var model = await downloadService.GetAllAsync();
-
-            return View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Download(int id)
-        {
-            var model = await downloadService.GetOneAsync(id);
-
-            if (model == null)
-            {
-                return NotFound();
-            }
-
-            return View(model);
         }
 
         [HttpPost]

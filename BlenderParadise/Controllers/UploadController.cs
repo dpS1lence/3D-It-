@@ -7,11 +7,11 @@ using System.Security.Claims;
 
 namespace BlenderParadise.Controllers
 {
-    public class UploadProductController : Controller
+    public class UploadController : Controller
     {
         private readonly IUploadService uploadService;
 
-        public UploadProductController(IUploadService _uploadService)
+        public UploadController(IUploadService _uploadService)
         {
             uploadService = _uploadService;
         }

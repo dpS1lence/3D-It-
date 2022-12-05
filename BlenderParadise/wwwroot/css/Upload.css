@@ -14,30 +14,42 @@
     transition: background .2s ease-in-out, border .2s ease-in-out;
 }
 
-.center{
-    margin: auto;
+.center {
+    position: relative;
 }
 
-    .drop-container:hover {
-        background: #eee;
-        border-color: #111;
+.drop-container:hover {
+    background: #eee;
+    border-color: #111;
+}
+
+    .drop-container:hover .drop-title {
+        color: #222;
     }
 
-        .drop-container:hover .drop-title {
-            color: #222;
-        }
-
 .drop-title {
-    color: #444;
-    font-size: 20px;
-    font-weight: bold;
     text-align: center;
     transition: color .2s ease-in-out;
 }
 
+.uploadBtn {
+    align-content: center;
+    margin-top: 20px;
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+    .uploadBtn::hover {
+        background: #0d45a5;
+    }
+
 input[type=file] {
-    width: 350px;
-    max-width: 100%;
     color: #444;
     padding: 5px;
     background: #fff;
