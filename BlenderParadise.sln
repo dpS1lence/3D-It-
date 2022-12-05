@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise", "BlenderParadise\BlenderParadise.csproj", "{1CD72DF5-D25F-4F49-A8AF-D847C7262411}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlenderParadise.UnitTests", "BlenderParadise.UnitTests\BlenderParadise.UnitTests.csproj", "{948DADD7-625C-4BD8-90B5-63F6D0A23C97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlenderParadise.Tests.Common", "BlenderParadise.Tests.Common\BlenderParadise.Tests.Common.csproj", "{F5112698-80FE-4515-8232-D2C43D47E245}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1CD72DF5-D25F-4F49-A8AF-D847C7262411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CD72DF5-D25F-4F49-A8AF-D847C7262411}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CD72DF5-D25F-4F49-A8AF-D847C7262411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{948DADD7-625C-4BD8-90B5-63F6D0A23C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{948DADD7-625C-4BD8-90B5-63F6D0A23C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{948DADD7-625C-4BD8-90B5-63F6D0A23C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{948DADD7-625C-4BD8-90B5-63F6D0A23C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5112698-80FE-4515-8232-D2C43D47E245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5112698-80FE-4515-8232-D2C43D47E245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5112698-80FE-4515-8232-D2C43D47E245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5112698-80FE-4515-8232-D2C43D47E245}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
