@@ -8,7 +8,7 @@ namespace BlenderParadise.Data.Models
         public int Id { get; set; }
 
         [Required]
-        public byte[] AttachmentModel { get; set; } = null!;
+        public string FileName { get; set; } = null!;
 
         [Required]
         public byte[] PhotosZip { get; set; } = null!;

@@ -1,18 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlenderParadise.Data.Models
 {
     public class Product
     {
-        public Product()
-        {
-            ApplicationUsersProducts = new HashSet<ApplicationUserProduct>();
-
-            ProductsContent = new HashSet<ProductContent>();
-
-            ProductPhotos = new HashSet<ProductPhoto>();
-        }
-
         [Key]
         public int Id { get; set; }
 
@@ -41,10 +33,12 @@ namespace BlenderParadise.Data.Models
         [Required]
         public byte[] Photo { get; set; } = null!;
 
-        public virtual ICollection<ApplicationUserProduct> ApplicationUsersProducts { get; set; }
-               
-        public virtual ICollection<ProductContent> ProductsContent { get; set; }
-               
-        public virtual ICollection<ProductPhoto> ProductPhotos { get; set; }
+        [ForeignKey(nameof(Content))]
+        public int ContentId { get; set; }
+        public Content? Content { get; set; }
+
+        [ForeignKey(nameof(ApplicationUser))]
+        public string UserId { get; set; } = null!;
+        public ApplicationUser? ApplicationUser { get; set; }
     }
 }

@@ -29,20 +29,23 @@ namespace BlenderParadise.Services
         }
         public async Task<UserProfileModel> GetUserData(string userName)
         {
-            var user = await _userManager.FindByNameAsync(userName);
+            var user = await _userManager.Users
+                .Include(a => a.ProductsData)
+                .Where(a => a.UserName == userName)
+                .FirstOrDefaultAsync();
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
 
-            var usersProducts = _repository.All<ApplicationUserProduct>().Where(a => a.ApplicationUserId == user.Id);
+            var userProductsData = user.ProductsData.ToList();
 
             var userProducts = new List<UserProductModel>();
 
-            foreach (var userProduct in usersProducts)
+            foreach (var userProduct in userProductsData)
             {
-                var product = await _repository.GetByIdAsync<Product>(userProduct.ProductId);
+                var product = await _repository.GetByIdAsync<Product>(userProduct.Id);
 
                 var category = await _repository.GetByIdAsync<Category>(product.CategoryId);
 
@@ -84,50 +87,39 @@ namespace BlenderParadise.Services
                 return null;
             }
 
-            var userProduct = user.ProductsData.FirstOrDefault(p => p.ProductId == productId);
+            var userProduct = user.ProductsData.FirstOrDefault(p => p.Id == productId);
 
             if (userProduct == null)
             {
                 return null;
             }
 
-            var product = await _repository.GetByIdAsync<Product>(userProduct.ProductId);
+            var product = await _repository.GetByIdAsync<Product>(userProduct.Id);
 
             if (product == null)
             {
                 return null;
             }
 
-            var productContent = await _repository.All<ProductContent>().Where(a => a.ProductId == product.Id).FirstOrDefaultAsync();
-
-            if (productContent == null)
-            {
-                return null;
-            }
-
-            var content = await _repository.GetByIdAsync<Content>(productContent.ContentId);
+            var content = await _repository.GetByIdAsync<Content>(product.ContentId);
 
             if (content == null)
             {
                 return null;
             }
 
-            var productPhotos = _repository.All<ProductPhoto>().Where(p => p.ProductId == userProduct.ProductId);
+            var photos = _repository.All<Photo>().Where(p => p.ProductId == product.Id);
 
-            if (productPhotos == null)
+            if (photos == null)
             {
                 return null;
             }
 
-            foreach (var productPhoto in productPhotos)
+            foreach (var photo in photos)
             {
-                var photo = await _repository.GetByIdAsync<Photo>(productPhoto.PhotoId);
-
-                _repository.Delete(productPhoto);
                 _repository.Delete(photo);
             }
 
-            _repository.Delete(productContent);
             _repository.Delete(content);
             _repository.Delete(product);
 

@@ -25,7 +25,7 @@
                     @product.Name
                 </h4>
                 <span>
-                    <form method="get" asp-controller="DownloadProduct" asp-action="Download" asp-route-id="@product.Id">
+                    <form method="get" asp-controller="Product" asp-action="One" asp-route-id="@product.Id">
                         <button type="submit" class="buttonTag buttonTag-teal">Download</button>
                     </form>
                 </span>

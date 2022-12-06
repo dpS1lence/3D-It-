@@ -6,13 +6,13 @@ namespace BlenderParadise.Data.Models
     {
         public ApplicationUser()
         {
-            ProductsData = new HashSet<ApplicationUserProduct>();
+            ProductsData = new HashSet<Product>();
         }
 
         public string ProfilePicture { get; set; } = null!;
 
         public string Description { get; set; } = null!;
 
-        public virtual ICollection<ApplicationUserProduct> ProductsData { get; set; }
+        public virtual ICollection<Product> ProductsData { get; set; }
     }
 }

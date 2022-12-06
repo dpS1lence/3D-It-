@@ -19,34 +19,21 @@ namespace BlenderParadise.Services
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> DownloadModelAsync(int id)
+        public async Task<string> DownloadModelAsync(int id)
         {
-            var entity = await _repository.All<ProductContent>()
-                .Where(a => a.ProductId == id)
-                .FirstOrDefaultAsync();
 
             var productEntity = await _repository.GetByIdAsync<Product>(id);
 
             try
             {
-                //var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == entity.ContentId);
-                var contentEntity = _repository.GetDownloadById(entity.ContentId);
+                var contentEntity = _repository.GetDownloadById(productEntity.ContentId);
 
                 if (contentEntity == null)
                 {
                     return null;
                 }
-                if (contentEntity?.AttachmentModel == null)
-                {
-                    return null;
-                }
 
-                byte[] byteArr = contentEntity?.AttachmentModel ?? null!;
-                string mimeType = "application/blend";
-                return new FileContentResult(byteArr, mimeType)
-                {
-                    FileDownloadName = $"3DIt!_{productEntity?.Name.Replace(" ", "_")}.blend"
-                };
+                return contentEntity.FileName;
 
             }
             catch (Exception)
@@ -57,16 +44,11 @@ namespace BlenderParadise.Services
 
         public async Task<IActionResult> DownloadZipAsync(int id)
         {
-            var entity = await _repository.All<ProductContent>()
-                .Where(a => a.ProductId == id)
-                .FirstOrDefaultAsync();
-
             var productEntity = await _repository.GetByIdAsync<Product>(id);
 
             try
             {
-                //var contentEntity = await context.Content.FirstOrDefaultAsync(a => a.Id == entity.ContentId);
-                var contentEntity = _repository.GetDownloadById(entity.ContentId);
+                var contentEntity = _repository.GetDownloadById(productEntity.ContentId);
 
                 if (contentEntity == null)
                 {

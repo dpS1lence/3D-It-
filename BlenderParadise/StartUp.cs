@@ -33,7 +33,9 @@ builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IDownloadService, DownloadService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IFileSaverService, LocalStorageFileSaverService>();
 
 var app = builder.Build();
 
@@ -57,7 +59,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.SeedAdmin();
+//app.SeedAdmin();
 
 app.UseEndpoints(endpoints =>
 {

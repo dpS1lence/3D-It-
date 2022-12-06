@@ -41,7 +41,7 @@ namespace BlenderParadise.Controllers
                     return NotFound();
                 }
 
-                return RedirectToAction("All", "DownloadProduct");
+                return RedirectToAction("All", "Product");
             }
             catch (Exception)
             {

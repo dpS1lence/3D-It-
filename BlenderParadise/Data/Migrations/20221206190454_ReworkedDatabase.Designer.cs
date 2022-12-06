@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlenderParadise.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221128160844_AddedChallenges")]
-    partial class AddedChallenges
+    [Migration("20221206190454_ReworkedDatabase")]
+    partial class ReworkedDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,10 @@ namespace BlenderParadise.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -66,6 +70,10 @@ namespace BlenderParadise.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ProfilePicture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -87,21 +95,6 @@ namespace BlenderParadise.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("BlenderParadise.Data.Models.ApplicationUserProduct", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ProductId", "ApplicationUserId");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("ApplicationUsersProducts");
                 });
 
             modelBuilder.Entity("BlenderParadise.Data.Models.Category", b =>
@@ -155,9 +148,9 @@ namespace BlenderParadise.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<byte[]>("AttachmentModel")
+                    b.Property<string>("FileName")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PhotosZip")
                         .IsRequired()
@@ -180,7 +173,12 @@ namespace BlenderParadise.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Photos");
                 });
@@ -194,6 +192,9 @@ namespace BlenderParadise.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -218,43 +219,21 @@ namespace BlenderParadise.Data.Migrations
                         .HasMaxLength(26)
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Vertices")
                         .HasMaxLength(26)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("BlenderParadise.Data.Models.ProductContent", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ContentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "ContentId");
-
                     b.HasIndex("ContentId");
 
-                    b.ToTable("ProductsContent");
-                });
+                    b.HasIndex("UserId");
 
-            modelBuilder.Entity("BlenderParadise.Data.Models.ProductPhoto", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhotoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "PhotoId");
-
-                    b.HasIndex("PhotoId");
-
-                    b.ToTable("ProductPhotos");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -394,26 +373,18 @@ namespace BlenderParadise.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BlenderParadise.Data.Models.ApplicationUserProduct", b =>
+            modelBuilder.Entity("BlenderParadise.Data.Models.Photo", b =>
                 {
-                    b.HasOne("BlenderParadise.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("ProductsData")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BlenderParadise.Data.Models.Product", "Product")
-                        .WithMany("ApplicationUsersProducts")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
-
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("BlenderParadise.Data.Models.ProductContent", b =>
+            modelBuilder.Entity("BlenderParadise.Data.Models.Product", b =>
                 {
                     b.HasOne("BlenderParadise.Data.Models.Content", "Content")
                         .WithMany()
@@ -421,34 +392,15 @@ namespace BlenderParadise.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BlenderParadise.Data.Models.Product", "Product")
-                        .WithMany("ProductsContent")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("BlenderParadise.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("ProductsData")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Content");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("BlenderParadise.Data.Models.ProductPhoto", b =>
-                {
-                    b.HasOne("BlenderParadise.Data.Models.Photo", "Photo")
-                        .WithMany()
-                        .HasForeignKey("PhotoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlenderParadise.Data.Models.Product", "Product")
-                        .WithMany("ProductPhotos")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Photo");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -505,15 +457,6 @@ namespace BlenderParadise.Data.Migrations
             modelBuilder.Entity("BlenderParadise.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("ProductsData");
-                });
-
-            modelBuilder.Entity("BlenderParadise.Data.Models.Product", b =>
-                {
-                    b.Navigation("ApplicationUsersProducts");
-
-                    b.Navigation("ProductPhotos");
-
-                    b.Navigation("ProductsContent");
                 });
 #pragma warning restore 612, 618
         }

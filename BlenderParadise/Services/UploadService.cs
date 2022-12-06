@@ -13,12 +13,16 @@ namespace BlenderParadise.Services
     public class UploadService : IUploadService
     {
         private readonly IRepository _repository;
+        private readonly IFileSaverService _fileSaverService;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UploadService(IRepository repository, UserManager<ApplicationUser> userManager)
+
+        public UploadService(IRepository repository, IFileSaverService fileSaverService, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
+            _fileSaverService = fileSaverService;
             _userManager = userManager;
         }
+
         public async Task<bool> UploadProductAsync(ProductModel model, string userId)
         {
             if (model == null || userId == null)
@@ -27,10 +31,42 @@ namespace BlenderParadise.Services
             }
             var desiredCategory = await _repository.All<Category>().Where(a => a.Name == model.Category).FirstOrDefaultAsync();
 
-            if(desiredCategory == null)
+            var desiredUser = await _userManager.FindByIdAsync(userId);
+
+            if (desiredCategory == null || desiredUser == null)
+            {
+                return false;
+            } 
+
+            var contentEntity = new Content();
+
+            string fileName = _fileSaverService.SaveFile(model.AttachmentModel[0]);
+
+            using (var target = new MemoryStream())
+            {
+                model.PhotosZip[0].CopyTo(target);
+
+                var photosCollection = target.ToArray();
+
+                contentEntity = new Content()
+                {
+                    FileName = fileName,
+                    PhotosZip = photosCollection
+                };
+            }
+
+            await _repository.AddAsync(contentEntity);
+
+            try
+            {
+                await _repository.SaveChangesAsync();
+
+            }
+            catch (Exception)
             {
                 return false;
             }
+
             var productEntity = new Product();
 
             using (var target = new MemoryStream())
@@ -47,31 +83,14 @@ namespace BlenderParadise.Services
                     Vertices = int.Parse(model.Vertices),
                     Geometry = int.Parse(model.Geometry),
                     CategoryId = desiredCategory?.Id ?? 1,
-                    Photo = coverPhoto
+                    Photo = coverPhoto,
+                    UserId = userId,
+                    ApplicationUser = desiredUser,
+                    ContentId = contentEntity.Id,
+                    Content = contentEntity
                 };
             }
 
-            var contentEntity = new Content();
-
-            using (var target = new MemoryStream())
-            {
-                model.AttachmentModel[0].CopyTo(target);
-
-                var attachmentModel = target.ToArray();
-
-                model.PhotosZip[0].CopyTo(target);
-
-                var photosCollection = target.ToArray();
-
-                contentEntity = new Content()
-                {
-                    AttachmentModel = attachmentModel,
-                    PhotosZip = photosCollection
-                };
-            }
-            
-            
-            await _repository.AddAsync(contentEntity);
             await _repository.AddAsync(productEntity);
 
             try
@@ -85,7 +104,6 @@ namespace BlenderParadise.Services
             }
 
             var photo = new Photo();
-            var productPhoto = new ProductPhoto();
 
             var stream = new MemoryStream();
 
@@ -99,7 +117,9 @@ namespace BlenderParadise.Services
 
                 photo = new Photo()
                 {
-                    PhotoFile = photoResult
+                    PhotoFile = photoResult,
+                    ProductId = productEntity.Id,
+                    Product = productEntity
                 };
 
                 await _repository.AddAsync(photo);
@@ -113,40 +133,9 @@ namespace BlenderParadise.Services
                 {
                     return false;
                 }
-
-                productPhoto = new ProductPhoto()
-                {
-                    Photo = photo,
-                    PhotoId = photo.Id,
-                    Product = productEntity,
-                    ProductId = productEntity.Id
-                };
-
-                await _repository.AddAsync(productPhoto);
             }
 
-            var desiredUser = await _userManager.FindByIdAsync(userId);
-
-            var applicationUserProductEntity = new ApplicationUserProduct()
-            {
-                ApplicationUser = desiredUser,
-                ApplicationUserId = desiredUser?.Id ?? "-1",
-                Product = productEntity,
-                ProductId = productEntity.Id
-            };
-
-            var productContentEntity = new ProductContent()
-            {
-                Content = contentEntity,
-                ContentId = contentEntity.Id,
-                Product = productEntity,
-                ProductId = productEntity.Id
-            };
-
-            await _repository.AddAsync(productContentEntity);
-            await _repository.AddAsync(applicationUserProductEntity);
-
-            await _repository.SaveChangesAsync();
+            
 
             return true;
         }

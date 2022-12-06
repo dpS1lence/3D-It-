@@ -6,7 +6,7 @@ namespace BlenderParadise.Services.Contracts
 {
     public interface IDownloadService
     {
-        Task<IActionResult> DownloadModelAsync(int id);
+        Task<string> DownloadModelAsync(int id);
 
         Task<IActionResult> DownloadZipAsync(int id);
     }

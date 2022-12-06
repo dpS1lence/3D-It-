@@ -21,15 +21,17 @@ namespace BlenderParadise.Controllers
         [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
         public async Task<IActionResult> GetDownloadModel(int id)
         {
-            var file = await downloadService.DownloadModelAsync(id);
+            var filePath = await downloadService.DownloadModelAsync(id);
 
-            if (file == null)
+            if (filePath == null)
             {
                 return NotFound();
             }
             else
             {
-                return file;
+                string mimeType = "application/blend";
+
+                return File("F:\\3_DavidDocuments\\Work\\SOFT-UNI\\ASP.NET Project for exam\\GitHub\\3D-It-\\BlenderParadise\\wwwroot\\databaseFiles\\" + filePath, mimeType);
             }
         }
 

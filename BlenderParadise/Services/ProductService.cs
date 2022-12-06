@@ -59,23 +59,14 @@ namespace BlenderParadise.Services
                 return null;
             }
 
-            var productPhotos = await _repository.All<ProductPhoto>().Where(a => a.ProductId == productEntity.Id).ToListAsync();
+            var productPhotos = await _repository.All<Photo>().Where(a => a.ProductId == productEntity.Id).ToListAsync();
 
             if (productPhotos == null)
             {
                 return null;
             }
 
-            var applicationUserProduct = await _repository.All<ApplicationUserProduct>()
-                .Where(a => a.ProductId == productEntity.Id)
-                .FirstOrDefaultAsync();
-
-            if (applicationUserProduct == null)
-            {
-                return null;
-            }
-
-            var user = await _userManager.FindByIdAsync(applicationUserProduct.ApplicationUserId);
+            var user = await _userManager.FindByIdAsync(productEntity.UserId);
 
             if (user == null)
             {
@@ -90,9 +81,7 @@ namespace BlenderParadise.Services
 
             foreach (var item in productPhotos)
             {
-                var photo = await _repository.GetByIdAsync<Photo>(item.PhotoId);
-
-                var photoStr = Convert.ToBase64String(photo.PhotoFile);
+                var photoStr = Convert.ToBase64String(item.PhotoFile);
 
                 var imageString = string.Format("data:image/jpg;base64,{0}", photoStr);
 
