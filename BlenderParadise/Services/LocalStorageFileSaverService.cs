@@ -11,7 +11,10 @@ namespace BlenderParadise.Services
         {
             this.webHostEnvironment = webHostEnvironment;
         }
-
+        public string GetPath(string fileName)
+        {
+            return Path.Combine(Path.Combine(webHostEnvironment.WebRootPath, "databaseFiles"), fileName);
+        }
         public string SaveFile(IFormFile fileData)
         {
             string uniqueFileName = String.Empty;

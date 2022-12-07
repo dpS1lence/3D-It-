@@ -18,8 +18,13 @@ namespace BlenderParadise.Services
         }
         public async Task<List<ViewProductModel>> GetAllAsync()
         {
-            var entities = await _repository.All<Product>()
-                .ToListAsync();
+            List<Product> entities = new();
+            try
+            {
+                entities = _repository.All<Product>()
+                    .ToList();
+            }
+            catch (Exception) { }
 
             var products = new List<ViewProductModel>();
 
@@ -59,7 +64,7 @@ namespace BlenderParadise.Services
                 return null;
             }
 
-            var productPhotos = await _repository.All<Photo>().Where(a => a.ProductId == productEntity.Id).ToListAsync();
+            var productPhotos = _repository.All<Photo>().Where(a => a.ProductId == productEntity.Id).ToList();
 
             if (productPhotos == null)
             {

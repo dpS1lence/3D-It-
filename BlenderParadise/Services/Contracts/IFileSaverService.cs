@@ -2,6 +2,7 @@
 {
     public interface IFileSaverService
     {
+        string GetPath(string fileName);
         string SaveFile(IFormFile fileData);
     }
 }

@@ -43,7 +43,7 @@ namespace BlenderParadise.Controllers
                 return NotFound();
             }
 
-            return View(model);
+            return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
         }
 
         [HttpGet]
@@ -66,7 +66,7 @@ namespace BlenderParadise.Controllers
                 return NotFound();
             }
 
-            return RedirectToAction("All", "DownloadProduct");
+            return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
         }
     }
 }

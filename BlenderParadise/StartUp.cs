@@ -59,7 +59,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.SeedAdmin();
+app.SeedAdmin();
 
 app.UseEndpoints(endpoints =>
 {
