@@ -1,4 +1,5 @@
 ﻿using BlenderParadise.Data.Models;
+using BlenderParadise.Tests.Common;
 using BlenderParadise.UnitTests.Mocks;
 using Microsoft.AspNetCore.Identity;
 using Moq;
@@ -13,14 +14,16 @@ namespace BlenderParadise.UnitTests.Tests
     public class TestsBase
     {
         protected Mock<UserManager<ApplicationUser>> userManager;
+        private readonly BlenderParadiseTestDb testDb = new();
 
         [OneTimeSetUp]
         public void OnTimeSetUp()
         {
             this.userManager = UserManagerMock.MockUserManager<ApplicationUser>(new List<ApplicationUser>()
             {
-                new ApplicationUser(),
-                new ApplicationUser()
+                testDb.User,
+                testDb.User2,
+                testDb.UserWithNoUploads
             });
         }
     }

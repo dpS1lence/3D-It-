@@ -14,10 +14,12 @@ namespace BlenderParadise.Services
     public class ProfileService : IProfileService
     {
         private readonly IRepository _repository;
+        private readonly IFileService _fileSaverService;
         private readonly UserManager<ApplicationUser> _userManager;
-        public ProfileService(IRepository repository, UserManager<ApplicationUser> userManager)
+        public ProfileService(IRepository repository, IFileService fileSaverService, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
+            _fileSaverService = fileSaverService;
             _userManager = userManager;
         }
 
@@ -29,10 +31,10 @@ namespace BlenderParadise.Services
         }
         public async Task<UserProfileModel> GetUserData(string userName)
         {
-            var user = await _userManager.Users
+            var user = _userManager.Users
                 .Include(a => a.ProductsData)
                 .Where(a => a.UserName == userName)
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
 
             if (user == null)
             {
@@ -77,10 +79,10 @@ namespace BlenderParadise.Services
 
         public async Task<UserProfileModel> RemoveUserUploadAsync(string userId, int productId)
         {
-            var user = await _userManager.Users
+            var user = _userManager.Users
                 .Include(a => a.ProductsData)
                 .Where(a => a.Id == userId)
-                .FirstOrDefaultAsync();
+                .FirstOrDefault();
 
             if (user == null)
             {
@@ -111,6 +113,18 @@ namespace BlenderParadise.Services
             var photos = _repository.All<Photo>().Where(p => p.ProductId == product.Id);
 
             if (photos == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                if (!_fileSaverService.DeleteFile(content.FileName))
+                {
+                    return null;
+                }
+            }
+            catch (IOException ioExp)
             {
                 return null;
             }

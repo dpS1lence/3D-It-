@@ -13,10 +13,10 @@ namespace BlenderParadise.Services
     public class UploadService : IUploadService
     {
         private readonly IRepository _repository;
-        private readonly IFileSaverService _fileSaverService;
+        private readonly IFileService _fileSaverService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public UploadService(IRepository repository, IFileSaverService fileSaverService, UserManager<ApplicationUser> userManager)
+        public UploadService(IRepository repository, IFileService fileSaverService, UserManager<ApplicationUser> userManager)
         {
             _repository = repository;
             _fileSaverService = fileSaverService;
@@ -36,11 +36,11 @@ namespace BlenderParadise.Services
             if (desiredCategory == null || desiredUser == null)
             {
                 return false;
-            } 
+            }
 
             var contentEntity = new Content();
 
-            string fileName = _fileSaverService.SaveFile(model.AttachmentModel[0]);
+            string fileName = await _fileSaverService.SaveFile(model.AttachmentModel[0]);
 
             using (var target = new MemoryStream())
             {
@@ -135,7 +135,7 @@ namespace BlenderParadise.Services
                 }
             }
 
-            
+
 
             return true;
         }

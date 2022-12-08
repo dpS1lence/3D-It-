@@ -12,12 +12,12 @@ namespace BlenderParadise.Controllers
     public class DownloadController : Controller
     {
         private readonly IDownloadService downloadService;
-        private readonly IFileSaverService fileSaverService;
+        private readonly IFileService fileService;
 
-        public DownloadController(IDownloadService downloadService, IFileSaverService fileSaverService)
+        public DownloadController(IDownloadService downloadService, IFileService fileService)
         {
             this.downloadService = downloadService;
-            this.fileSaverService = fileSaverService;
+            this.fileService = fileService;
         }
 
         [HttpPost]
@@ -25,7 +25,7 @@ namespace BlenderParadise.Controllers
         {
             var fileName = await downloadService.DownloadModelAsync(id);
 
-            string filePath = fileSaverService.GetPath(fileName);
+            string filePath = fileService.GetPath(fileName);
 
             if (fileName == null)
             {

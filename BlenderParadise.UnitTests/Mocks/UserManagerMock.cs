@@ -19,16 +19,27 @@ namespace BlenderParadise.UnitTests.Mocks
             mgr.Object.UserValidators.Add(new UserValidator<ApplicationUser>());
             mgr.Object.PasswordValidators.Add(new PasswordValidator<ApplicationUser>());
 
-            mgr.Setup(x => x.DeleteAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(IdentityResult.Success);
-            mgr.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success).Callback<ApplicationUser, string>((x, y) => userList.Add(x));
-            mgr.Setup(x => x.UpdateAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(IdentityResult.Success);
+            mgr.Setup(x => x.DeleteAsync(It.IsAny<ApplicationUser>()))
+                .ReturnsAsync(IdentityResult.Success);
+            mgr.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success).Callback<ApplicationUser, string>((x, y) => userList.Add(x));
+
+            mgr.Setup(um => um.FindByNameAsync(
+                It.IsAny<string>()))!
+            .ReturnsAsync((string username) =>
+                userList.FirstOrDefault(u => u.UserName == username));
+
+            mgr.Setup(a => a.Users).Returns(userList.AsQueryable());
+
+            mgr.Setup(um => um.FindByIdAsync(
+                It.IsAny<string>()))!
+            .ReturnsAsync((string id) =>
+                userList.FirstOrDefault(u => u.Id == id));
+
+            mgr.Setup(x => x.UpdateAsync(It.IsAny<ApplicationUser>()))
+                .ReturnsAsync(IdentityResult.Success);
 
             return mgr;
-        }
-
-        private async Task<bool> CreateUser(UserManager<ApplicationUser> _userManager, ApplicationUser user, string password)
-        {
-            return (await _userManager.CreateAsync(user, password)).Succeeded;
         }
     }
 }
