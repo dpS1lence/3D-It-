@@ -26,7 +26,7 @@ namespace BlenderParadise.Services
 
             try
             {
-                var contentEntity = _repository.GetDownloadById(productEntity.ContentId);
+                var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
 
                 if (contentEntity == null)
                 {
@@ -48,7 +48,7 @@ namespace BlenderParadise.Services
 
             try
             {
-                var contentEntity = _repository.GetDownloadById(productEntity.ContentId);
+                var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
 
                 if (contentEntity == null)
                 {

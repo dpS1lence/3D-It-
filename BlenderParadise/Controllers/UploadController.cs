@@ -36,12 +36,17 @@ namespace BlenderParadise.Controllers
             {
                 var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
 
+                if(userId == null)
+                {
+                    return NotFound();
+                }
+
                 if((await uploadService.UploadProductAsync(model, userId)).Equals(false))
                 {
                     return NotFound();
                 }
 
-                return RedirectToAction("All", "Product");
+                return RedirectToAction("UserProfile", "Profile", new { userName = User?.Identity?.Name });
             }
             catch (Exception)
             {

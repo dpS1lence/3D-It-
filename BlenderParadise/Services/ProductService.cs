@@ -21,8 +21,7 @@ namespace BlenderParadise.Services
             List<Product> entities = new();
             try
             {
-                entities = _repository.All<Product>()
-                    .ToList();
+                entities = _repository.All<Product>().ToList();
             }
             catch (Exception) { }
 

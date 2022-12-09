@@ -25,17 +25,26 @@ namespace BlenderParadise.Services
 
         public async Task<ApplicationUser> GetUserById(string userId)
         {
-            var user = await _repository.GetByIdAsync<ApplicationUser>(userId);
+            var user = await _userManager.FindByIdAsync(userId);
 
             return user;
         }
         public async Task<UserProfileModel> GetUserData(string userName)
         {
-            var user = _userManager.Users
-                .Include(a => a.ProductsData)
-                .Where(a => a.UserName == userName)
-                .FirstOrDefault();
+            var user = new ApplicationUser();
+            try
+            {
 
+
+                user = await _userManager.Users
+                    .Include(a => a.ProductsData)
+                    .Where(a => a.UserName == userName)
+                    .FirstOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+
+            }
             if (user == null)
             {
                 return null;

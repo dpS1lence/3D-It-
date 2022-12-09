@@ -28,13 +28,18 @@ namespace BlenderParadise.Tests.Common
             UserName = "Pesho",
             Description = "Descr"
         };
+
+        public string File = "str";
+        public string File2 = "str2";
+        public string File3 = "str3";
+        public string File4 = "str4";
         //public ApplicationUser B { get; set; }
 
         public readonly List<Product> products = new()
            {
                new Product { Id = 1, Name = "Product1", CategoryId = 1, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "1", ContentId = 2 },
-               new Product { Id = 2, Name = "Product2", CategoryId = 2, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "2", ContentId = 3 },
-               new Product { Id = 3, Name = "Product3", CategoryId = 3, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "2", ContentId = 4 },
+               new Product { Id = 2, Name = "Product2", CategoryId = 2, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "3", ContentId = 3 },
+               new Product { Id = 3, Name = "Product3", CategoryId = 3, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "3", ContentId = 4 },
                new Product { Id = 4, Name = "Product4", CategoryId = 4, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "1", ContentId = 1}
            };
 

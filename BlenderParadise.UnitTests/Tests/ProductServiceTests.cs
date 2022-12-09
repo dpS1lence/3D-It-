@@ -14,7 +14,6 @@ namespace BlenderParadise.UnitTests
 {
     public class ProductServiceTests : TestsBase
     {
-        private Mock<IRepository>? repoMock;
         private readonly BlenderParadiseTestDb testDb = new();
 
         [Test]
