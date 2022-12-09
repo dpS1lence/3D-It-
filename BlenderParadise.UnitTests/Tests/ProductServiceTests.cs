@@ -1,21 +1,8 @@
-using BlenderParadise.Data.Models;
-using BlenderParadise.Models;
-using BlenderParadise.Repositories.Contracts;
-using BlenderParadise.Services;
-using BlenderParadise.Services.Contracts;
-using BlenderParadise.Tests.Common;
-using BlenderParadise.UnitTests.Mocks;
-using BlenderParadise.UnitTests.Tests;
-using Microsoft.AspNetCore.Identity;
-using MockQueryable.Moq;
-using Moq;
-
-namespace BlenderParadise.UnitTests
+namespace BlenderParadise.UnitTests.Tests
 {
+    [TestFixture]
     public class ProductServiceTests : TestsBase
     {
-        private readonly BlenderParadiseTestDb testDb = new();
-
         [Test]
         public void ProductService_GetAllAsync_Should_Get_All_Products()
         {

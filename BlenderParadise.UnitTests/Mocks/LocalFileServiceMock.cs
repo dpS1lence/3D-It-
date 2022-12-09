@@ -35,7 +35,16 @@ namespace BlenderParadise.UnitTests.Mocks
 
         public async Task<string> SaveFile(IFormFile fileData)
         {
-            return Guid.NewGuid().ToString();
+            try
+            {
+                await Task.Run(() => { });
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            return "a";
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using BlenderParadise.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Moq;
+using MockQueryable.Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BlenderParadise.UnitTests.Mocks
 {
@@ -29,7 +30,7 @@ namespace BlenderParadise.UnitTests.Mocks
             .ReturnsAsync((string username) =>
                 userList.FirstOrDefault(u => u.UserName == username));
 
-            mgr.Setup(a => a.Users).Returns(userList.AsQueryable());
+            mgr.Setup(a => a.Users).Returns(userList.BuildMock());
 
             mgr.Setup(um => um.FindByIdAsync(
                 It.IsAny<string>()))!

@@ -24,7 +24,7 @@ namespace BlenderParadise.Services
         }
 
         public async Task<bool> UploadProductAsync(ProductModel model, string userId)
-        {
+         {
             if (model == null || userId == null)
             {
                 return false;
@@ -39,8 +39,15 @@ namespace BlenderParadise.Services
             }
 
             var contentEntity = new Content();
-
-            string fileName = await _fileSaverService.SaveFile(model.AttachmentModel[0]);
+            string fileName = " ";
+            try
+            {
+                fileName = await _fileSaverService.SaveFile(model.AttachmentModel[0]);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
 
             using (var target = new MemoryStream())
             {
@@ -134,8 +141,6 @@ namespace BlenderParadise.Services
                     return false;
                 }
             }
-
-
 
             return true;
         }

@@ -31,20 +31,11 @@ namespace BlenderParadise.Services
         }
         public async Task<UserProfileModel> GetUserData(string userName)
         {
-            var user = new ApplicationUser();
-            try
-            {
+            var user = await _userManager.Users
+                .Include(a => a.ProductsData)
+                .Where(a => a.UserName == userName)
+                .FirstOrDefaultAsync();
 
-
-                user = await _userManager.Users
-                    .Include(a => a.ProductsData)
-                    .Where(a => a.UserName == userName)
-                    .FirstOrDefaultAsync();
-            }
-            catch (Exception)
-            {
-
-            }
             if (user == null)
             {
                 return null;
@@ -88,10 +79,10 @@ namespace BlenderParadise.Services
 
         public async Task<UserProfileModel> RemoveUserUploadAsync(string userId, int productId)
         {
-            var user = _userManager.Users
+            var user = await _userManager.Users
                 .Include(a => a.ProductsData)
                 .Where(a => a.Id == userId)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (user == null)
             {

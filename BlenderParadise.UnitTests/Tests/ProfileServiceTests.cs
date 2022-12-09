@@ -1,25 +1,12 @@
-﻿using BlenderParadise.Data.Models;
-using BlenderParadise.Models;
-using BlenderParadise.Repositories.Contracts;
-using BlenderParadise.Services.Contracts;
-using BlenderParadise.Services;
-using BlenderParadise.Tests.Common;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlenderParadise.UnitTests.Tests
+﻿namespace BlenderParadise.UnitTests.Tests
 {
+    [TestFixture]
     public class ProfileServiceTests : TestsBase
     {
-        private readonly BlenderParadiseTestDb testDb = new();
-
         [Test]
         public void ProfileService_GetUserData_Should_Get_User_Data()
         {
+            var users = testDb.users.ToList();
             var products = testDb.products.ToList();
 
             var categories = testDb.categories.ToList();
