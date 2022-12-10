@@ -43,7 +43,6 @@ namespace BlenderParadise.UnitTests.Tests
 
             repoMock = new Mock<IRepository>();
             repoMock.Setup(r => r.All<Category>()).Returns(categories.BuildMock());
-            IFileService fileService = new LocalStorageFileService("");
             IUploadService service = new UploadService(repoMock.Object, fileService, this.userManager.Object);
 
             var actual = service.UploadProductAsync(model, testDb.User.Id);

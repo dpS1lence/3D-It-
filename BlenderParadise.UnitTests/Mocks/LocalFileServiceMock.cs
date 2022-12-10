@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BlenderParadise.UnitTests.Mocks
 {
-    internal class LocalFileServiceMock : IFileService
+    public class LocalFileServiceMock : IFileService
     {
         public bool DeleteFile(string fileName)
         {
@@ -35,14 +35,7 @@ namespace BlenderParadise.UnitTests.Mocks
 
         public async Task<string> SaveFile(IFormFile fileData)
         {
-            try
-            {
-                await Task.Run(() => { });
-            }
-            catch(Exception ex)
-            {
-
-            }
+            await Task.Run(() => { });
 
             return "a";
         }
