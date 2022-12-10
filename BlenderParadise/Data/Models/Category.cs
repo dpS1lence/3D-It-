@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BlenderParadise.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlenderParadise.Data.Models
 {
@@ -8,7 +9,7 @@ namespace BlenderParadise.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(26)]
+        [MaxLength(ValidationConstants.CATEGORY_NAME_MAX_LENGTH)]
         public string Name { get; set; } = null!;
     }
 }

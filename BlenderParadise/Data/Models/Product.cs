@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BlenderParadise.Constants;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlenderParadise.Data.Models
@@ -9,22 +10,22 @@ namespace BlenderParadise.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(26)]
+        [MaxLength(ValidationConstants.PRODUCT_NAME_MAX_LENGTH)]
         public string Name { get; set; } = null!;
 
-        [MaxLength(256)]
+        [MaxLength(ValidationConstants.PRODUCT_DESCRIPTION_MAX_LENGTH)]
         public string Description { get; set; } = null!;
 
         [Required]
-        [MaxLength(26)]
+        [MaxLength(ValidationConstants.PRODUCT_NUMERIC_FIELDS_MAX_LENGTH)]
         public int Polygons { get; set; }
 
         [Required]
-        [MaxLength(26)]
+        [MaxLength(ValidationConstants.PRODUCT_NUMERIC_FIELDS_MAX_LENGTH)]
         public int Vertices { get; set; }
 
         [Required]
-        [MaxLength(26)]
+        [MaxLength(ValidationConstants.PRODUCT_NUMERIC_FIELDS_MAX_LENGTH)]
         public int Geometry { get; set; }
 
         [Required]

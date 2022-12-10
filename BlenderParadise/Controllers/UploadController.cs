@@ -1,4 +1,5 @@
-﻿using BlenderParadise.Models;
+﻿using BlenderParadise.Constants;
+using BlenderParadise.Models;
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -23,8 +24,8 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 209715200)]
-        [RequestSizeLimit(209715200)]
+        [RequestFormLimits(MultipartBodyLengthLimit = ValidationConstants.MULTIPART_BODY_LENGTH_LIMIT)]
+        [RequestSizeLimit(ValidationConstants.MULTIPART_BODY_LENGTH_LIMIT)]
         public async Task<IActionResult> Upload(ProductModel model)
         {
             if (!ModelState.IsValid)

@@ -24,7 +24,7 @@ namespace BlenderParadise.Services
         }
 
         public async Task<bool> UploadProductAsync(ProductModel model, string userId)
-         {
+        {
             bool error = false;
 
             if (model == null || userId == null)
@@ -64,10 +64,10 @@ namespace BlenderParadise.Services
                 };
             }
 
-            await _repository.AddAsync(contentEntity);
-
             try
             {
+                var a = contentEntity.PhotosZip;
+                await _repository.AddAsync(contentEntity);
                 await _repository.SaveChangesAsync();
 
             }
@@ -100,12 +100,11 @@ namespace BlenderParadise.Services
                 };
             }
 
-            await _repository.AddAsync(productEntity);
-
             try
             {
+                var a = productEntity.ApplicationUser;
+                await _repository.AddAsync(productEntity);
                 await _repository.SaveChangesAsync();
-
             }
             catch (Exception)
             {
@@ -131,12 +130,11 @@ namespace BlenderParadise.Services
                     Product = productEntity
                 };
 
-                await _repository.AddAsync(photo);
-
                 try
                 {
+                    var a = photo.PhotoFile;
+                    await _repository.AddAsync(photo);
                     await _repository.SaveChangesAsync();
-
                 }
                 catch (Exception)
                 {
