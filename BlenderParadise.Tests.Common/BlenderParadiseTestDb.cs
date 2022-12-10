@@ -1,4 +1,6 @@
 ﻿using BlenderParadise.Data.Models;
+using BlenderParadise.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace BlenderParadise.Tests.Common
 {
@@ -88,5 +90,31 @@ namespace BlenderParadise.Tests.Common
                 new Photo { Id = 3, PhotoFile = Array.Empty<byte>(), ProductId = 1 },
                 new Photo { Id = 4, PhotoFile = Array.Empty<byte>(), ProductId = 2 }
             };
+
+        public ProductModel productModel = new()
+        {
+            Name = "a",
+            Description = "d",
+            Polygons = "2",
+            Vertices = "2",
+            Geometry = "2",
+            Category = "Category1",
+            AttachmentModel = new FormFileCollection()
+                {
+                    new FormFile(new MemoryStream(), 1, 1, "a", "a")
+                },
+            Photos = new FormFileCollection()
+                {
+                    new FormFile(new MemoryStream(), 1, 1, "a", "a")
+                },
+            PhotosZip = new FormFileCollection()
+                {
+                    new FormFile(new MemoryStream(), 1, 1, "a", "a")
+                },
+            CoverPhoto = new FormFileCollection()
+                {
+                    new FormFile(new MemoryStream(), 1, 1, "a", "a")
+                }
+        };
     }
 }

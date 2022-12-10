@@ -27,7 +27,7 @@ namespace BlenderParadise.Services
         {
             bool error = false;
 
-            if (model == null || userId == null)
+            if (model == null || string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(model.Category))
             {
                 return error;
             }
@@ -53,6 +53,11 @@ namespace BlenderParadise.Services
 
             using (var target = new MemoryStream())
             {
+                if (!model.PhotosZip.Any())
+                {
+                    return error;
+                }
+
                 model.PhotosZip[0].CopyTo(target);
 
                 var photosCollection = target.ToArray();
@@ -69,7 +74,6 @@ namespace BlenderParadise.Services
                 var a = contentEntity.PhotosZip;
                 await _repository.AddAsync(contentEntity);
                 await _repository.SaveChangesAsync();
-
             }
             catch (Exception)
             {
@@ -80,6 +84,11 @@ namespace BlenderParadise.Services
 
             using (var target = new MemoryStream())
             {
+                if (!model.CoverPhoto.Any())
+                {
+                    return error;
+                }
+
                 model.CoverPhoto[0].CopyTo(target);
 
                 var coverPhoto = target.ToArray();

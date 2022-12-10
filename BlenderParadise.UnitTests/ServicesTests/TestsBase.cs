@@ -6,6 +6,9 @@
         protected Mock<UserManager<ApplicationUser>> userManager;
         protected readonly BlenderParadiseTestDb testDb = new();
         protected IFileService fileService = new LocalFileServiceMock();
+        public List<ApplicationUser> users;
+        public List<Product> products;
+        public List<Category> categories;
 
 
         [OneTimeSetUp]
@@ -17,6 +20,10 @@
                 testDb.User2,
                 testDb.UserWithNoUploads
             });
+
+            users = testDb.users;
+            products = testDb.products;
+            categories = testDb.categories;
         }
     }
 }
