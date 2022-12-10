@@ -34,7 +34,6 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
             var actual = service.UploadProductAsync(model, testDb.User.Id);
 
-            repoMock.VerifyAll();
             Assert.That(actual.Result, Is.EqualTo(false));
         }
 
@@ -55,13 +54,12 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if the desiredCategory variable is null.
-        public void GetUserData_Should_Return_False_If_The_DesiredCategory_Is_Null()
+        public void GetUserData_Should_Return_False_If_The_DesiredCategory_Is_Null_Or_Empty()
         {
             var model = testDb.productModel;
             model.Category = String.Empty;
 
             repoMock = new Mock<IRepository>();
-            repoMock.Setup(r => r.All<Category>()).Returns(categories.BuildMock());
             IUploadService service = new UploadService(repoMock.Object, fileService, userManager.Object);
 
             var actual = service.UploadProductAsync(model, testDb.User.Id);
@@ -72,7 +70,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if the desiredUser variable is null.
-        public void GetUserData_Should_Return_False_If_The_DesiredUser_Is_Null()
+        public void GetUserData_Should_Return_False_If_The_DesiredUser_Is_Null_Or_Empty()
         {
             var model = testDb.productModel;
 
@@ -82,7 +80,6 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
             var actual = service.UploadProductAsync(model, "invalid userId");
 
-            repoMock.VerifyAll();
             Assert.That(actual.Result, Is.EqualTo(false));
         }
 

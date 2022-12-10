@@ -1,4 +1,4 @@
-﻿namespace BlenderParadise.UnitTests.Tests
+﻿namespace BlenderParadise.UnitTests.ServicesTests
 {
     [TestFixture]
     public class DownloadServiceTests : TestsBase

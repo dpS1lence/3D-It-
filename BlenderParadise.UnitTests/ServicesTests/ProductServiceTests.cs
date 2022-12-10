@@ -1,10 +1,10 @@
-namespace BlenderParadise.UnitTests.Tests
+namespace BlenderParadise.UnitTests.ServicesTests
 {
     [TestFixture]
     public class ProductServiceTests : TestsBase
     {
         [Test]
-        public void ProductService_GetAllAsync_Should_Get_All_Products()
+        public void GetAllAsync_Should_Get_All_Products()
         {
             var products = testDb.products.ToList();
 
@@ -25,7 +25,7 @@ namespace BlenderParadise.UnitTests.Tests
         }
 
         [Test]
-        public void ProductService_GetOneAsync_Should_Get_One_Product()
+        public void GetOneAsync_Should_Get_One_Product()
         {
             var products = testDb.products.ToList();
 

@@ -1,10 +1,10 @@
-﻿namespace BlenderParadise.UnitTests.Tests
+﻿namespace BlenderParadise.UnitTests.ServicesTests
 {
     [TestFixture]
     public class ProfileServiceTests : TestsBase
     {
         [Test]
-        public void ProfileService_GetUserData_Should_Get_User_Data()
+        public void GetUserData_Should_Get_User_Data()
         {
             var users = testDb.users.ToList();
             var products = testDb.products.ToList();
@@ -30,7 +30,7 @@
         }
 
         [Test]
-        public void ProfileService_GetUserById_Should_Get_User_By_Id()
+        public void GetUserById_Should_Get_User_By_Id()
         {
             repoMock = new Mock<IRepository>();
             IFileService fileService = new LocalStorageFileService("");
@@ -44,7 +44,7 @@
         }
 
         [Test]
-        public void ProfileService_RemoveUserUploadAsync_Should_Remove_User_Upload()
+        public void RemoveUserUploadAsync_Should_Remove_User_Upload()
         {
             var products = testDb.products.ToList();
 
@@ -75,7 +75,7 @@
         }
 
         [Test]
-        public void ProfileService_EditUserUploadAsync_Should_Return_View_Model()
+        public void EditUserUploadAsync_Should_Return_View_Model()
         {
             var products = testDb.products.ToList();
 
@@ -94,7 +94,7 @@
         }
 
         [Test]
-        public void ProfileService_EditUserUploadAsync_Should_Update_User_Upload()
+        public void EditUserUploadAsync_Should_Update_User_Upload()
         {
             var products = testDb.products.ToList();
 
