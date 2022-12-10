@@ -17,56 +17,74 @@ namespace BlenderParadise.Controllers
         [Route("{userName}")]
         public async Task<IActionResult> UserProfile(string userName)
         {
-            var model = await _profileService.GetUserData(userName);
-
-            if(model == null)
+            try
             {
-                return NotFound();
-            }
+                var model = await _profileService.GetUserData(userName);
 
-            return View(model);
+                return View(model);
+            }
+            catch(ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
-
-            if (userId == null)
+            try
             {
-                return NotFound();
+                var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
+
+                if(userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                var model = await _profileService.RemoveUserUploadAsync(userId, id);
+
+                return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
             }
-
-            var model = await _profileService.RemoveUserUploadAsync(userId, id);
-
-            if(model == null)
+            catch(ArgumentException ex)
             {
-                return NotFound();
+                return NotFound(ex.Message);
             }
-
-            return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
         }
 
         [HttpGet]
         public async Task<IActionResult> EditProduct(int id)
         {
-            var model = await _profileService.EditUserUploadAsync(id);
-
-            if (model == null)
+            try
             {
-                return NotFound();
-            }
+                var model = await _profileService.EditUserUploadAsync(id);
 
-            return View(model);
+                return View(model);
+            }
+            catch(ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
         [HttpPost]
         public async Task<IActionResult> EditProduct(EditProductModel model)
         {
-            if((await _profileService.EditUserUploadAsync(model)).Equals(false))
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return View();
             }
 
-            return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
+            try
+            {
+                if ((await _profileService.EditUserUploadAsync(model)).Equals(false))
+                {
+                    return NotFound();
+                }
+
+                return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
+            }
+            catch(ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

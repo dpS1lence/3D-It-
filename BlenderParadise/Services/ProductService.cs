@@ -18,12 +18,7 @@ namespace BlenderParadise.Services
         }
         public async Task<List<ViewProductModel>> GetAllAsync()
         {
-            List<Product> entities = new();
-            try
-            {
-                entities = _repository.All<Product>().ToList();
-            }
-            catch (Exception) { }
+            var entities = _repository.All<Product>().ToList();
 
             var products = new List<ViewProductModel>();
 
@@ -53,28 +48,28 @@ namespace BlenderParadise.Services
 
             if (productEntity == null)
             {
-                return null;
+                throw new ArgumentException("Invalid product id.");
             }
 
             var desiredCategory = await _repository.GetByIdAsync<Category>(productEntity.CategoryId);
 
             if (desiredCategory == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             var productPhotos = _repository.All<Photo>().Where(a => a.ProductId == productEntity.Id).ToList();
 
             if (productPhotos == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             var user = await _userManager.FindByIdAsync(productEntity.UserId);
 
             if (user == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             var convertedPhoto = Convert.ToBase64String(productEntity.Photo);

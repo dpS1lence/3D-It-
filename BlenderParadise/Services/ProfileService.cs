@@ -38,7 +38,7 @@ namespace BlenderParadise.Services
 
             if (user == null)
             {
-                return null;
+                throw new ArgumentException("Invalid username.");
             }
 
             var userProductsData = user.ProductsData.ToList();
@@ -86,47 +86,47 @@ namespace BlenderParadise.Services
 
             if (user == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             var userProduct = user.ProductsData.FirstOrDefault(p => p.Id == productId);
 
             if (userProduct == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             var product = await _repository.GetByIdAsync<Product>(userProduct.Id);
 
             if (product == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             var content = await _repository.GetByIdAsync<Content>(product.ContentId);
 
             if (content == null)
             {
-                return null;
-            }
+                throw new ArgumentException("Invalid request.");
+            }   
 
             var photos = _repository.All<Photo>().Where(p => p.ProductId == product.Id);
 
             if (photos == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             try
             {
                 if (!_fileSaverService.DeleteFile(content.FileName))
                 {
-                    return null;
+                    throw new ArgumentException("Invalid request.");
                 }
             }
-            catch (IOException ioExp)
+            catch (Exception)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             foreach (var photo in photos)
@@ -155,7 +155,7 @@ namespace BlenderParadise.Services
 
             if (desiredProduct == null)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
 
             var model = new EditProductModel()

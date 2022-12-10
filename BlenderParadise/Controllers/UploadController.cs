@@ -48,9 +48,9 @@ namespace BlenderParadise.Controllers
 
                 return RedirectToAction("UserProfile", "Profile", new { userName = User?.Identity?.Name });
             }
-            catch (Exception)
+            catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", "Something went wrong");
+                ModelState.AddModelError("", ex.Message);
 
                 return View();
             }

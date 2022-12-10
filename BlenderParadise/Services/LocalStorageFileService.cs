@@ -32,7 +32,7 @@ namespace BlenderParadise.Services
                 }
                 catch (Exception)
                 {
-
+                    throw new ArgumentException("Invalid file data.");
                 }
             }
 

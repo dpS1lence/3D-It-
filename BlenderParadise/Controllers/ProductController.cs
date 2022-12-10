@@ -1,6 +1,7 @@
 ﻿using BlenderParadise.Services;
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 
 namespace BlenderParadise.Controllers
 {
@@ -23,14 +24,16 @@ namespace BlenderParadise.Controllers
         [HttpGet]
         public async Task<IActionResult> One(int id)
         {
-            var model = await _productService.GetOneAsync(id);
-
-            if (model == null)
+            try
             {
-                return NotFound();
-            }
+                var model = await _productService.GetOneAsync(id);
 
-            return View(model);
+                return View(model);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

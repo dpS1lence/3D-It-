@@ -25,9 +25,11 @@ namespace BlenderParadise.Services
 
         public async Task<bool> UploadProductAsync(ProductModel model, string userId)
          {
+            bool error = false;
+
             if (model == null || userId == null)
             {
-                return false;
+                return error;
             }
             var desiredCategory = await _repository.All<Category>().Where(a => a.Name == model.Category).FirstOrDefaultAsync();
 
@@ -35,7 +37,7 @@ namespace BlenderParadise.Services
 
             if (desiredCategory == null || desiredUser == null)
             {
-                return false;
+                return error;
             }
 
             var contentEntity = new Content();
@@ -44,9 +46,9 @@ namespace BlenderParadise.Services
             {
                 fileName = await _fileSaverService.SaveFile(model.AttachmentModel[0]);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return false;
+                return error;
             }
 
             using (var target = new MemoryStream())
@@ -71,7 +73,7 @@ namespace BlenderParadise.Services
             }
             catch (Exception)
             {
-                return false;
+                return error;
             }
 
             var productEntity = new Product();
@@ -107,7 +109,7 @@ namespace BlenderParadise.Services
             }
             catch (Exception)
             {
-                return false;
+                return error;
             }
 
             var photo = new Photo();
@@ -138,7 +140,7 @@ namespace BlenderParadise.Services
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return error;
                 }
             }
 

@@ -24,53 +24,41 @@ namespace BlenderParadise.Services
 
             var productEntity = await _repository.GetByIdAsync<Product>(id);
 
-            try
+            var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
+
+            if (contentEntity == null)
             {
-                var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
-
-                if (contentEntity == null)
-                {
-                    return null;
-                }
-
-                return contentEntity.FileName;
-
+                throw new ArgumentException("Invalid request.");
             }
-            catch (Exception)
-            {
-                return null;
-            }
+
+            return contentEntity.FileName;
         }
 
         public async Task<IActionResult> DownloadZipAsync(int id)
         {
             var productEntity = await _repository.GetByIdAsync<Product>(id);
 
+            var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
+
+            if (contentEntity == null || contentEntity?.PhotosZip == null)
+            {
+                throw new ArgumentException("Invalid request.");
+            }
+
+            byte[] byteArr = contentEntity?.PhotosZip ?? null!;
+            string mimeType = "application/rar";
+
             try
             {
-                var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
-
-                if (contentEntity == null)
-                {
-                    return null;
-                }
-                if (contentEntity?.PhotosZip == null)
-                {
-                    return null;
-                }
-
-                byte[] byteArr = contentEntity?.PhotosZip ?? null!;
-                string mimeType = "application/rar";
-
                 return new FileContentResult(byteArr, mimeType)
                 {
-                    FileDownloadName = $"3DIt!_{productEntity?.Name.Replace(" ", "_")}_textures.rar"
+                    FileDownloadName = $"{contentEntity?.FileName.Replace(" ", "_")}_textures.rar"
                 };
 
             }
             catch (Exception)
             {
-                return null;
+                throw new ArgumentException("Invalid request.");
             }
         }
     }

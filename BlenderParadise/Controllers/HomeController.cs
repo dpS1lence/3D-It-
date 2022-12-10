@@ -23,7 +23,7 @@ namespace BlenderParadise.Controllers
 
         public IActionResult Index(string value)
         {
-            return RedirectToAction(nameof(FiltersPage), new { value = value });
+            return RedirectToAction(nameof(FiltersPage), new { value });
         }
 
         public async Task<IActionResult> FiltersPage(string value)
