@@ -16,7 +16,8 @@ Here're some of the project's best features:
 <h2>🛠️ Installation Steps:</h2>
 
 <p>1. Before you start the application you must add your own appsettings.json with a valid connection string.</p>
-```
+
+```bash
 {
   "ConnectionStrings": {
     "DefaultConnection": ".",
