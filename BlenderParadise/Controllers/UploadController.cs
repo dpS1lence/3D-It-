@@ -1,5 +1,5 @@
 ﻿using BlenderParadise.Constants;
-using BlenderParadise.Models;
+using BlenderParadise.Models.Product;
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;

@@ -1,5 +1,6 @@
 ﻿using BlenderParadise.Data.Models;
-using BlenderParadise.Models;
+using BlenderParadise.Models.Product;
+using BlenderParadise.Models.Profile;
 
 namespace BlenderParadise.Services.Contracts
 {

@@ -1,5 +1,5 @@
 ﻿using BlenderParadise.Data.Models;
-using BlenderParadise.Models;
+using BlenderParadise.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

@@ -1,3 +1,5 @@
+using BlenderParadise.Models.Product;
+
 namespace BlenderParadise.UnitTests.ServicesTests
 {
     [TestFixture]

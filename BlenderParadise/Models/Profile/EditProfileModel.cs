@@ -1,7 +1,7 @@
 ﻿using BlenderParadise.Constants;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlenderParadise.Models
+namespace BlenderParadise.Models.Profile
 {
     public class EditProfileModel
     {

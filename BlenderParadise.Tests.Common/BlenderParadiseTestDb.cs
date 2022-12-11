@@ -1,5 +1,5 @@
 ﻿using BlenderParadise.Data.Models;
-using BlenderParadise.Models;
+using BlenderParadise.Models.Product;
 using Microsoft.AspNetCore.Http;
 
 namespace BlenderParadise.Tests.Common

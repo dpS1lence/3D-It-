@@ -1,7 +1,8 @@
 ﻿using BlenderParadise.Constants;
+using BlenderParadise.Models.Product;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlenderParadise.Models
+namespace BlenderParadise.Models.Profile
 {
     public class UserProfileModel
     {

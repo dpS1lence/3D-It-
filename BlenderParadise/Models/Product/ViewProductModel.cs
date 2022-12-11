@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 
-namespace BlenderParadise.Models
+namespace BlenderParadise.Models.Product
 {
     public class ViewProductModel
     {

@@ -1,4 +1,4 @@
-﻿using BlenderParadise.Models;
+﻿using BlenderParadise.Models.Product;
 
 namespace BlenderParadise.Services.Contracts
 {

@@ -1,4 +1,5 @@
-﻿using MockQueryable.Moq;
+﻿using BlenderParadise.Models.Product;
+using MockQueryable.Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

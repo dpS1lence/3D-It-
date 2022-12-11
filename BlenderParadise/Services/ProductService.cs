@@ -1,5 +1,5 @@
 ﻿using BlenderParadise.Data.Models;
-using BlenderParadise.Models;
+using BlenderParadise.Models.Product;
 using BlenderParadise.Repositories.Contracts;
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Identity;

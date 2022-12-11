@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlenderParadise.Models
+namespace BlenderParadise.Models.Product
 {
     public class DownloadProductModel
     {
