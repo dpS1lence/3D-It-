@@ -3,7 +3,7 @@
 
 <p id="description">The idea of the project is all about free blender models sharing.</p>
 
-<p align="center"><img src="[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dpS1lence_3D-It-&amp;metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dpS1lence_3D-It-)" alt="shields"></p>
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dpS1lence_3D-It-&amp;metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dpS1lence_3D-It-)"
 
   
   
