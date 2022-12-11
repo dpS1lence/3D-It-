@@ -33,12 +33,13 @@ builder.Services.AddScoped<IFileService>(_ => new LocalStorageFileService(builde
 
 Technologies used in the project:
 
-*   ASP.Net
+*   ASP.net
 *   Azure
 *   Bootstrap
 *   Sonar Cloud
 *   Entity Framework Core
 *   NUnit
+*   Quartz.net
 
 <h2>🛡️ License:</h2>
 
