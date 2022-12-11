@@ -51,6 +51,11 @@ namespace BlenderParadise.Services
 
                 var category = await _repository.GetByIdAsync<Category>(product.CategoryId);
 
+                if (category == null)
+                {
+                    throw new ArgumentException("Invalid request.");
+                }
+
                 var photoStr = Convert.ToBase64String(product.Photo);
 
                 var imageString = string.Format("data:image/jpg;base64,{0}", photoStr);
@@ -108,11 +113,11 @@ namespace BlenderParadise.Services
             if (content == null)
             {
                 throw new ArgumentException("Invalid request.");
-            }   
+            }
 
-            var photos = _repository.All<Photo>().Where(p => p.ProductId == product.Id);
+            var photos = await _repository.All<Photo>().Where(p => p.ProductId == product.Id).ToListAsync();
 
-            if (photos == null)
+            if (!photos.Any())
             {
                 throw new ArgumentException("Invalid request.");
             }
@@ -181,6 +186,48 @@ namespace BlenderParadise.Services
             desiredProduct.Description = model.Description;
 
             _repository.Update(desiredProduct);
+
+            await _repository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<EditProfileModel> EditUserProfileAsync(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                throw new ArgumentException("Invalid request.");
+            }
+
+            var model = new EditProfileModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                Description = user.Description,
+                ProfilePicture = user.ProfilePicture
+            };
+
+            return model;
+        }
+
+        public async Task<bool> EditUserProfileAsync(EditProfileModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+            user.Description = model.Description;
+            user.ProfilePicture = model.ProfilePicture;
+
+            _repository.Update(user);
 
             await _repository.SaveChangesAsync();
 

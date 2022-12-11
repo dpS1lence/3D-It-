@@ -106,7 +106,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
         {
             var model = testDb.productModel;
             model.CoverPhoto = new FormFileCollection();
-
+            
             repoMock = new Mock<IRepository>();
             repoMock.Setup(r => r.All<Category>()).Returns(categories.BuildMock());
             IUploadService service = new UploadService(repoMock.Object, fileService, userManager.Object);

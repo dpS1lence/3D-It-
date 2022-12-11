@@ -13,6 +13,9 @@
 @if (Model.Id == userId)
 {
     <h1>Your Profile</h1>
+    <form method="get" asp-area="" asp-controller="Profile" asp-action="EditProfile" asp-route-id="@userId">
+        <button type="submit" class="buttonTag buttonTag-teal">Edit Profile</button>
+    </form>
 }
 <img src="@Model.ProfilePhoto" alt="ProfilePhoto"/>
 <span>@Model.UserName</span>

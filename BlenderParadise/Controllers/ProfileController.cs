@@ -13,6 +13,7 @@ namespace BlenderParadise.Controllers
         {
             _profileService = profileService;
         }
+
         [HttpGet]
         [Route("{userName}")]
         public async Task<IActionResult> UserProfile(string userName)
@@ -28,6 +29,7 @@ namespace BlenderParadise.Controllers
                 return NotFound(ex.Message);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -64,6 +66,7 @@ namespace BlenderParadise.Controllers
                 return NotFound(ex.Message);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> EditProduct(EditProductModel model)
         {
@@ -82,6 +85,44 @@ namespace BlenderParadise.Controllers
                 return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
             }
             catch(ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProfile(string id)
+        {
+            try
+            {
+                var model = await _profileService.EditUserProfileAsync(id);
+
+                return View(model);
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProfile(EditProfileModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            try
+            {
+                if ((await _profileService.EditUserProfileAsync(model)).Equals(false))
+                {
+                    return NotFound();
+                }
+
+                return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
+            }
+            catch (ArgumentException ex)
             {
                 return NotFound(ex.Message);
             }

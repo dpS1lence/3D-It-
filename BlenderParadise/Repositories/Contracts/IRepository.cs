@@ -36,10 +36,6 @@ namespace BlenderParadise.Repositories.Contracts
         /// <returns>Single record</returns>
         Task<T> GetByIdAsync<T>(object id) where T : class;
 
-        Content GetDownloadById(int id);
-
-        Task<T> GetByIdsAsync<T>(object[] id) where T : class;
-
         /// <summary>
         /// Adds entity to the database
         /// </summary>

@@ -14,9 +14,9 @@ namespace BlenderParadise.UnitTests.ServicesTests
         public void SearchProductAsync_Should_Return_List_Of_Products()
         {
             var products = testDb.products.ToList();
-
+            
             var categories = testDb.categories.ToList();
-
+            
             repoMock = new Mock<IRepository>();
             repoMock.Setup(r => r.All<Product>()).Returns(products.BuildMock());
             repoMock.Setup(r => r.GetByIdAsync<Category>(It.IsAny<int>()))!.ReturnsAsync((int id) => categories.FirstOrDefault(a => a.Id == id));

@@ -16,7 +16,12 @@ namespace BlenderParadise.Tests.Common
         {
             Id = "1",
             UserName = "Pesho",
-            Description = "Descr"
+            Description = "Descr",
+            ProductsData = new List<Product>()
+           {
+               new Product { Id = 1, Name = "Product1", CategoryId = 1, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "1", ContentId = 2 },
+               new Product { Id = 2, Name = "Product2", CategoryId = 2, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "3", ContentId = 3 }
+           }
         };
         public ApplicationUser UserWithNoUploads = new()
         {
@@ -28,7 +33,12 @@ namespace BlenderParadise.Tests.Common
         {
             Id = "3",
             UserName = "Pesho",
-            Description = "Descr"
+            Description = "Descr",
+            ProductsData = new List<Product>()
+           {
+               new Product { Id = 3, Name = "Product3", CategoryId = 3, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "3", ContentId = 4 },
+               new Product { Id = 4, Name = "Product4", CategoryId = 4, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "1", ContentId = 1}
+           }
         };
 
         public string File = "str";
@@ -59,7 +69,12 @@ namespace BlenderParadise.Tests.Common
                 {
                     Id = "3",
                     UserName = "Pesho",
-                    Description = "Descr"
+                    Description = "Descr",
+                    ProductsData = new List<Product>()
+           {
+               new Product { Id = 1, Name = "Product1", CategoryId = 1, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "1", ContentId = 2 },
+               new Product { Id = 2, Name = "Product2", CategoryId = 2, Description = "Description", Geometry = 10, Polygons = 10, Vertices = 10,Photo = Array.Empty<byte>(), UserId =  "3", ContentId = 3 }
+           }
                 },
                 new ApplicationUser
                 {
@@ -89,6 +104,14 @@ namespace BlenderParadise.Tests.Common
                 new Photo { Id = 2, PhotoFile = Array.Empty<byte>(), ProductId = 1 },
                 new Photo { Id = 3, PhotoFile = Array.Empty<byte>(), ProductId = 1 },
                 new Photo { Id = 4, PhotoFile = Array.Empty<byte>(), ProductId = 2 }
+            };
+
+        public readonly List<Photo> invalidPhotos = new()
+            {
+                new Photo { Id = 1, PhotoFile = Array.Empty<byte>(), ProductId = -1 },
+                new Photo { Id = 2, PhotoFile = Array.Empty<byte>(), ProductId = -1 },
+                new Photo { Id = 3, PhotoFile = Array.Empty<byte>(), ProductId = -1 },
+                new Photo { Id = 4, PhotoFile = Array.Empty<byte>(), ProductId = -1 }
             };
 
         public ProductModel productModel = new()

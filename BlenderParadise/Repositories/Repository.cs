@@ -125,21 +125,6 @@ namespace BlenderParadise.Repositories
         }
 
         /// <summary>
-        /// Gets specific record from database by primary key
-        /// </summary>
-        /// <param name="id">record identificator</param>
-        /// <returns>Single record</returns>
-        public Content GetDownloadById(int id)
-        {
-            return DbSet<Content>().Where(a => a.Id == id).FirstOrDefault();
-        }
-
-        public async Task<T> GetByIdsAsync<T>(object[] id) where T : class
-        {
-            return await DbSet<T>().FindAsync(id);
-        }
-
-        /// <summary>
         /// Saves all made changes in trasaction
         /// </summary>
         /// <returns>Error code</returns>
