@@ -1,9 +1,8 @@
 
 <h1 id="title" align="center">Blender Paradise</h1>
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dpS1lence_3D-It-&amp;metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dpS1lence_3D-It-)
 
 <p id="description">The idea of the project is all about free blender models sharing.</p>
-
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dpS1lence_3D-It-&amp;metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dpS1lence_3D-It-)"
 
   
   
