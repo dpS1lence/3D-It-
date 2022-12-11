@@ -20,13 +20,13 @@ Here're some of the project's best features:
 <p>2. Also you must replace the AzureFileService with a LocalFileService if you dont want to use Azure.</p>
 
 ```
-builder.Services.AddScoped(_ => new AzureFileService(builder.Configuration.GetConnectionString("BlobStorageConnection")));
+builder.Services.AddScoped<IFileService>(_ => new AzureFileService(builder.Configuration.GetConnectionString("BlobStorageConnection")));
 ```
 
 <p>3. Here is the code example:</p>
 
 ```
-builder.Services.AddScoped(_ => new LocalStorageFileService(builder.Environment.WebRootPath));
+builder.Services.AddScoped<IFileService>(_ => new LocalStorageFileService(builder.Environment.WebRootPath));
 ```
   
 <h2>💻 Built with</h2>
