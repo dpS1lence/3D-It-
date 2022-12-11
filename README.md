@@ -16,6 +16,23 @@ Here're some of the project's best features:
 <h2>🛠️ Installation Steps:</h2>
 
 <p>1. Before you start the application you must add your own appsettings.json with a valid connection string.</p>
+```
+{
+  "ConnectionStrings": {
+    "DefaultConnection": ".",
+    "BlobStorageConnection": "."
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ApiNinjas": "https://api.api-ninjas.com/v1/hobbies?category=sports_and_outdoors",
+  "Key": "."
+}
+```
 
 <p>2. Also you must replace the AzureFileService with a LocalFileService if you dont want to use Azure.</p>
 
