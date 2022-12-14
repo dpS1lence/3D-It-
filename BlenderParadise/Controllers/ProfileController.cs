@@ -16,7 +16,7 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpGet]
-        [Route("{userName}")]
+        [Route("UserProfile/{userName}")]
         public async Task<IActionResult> UserProfile(string userName)
         {
             try

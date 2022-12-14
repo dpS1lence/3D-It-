@@ -16,7 +16,7 @@
 
             IDownloadService service = new DownloadService(repoMock.Object, this.userManager.Object);
 
-            var actual = service.DownloadModelAsync(products.First().Id);
+            var actual = service.GetNameAsync(products.First().Id);
 
             repoMock.VerifyAll();
             Assert.That(actual.Result, Is.Not.Null);
@@ -36,7 +36,7 @@
 
             IDownloadService service = new DownloadService(repoMock.Object, this.userManager.Object);
 
-            var actual = service.DownloadZipAsync(products.First().Id);
+            var actual = service.GetZipAsync(products.First().Id);
 
             repoMock.VerifyAll();
             Assert.That(actual.Result, Is.Not.Null);

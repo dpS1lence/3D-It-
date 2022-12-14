@@ -13,31 +13,31 @@ using System.Threading.Tasks;
 
 namespace BlenderParadise.UnitTests.Mocks
 {
-    public class LocalFileServiceMock : IFileService
+    public class FileServiceMock : IFileService
     {
-        public bool DeleteFile(string fileName)
+        public async Task<bool> DeleteFile(string fileName)
         {
-            string filePath = GetPath(fileName);
+            var file = await GetFile(fileName);
 
-            if (File.Exists(filePath))
+            if (file == null)
             {
-
+                return false;
             }
-            else return false;
-
-            return true;
+            else return true;
         }
 
-        public string GetPath(string fileName)
+        public async Task<IActionResult> GetFile(string fileName)
         {
-            return "F:\\3_DavidDocuments\\Work\\SOFT-UNI\\ASP.NET Project for exam\\GitHub\\3D-It-\\BlenderParadise\\wwwroot\\databaseFiles\\374970cf-e643-497a-b77b-0b38bcf8ef1b_Hoe.blend";
+            await Task.Run(() => { });
+
+            return new FileContentResult(Array.Empty<byte>(), "application/pdf");
         }
 
         public async Task<string> SaveFile(IFormFile fileData)
         {
             await Task.Run(() => { });
 
-            return "a";
+            return string.Empty;
         }
     }
 }

@@ -125,7 +125,7 @@ namespace BlenderParadise.Services
 
             try
             {
-                if (!_fileSaverService.DeleteFile(content.FileName))
+                if (!(await _fileSaverService.DeleteFile(content.FileName)))
                 {
                     throw new ArgumentException("Invalid request.");
                 }
@@ -134,15 +134,13 @@ namespace BlenderParadise.Services
             {
                 throw new ArgumentException("Invalid request.");
             }
-
-            foreach (var photo in photos)
-            {
-                _repository.Delete(photo);
+            try
+            { 
+                await _repository.DeleteAsync<Content>(content);
+                await _repository.DeleteAsync<Product>(product);
+                _repository.DeleteRange(photos);
             }
-
-            _repository.Delete(content);
-            _repository.Delete(product);
-
+            catch (Exception) { }
             if (userProduct != null)
             {
                 user.ProductsData.Remove(userProduct);

@@ -2,6 +2,7 @@
 using BlenderParadise.Models;
 using BlenderParadise.Services;
 using BlenderParadise.Services.Contracts;
+using BlenderParadise.Services.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
@@ -20,18 +21,18 @@ namespace BlenderParadise.Controllers
             this.fileService = fileService;
         }
 
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> GetDownloadModel(int id)
         {
             try
             {
-                var fileName = await downloadService.DownloadModelAsync(id);
+                var fileName = await downloadService.GetNameAsync(id);
 
-                string filePath = fileService.GetPath(fileName);
-
-                return PhysicalFile(filePath, MimeTypes.GetMimeType(filePath), Path.GetFileName(filePath));
+                var file = await fileService.GetFile(fileName);
+                
+                return file;
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
@@ -42,7 +43,7 @@ namespace BlenderParadise.Controllers
         {
             try
             {
-                var file = await downloadService.DownloadZipAsync(id);
+                var file = await downloadService.GetZipAsync(id);
 
                 return file;
             }

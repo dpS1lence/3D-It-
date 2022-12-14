@@ -100,12 +100,12 @@ namespace BlenderParadise.UnitTests.ServicesTests
             var photos = testDb.photos.ToList();
 
             repoMock = new Mock<IRepository>();
-            repoMock.Setup(r => r.Delete(It.IsAny<Photo>()));
-            repoMock.Setup(r => r.Delete(It.IsAny<Content>()));
-            repoMock.Setup(r => r.Delete(It.IsAny<Product>()));
             repoMock.Setup(r => r.All<Photo>()).Returns(photos.BuildMock());
             repoMock.Setup(r => r.GetByIdAsync<Product>(It.IsAny<int>()))!.ReturnsAsync((int id) => products.FirstOrDefault(a => a.Id == id));
             repoMock.Setup(r => r.GetByIdAsync<Content>(It.IsAny<int>()))!.ReturnsAsync((int id) => content.FirstOrDefault(a => a.Id == id));
+            repoMock.Setup(r => r.DeleteAsync<Content>(It.IsAny<Content>()));
+            repoMock.Setup(r => r.DeleteAsync<Product>(It.IsAny<Product>()));
+            repoMock.Setup(r => r.DeleteRange(It.IsAny<List<Photo>>()));
             repoMock.Setup(r => r.GetByIdAsync<Category>(It.IsAny<int>()))!.ReturnsAsync((int id) => categories.FirstOrDefault(a => a.Id == id));
             IProfileService service = new ProfileService(repoMock.Object, this.fileService, this.userManager.Object);
 
@@ -113,7 +113,6 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
             var actual = service.RemoveUserUploadAsync(testDb.User.Id, testDb.User.ProductsData.ToList().First().Id);
 
-            repoMock.VerifyAll();
             Assert.That(actual.Result, Is.Not.Null);
             Assert.IsAssignableFrom<UserProfileModel>(actual.Result);
             Assert.That(actual.Result.UserName, Is.EqualTo(testDb.User.UserName));

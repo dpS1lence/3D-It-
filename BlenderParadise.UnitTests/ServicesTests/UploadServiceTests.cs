@@ -1,4 +1,5 @@
 ﻿using BlenderParadise.Data.Models;
+using BlenderParadise.Models.Product;
 using Microsoft.AspNetCore.Http;
 using MockQueryable.Moq;
 

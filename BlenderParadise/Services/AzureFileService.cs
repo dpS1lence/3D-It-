@@ -1,5 +1,10 @@
 ﻿using Azure.Storage.Blobs;
 using BlenderParadise.Services.Contracts;
+using BlenderParadise.Services.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32.SafeHandles;
+using MimeKit;
+using System.IO;
 
 namespace BlenderParadise.Services
 {
@@ -14,14 +19,36 @@ namespace BlenderParadise.Services
             connectionString = _connectionString;
         }
 
-        public bool DeleteFile(string fileName)
+        public async Task<bool> DeleteFile(string fileName)
         {
-            throw new NotImplementedException();
+            var container = new BlobContainerClient(connectionString, containerName);
+            var blob = container.GetBlobClient(fileName);
+
+            return await blob.DeleteIfExistsAsync();
         }
 
-        public string GetPath(string fileName)
+        public async Task<IActionResult> GetFile(string fileName)
         {
-            throw new NotImplementedException();
+            var container = new BlobContainerClient(connectionString, containerName);
+            var blob = container.GetBlobClient(fileName);
+
+            byte[] buffer = Array.Empty<byte>();
+            using (MemoryStream ms = new())
+            {
+                var response = await blob.DownloadToAsync(ms);
+
+                if (response.IsError)
+                {
+                    throw new ArgumentException(response.Status.ToString());
+                }
+
+                buffer = ms.ToArray();
+            }
+
+            return new FileContentResult(buffer, "application/blend"/*MimeTypes.GetMimeType(response.Headers.ContentType)*/)
+            {
+                FileDownloadName = fileName
+            };
         }
 
         public async Task<string> SaveFile(IFormFile fileData)
@@ -33,6 +60,8 @@ namespace BlenderParadise.Services
 
             var ms = new MemoryStream();
             fileData.CopyTo(ms);
+
+            ms.Position = 0;
 
             await blob.UploadAsync(ms);
 

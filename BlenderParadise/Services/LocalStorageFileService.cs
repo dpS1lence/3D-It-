@@ -1,6 +1,10 @@
 ﻿using BlenderParadise.Data.Models;
 using BlenderParadise.Services.Contracts;
+using BlenderParadise.Services.Helpers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32.SafeHandles;
+using MimeKit;
 
 namespace BlenderParadise.Services
 {
@@ -12,9 +16,16 @@ namespace BlenderParadise.Services
         {
             this.webRootPath = webRootPath;
         }
-        public string GetPath(string fileName)
+        public async Task<IActionResult> GetFile(string fileName)
         {
-            return Path.Combine(Path.Combine(webRootPath, "databaseFiles"), fileName);
+            string filePath = Path.Combine(Path.Combine(webRootPath, "databaseFiles"), fileName);
+
+            byte[] bytes = await File.ReadAllBytesAsync(filePath);
+
+            return new FileContentResult(bytes, "application/blend")
+            {
+                FileDownloadName = fileName
+            };
         }
         public async Task<string> SaveFile(IFormFile fileData)
         {
@@ -38,15 +49,18 @@ namespace BlenderParadise.Services
 
             return uniqueFileName;
         }
-        public bool DeleteFile(string fileName)
+        public async Task<bool> DeleteFile(string fileName)
         {
-            string filePath = GetPath(fileName);
+            string filePath = Path.Combine(Path.Combine(webRootPath, "databaseFiles"), fileName);
             // Check if file exists with its full path    
             if (File.Exists(filePath))
             {
+                await File.ReadAllLinesAsync(filePath);
+
                 // If file found, delete it    
                 File.Delete(filePath);
             }
+
             else return false;
 
             return true;

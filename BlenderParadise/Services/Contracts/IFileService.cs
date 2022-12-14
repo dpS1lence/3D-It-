@@ -1,9 +1,12 @@
-﻿namespace BlenderParadise.Services.Contracts
+﻿using BlenderParadise.Services.Helpers;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BlenderParadise.Services.Contracts
 {
     public interface IFileService
     {
-        string GetPath(string fileName);
+        Task<IActionResult> GetFile(string fileName);
         Task<string> SaveFile(IFormFile fileData);
-        bool DeleteFile(string fileName);
+        Task<bool> DeleteFile(string fileName);
     }
 }

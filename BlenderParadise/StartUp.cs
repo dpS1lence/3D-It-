@@ -34,10 +34,10 @@ builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IRepository, Repository>();
-builder.Services.AddScoped<IFileService>(_ =>
-    new LocalStorageFileService(builder.Environment.WebRootPath));
 /*builder.Services.AddScoped<IFileService>(_ =>
-    new AzureFileService(builder.Configuration.GetConnectionString("BlobStorageConnection")));*/
+    new LocalStorageFileService(builder.Environment.WebRootPath));*/
+builder.Services.AddScoped<IFileService>(_ =>
+    new AzureFileService(builder.Configuration.GetConnectionString("BlobStorageConnection")));
 
 var app = builder.Build();
 
@@ -61,7 +61,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.SeedAdmin();
+app.SeedAdmin();
 
 app.UseEndpoints(endpoints =>
 {

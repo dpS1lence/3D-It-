@@ -5,7 +5,7 @@
         protected Mock<IRepository>? repoMock;
         protected Mock<UserManager<ApplicationUser>> userManager;
         protected readonly BlenderParadiseTestDb testDb = new();
-        protected IFileService fileService = new LocalFileServiceMock();
+        protected IFileService fileService = new FileServiceMock();
         public List<ApplicationUser> users;
         public List<Product> products;
         public List<Category> categories;

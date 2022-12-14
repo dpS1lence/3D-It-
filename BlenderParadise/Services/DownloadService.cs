@@ -19,9 +19,8 @@ namespace BlenderParadise.Services
             _userManager = userManager;
         }
 
-        public async Task<string> DownloadModelAsync(int id)
+        public async Task<string> GetNameAsync(int id)
         {
-
             var productEntity = await _repository.GetByIdAsync<Product>(id);
 
             var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
@@ -34,7 +33,7 @@ namespace BlenderParadise.Services
             return contentEntity.FileName;
         }
 
-        public async Task<IActionResult> DownloadZipAsync(int id)
+        public async Task<IActionResult> GetZipAsync(int id)
         {
             var productEntity = await _repository.GetByIdAsync<Product>(id);
 
