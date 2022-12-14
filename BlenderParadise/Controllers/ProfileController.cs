@@ -45,6 +45,8 @@ namespace BlenderParadise.Controllers
 
                 var model = await _profileService.RemoveUserUploadAsync(userId, id);
 
+                TempData["message"] = $"You have successfully deleted the product.";
+
                 return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
             }
             catch(ArgumentException ex)
@@ -83,6 +85,8 @@ namespace BlenderParadise.Controllers
                     return NotFound();
                 }
 
+                TempData["message"] = $"You have successfully edited the product.";
+
                 return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
             }
             catch(ArgumentException ex)
@@ -120,6 +124,8 @@ namespace BlenderParadise.Controllers
                 {
                     return NotFound();
                 }
+
+                TempData["message"] = $"You have successfully edited your profile.";
 
                 return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
             }

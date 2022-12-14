@@ -47,6 +47,8 @@ namespace BlenderParadise.Controllers
                     return NotFound();
                 }
 
+                TempData["message"] = $"You have successfully uploaded a product.";
+
                 return RedirectToAction("UserProfile", "Profile", new { userName = User?.Identity?.Name });
             }
             catch (ArgumentException ex)
