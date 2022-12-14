@@ -109,7 +109,6 @@ namespace BlenderParadise.Controllers
                 return NotFound(ex.Message);
             }
         }
-
         [HttpPost]
         public async Task<IActionResult> EditProfile(EditProfileModel model)
         {

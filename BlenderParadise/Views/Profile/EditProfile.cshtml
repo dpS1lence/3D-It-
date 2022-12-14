@@ -1,13 +1,14 @@
 ﻿@using BlenderParadise.Models.Profile;
 @model EditProfileModel
 @{
-    ViewData["Title"] = "Upload Product";
+    ViewData["Title"] = "Edit Profile";
 }
-<h1>@ViewData["Title"]</h1>
+
+<link href="~/css/finalcard.css" rel="stylesheet" />
 
 <div class="text-center">
     <h1 class="display-4">Edit Profile</h1>
-    <form enctype="application/x-www-form-urlencoded" asp-action="EditProduct">
+    <form enctype="application/x-www-form-urlencoded" asp-action="EditProfile">
         <div class="text-center mb-3">
             <label asp-for="@Model.UserName">Username</label>
             <input class="form-control " autocomplete="username" aria-required="true" asp-for="@Model.UserName" />
@@ -29,7 +30,7 @@
             <span asp-validation-for="@Model.ProfilePicture" class="text-danger"></span>
         </div>
         <form method="post" asp-area="" asp-controller="Profile" asp-action="EditProfile">
-            <button type="submit" class="buttonTag buttonTag-teal">Upload</button>
+            <button type="submit" class="buttonTag buttonTag-teal">Edit Profile</button>
         </form>
     </form>
 </div>

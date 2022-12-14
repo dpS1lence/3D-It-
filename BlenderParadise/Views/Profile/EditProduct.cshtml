@@ -5,8 +5,10 @@
 }
 <h1>@ViewData["Title"]</h1>
 
+<link href="~/css/finalcard.css" rel="stylesheet" />
+
 <div class="text-center">
-    <h1 class="display-4">Upload Product</h1>
+    <h1 class="display-4">Edit Product</h1>
     <form enctype="application/x-www-form-urlencoded" asp-action="EditProduct">
         <div class="mb-3">
             <label asp-for="@Model.Name" class="form-label">Name</label>
@@ -18,8 +20,8 @@
             <textarea asp-for="@Model.Description" class="form-control" aria-required="true" rows="5"></textarea>
             <span asp-validation-for="@Model.Description" class="text-danger"></span>
         </div>
-        <form asp-area="" asp-controller="Profiles" asp-action="EditProduct">
-            <button type="submit" class="buttonTag buttonTag-teal">Upload</button>
+        <form method="post" asp-area="" asp-controller="Profile" asp-action="EditProduct">
+            <button type="submit" class="buttonTag buttonTag-teal">Edit Product</button>
         </form>
     </form>
 </div>
