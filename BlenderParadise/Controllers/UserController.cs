@@ -1,5 +1,6 @@
 ﻿using BlenderParadise.Data.Models;
 using BlenderParadise.Models.User;
+using BlenderParadise.Repositories.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace BlenderParadise.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        public UserController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager)
+        private readonly IRepository repo;
+        public UserController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager, IRepository _repo)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            repo = _repo;
         }
         [HttpGet]
         public IActionResult Register()
@@ -83,6 +86,10 @@ namespace BlenderParadise.Controllers
                     if (!string.IsNullOrEmpty(user.Penalties))
                     {
                         TempData["messageDanger"] = $"{user.Penalties}";
+
+                        user.Penalties = string.Empty;
+
+                        await repo.SaveChangesAsync();
                     }
 
                     return RedirectToAction("Index", "Home");
