@@ -24,6 +24,8 @@ namespace BlenderParadise.Services
 
             foreach (var item in entities)
             {
+                var owner = await _userManager.FindByIdAsync(item.UserId);
+
                 var desiredCategory = await _repository.GetByIdAsync<Category>(item.CategoryId);
 
                 var base64 = Convert.ToBase64String(item.Photo);
@@ -33,6 +35,8 @@ namespace BlenderParadise.Services
                 {
                     Id = item.Id,
                     Name = item.Name,
+                    UserName = owner.UserName,
+                    UserPhoto = owner.ProfilePicture,
                     Description = item.Description,
                     Category = desiredCategory?.Name ?? "-1",
                     Photo = imgSrc
@@ -40,6 +44,13 @@ namespace BlenderParadise.Services
             }
 
             return products;
+        }
+
+        public async Task<List<ViewProductModel>> SearchProductAsync(string modelName)
+        {
+            var matchingProducts = (await GetAllAsync()).Where(p => p.Name.ToLower().Contains(modelName.ToLower())).ToList();
+
+            return matchingProducts;
         }
 
         public async Task<DownloadProductModel> GetOneAsync(int id)

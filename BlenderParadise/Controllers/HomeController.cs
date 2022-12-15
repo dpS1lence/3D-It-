@@ -1,4 +1,5 @@
 ﻿using BlenderParadise.Models;
+using BlenderParadise.Services;
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ namespace BlenderParadise.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISearchService _searchService;
+        private readonly IProductService _productService;
 
-        public HomeController(ISearchService searchService)
+        public HomeController(IProductService productService)
         {
-            _searchService = searchService;
+            _productService = productService;
         }
 
         [HttpGet]
@@ -28,7 +29,7 @@ namespace BlenderParadise.Controllers
 
         public async Task<IActionResult> FiltersPage(string value)
         {
-            var models = await _searchService.SearchProductAsync(value);
+            var models = await _productService.SearchProductAsync(value);
 
             return View(models);
         }

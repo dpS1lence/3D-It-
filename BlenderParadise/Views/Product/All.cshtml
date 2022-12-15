@@ -2,6 +2,7 @@
 @model List<ViewProductModel>
 @{
     ViewData["Title"] = "Avalable Models";
+    string value = string.Empty;
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -11,31 +12,44 @@
 {
     <h2 class="display-4">No</h2>
 }
-<div class="text-center row">
-    @foreach (var product in Model)
-    {
-        <div class="card">
-            <div class="card-header">
-                <img src="@product.Photo" alt="rover" />
+else
+{
+    <div class="text-center row">
+        <div class="wrap">
+            <div class="search">
+                <form method="post" asp-area="" asp-controller="Home" asp-action="FiltersPage" asp-route-value="@value">
+                    <div class="centered">
+                        <input asp-for="@value" type="text" placeholder="Search" class="searchTerm">
+                        <button type="submit" class="searchButton">Search</button>
+                    </div>
+                </form>
             </div>
-            <div class="card-body">
-                <span class="tag tag-teal">@product.Category</span>
-                <h4>
-                    @product.Name
-                </h4>
-                <span>
-                    <form method="get" asp-area="" asp-controller="Product" asp-action="One" asp-route-id="@product.Id">
-                        <button type="submit" class="buttonTag buttonTag-teal">View</button>
-                    </form>
-                </span>
-                <div class="user">
-                    <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
-                    <div class="user-info">
-                        <h5>July Dec</h5>
-                        <small>2h ago</small>
+        </div>
+        @foreach (var product in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <img src="@product.Photo" alt="rover" />
+                </div>
+                <div class="card-body">
+                    <span class="tag tag-teal">@product.Category</span>
+                    <h4>
+                        @product.Name
+                    </h4>
+                    <span>
+                        <form method="get" asp-area="" asp-controller="Product" asp-action="One" asp-route-id="@product.Id">
+                            <button type="submit" class="buttonTag buttonTag-teal">View</button>
+                        </form>
+                    </span>
+                    <div class="user">
+                        <img src="@product.UserPhoto" alt="user" />
+                        <div class="user-info">
+                            <h5>@product.UserName</h5>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
+}
+

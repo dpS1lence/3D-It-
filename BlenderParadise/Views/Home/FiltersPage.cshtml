@@ -4,6 +4,7 @@
 @model List<ViewProductModel>
 @{
     ViewData["Title"] = "Filter Results";
+    string value = String.Empty;
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -14,6 +15,16 @@
     <h2 class="display-4">No matches</h2>
 }
 <div class="text-center row">
+    <div class="wrap">
+        <div class="search">
+            <form method="post" asp-area="" asp-controller="Home" asp-action="FiltersPage" asp-route-value="@value">
+                <div class="centered">
+                    <input asp-for="@value" type="text" placeholder="Search" class="searchTerm">
+                    <button type="submit" class="searchButton">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
     @foreach (var product in Model)
     {
         <div class="card">
@@ -27,14 +38,13 @@
                 </h4>
                 <span>
                     <form method="get" asp-controller="Product" asp-action="One" asp-route-id="@product.Id">
-                        <button type="submit" class="buttonTag buttonTag-teal">Download</button>
+                        <button type="submit" class="buttonTag buttonTag-teal">View</button>
                     </form>
                 </span>
                 <div class="user">
-                    <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
+                    <img src="@product.UserPhoto" alt="user" />
                     <div class="user-info">
-                        <h5>July Dec</h5>
-                        <small>2h ago</small>
+                        <h5>@product.UserName</h5>
                     </div>
                 </div>
             </div>

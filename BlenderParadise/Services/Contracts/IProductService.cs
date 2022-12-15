@@ -7,5 +7,7 @@ namespace BlenderParadise.Services.Contracts
         Task<List<ViewProductModel>> GetAllAsync();
 
         Task<DownloadProductModel> GetOneAsync(int id);
+
+        Task<List<ViewProductModel>> SearchProductAsync(string modelName);
     }
 }

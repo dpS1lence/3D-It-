@@ -10,6 +10,8 @@ namespace BlenderParadise.Models.Product
 
         [Required]
         public string Name { get; set; } = null!;
+        public string UserName { get; set; } = null!;
+        public string UserPhoto { get; set; } = null!;
 
         public string Description { get; set; } = null!;
 
