@@ -139,13 +139,11 @@ namespace BlenderParadise.Services
             {
                 throw new ArgumentException("Invalid request.");
             }
-            try
-            { 
-                await _repository.DeleteAsync<Content>(content);
-                await _repository.DeleteAsync<Product>(product);
-                _repository.DeleteRange(photos);
-            }
-            catch (Exception) { }
+
+            await _repository.DeleteAsync<Content>(content);
+            await _repository.DeleteAsync<Product>(product);
+            _repository.DeleteRange(photos);
+
             if (userProduct != null)
             {
                 user.ProductsData.Remove(userProduct);

@@ -232,5 +232,44 @@ namespace BlenderParadise.UnitTests.ServicesTests
             Assert.That(actual.Result, Is.Not.EqualTo(false));
             Assert.IsAssignableFrom<bool>(actual.Result);
         }
+
+        [Test]
+        public void EditUserProfileAsync_Should_Return_User_View_Model()
+        {
+            repoMock = new Mock<IRepository>();
+            IProfileService service = new ProfileService(repoMock.Object, this.fileService, this.userManager.Object);
+
+            var actual = service.EditUserProfileAsync(testDb.User.Id);
+            
+            Assert.That(actual.Result, Is.Not.Null);
+            Assert.IsAssignableFrom<EditProfileModel>(actual.Result);
+            Assert.That(actual.Result.Id, Is.EqualTo(testDb.User.Id));
+        }
+
+        [Test]
+        public void EditUserProfileAsync_Should_Update_User_Profile()
+        {
+            var model = new EditProfileModel()
+            {
+                Id = "1",
+                UserName = "Pesho",
+                Description = "Descr"
+            };
+
+            repoMock = new Mock<IRepository>();
+            IProfileService service = new ProfileService(repoMock.Object, this.fileService, this.userManager.Object);
+
+            var actual = service.EditUserProfileAsync(testDb.User.Id);
+
+            Assert.That(actual.Result, Is.Not.Null);
+            Assert.IsAssignableFrom<EditProfileModel>(actual.Result);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(actual.Result.Id, Is.EqualTo(model.Id));
+                Assert.That(actual.Result.UserName, Is.EqualTo(model.UserName));
+                Assert.That(actual.Result.Description, Is.EqualTo(model.Description));
+            });
+        }
     }
 }
