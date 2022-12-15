@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BlenderParadise.Data.Migrations
 {
-    public partial class ReworkedDatabase : Migration
+    public partial class InitialMgr : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace BlenderParadise.Data.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Penalties = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -205,10 +206,10 @@ namespace BlenderParadise.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(26)", maxLength: 26, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Polygons = table.Column<int>(type: "int", maxLength: 26, nullable: false),
-                    Vertices = table.Column<int>(type: "int", maxLength: 26, nullable: false),
-                    Geometry = table.Column<int>(type: "int", maxLength: 26, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: false),
+                    Polygons = table.Column<int>(type: "int", maxLength: 20, nullable: false),
+                    Vertices = table.Column<int>(type: "int", maxLength: 20, nullable: false),
+                    Geometry = table.Column<int>(type: "int", maxLength: 20, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     ContentId = table.Column<int>(type: "int", nullable: false),

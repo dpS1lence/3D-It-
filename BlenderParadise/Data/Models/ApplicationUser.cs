@@ -15,6 +15,8 @@ namespace BlenderParadise.Data.Models
         [Required]
         public string Description { get; set; } = null!;
 
+        public string Penalties { get; set; } = null!;
+
         public virtual ICollection<Product> ProductsData { get; set; }
     }
 }

@@ -36,7 +36,8 @@ namespace BlenderParadise.Controllers
                 Email = model.Email,
                 UserName = model.UserName,
                 Description = model.Description,
-                ProfilePicture = model.ProfilePicture
+                ProfilePicture = model.ProfilePicture,
+                Penalties = string.Empty
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
@@ -79,6 +80,11 @@ namespace BlenderParadise.Controllers
 
                 if (result.Succeeded)
                 {
+                    if (!string.IsNullOrEmpty(user.Penalties))
+                    {
+                        TempData["messageDanger"] = $"{user.Penalties}";
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
             }

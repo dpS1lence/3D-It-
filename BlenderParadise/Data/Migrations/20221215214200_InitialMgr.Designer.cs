@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlenderParadise.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221206190454_ReworkedDatabase")]
-    partial class ReworkedDatabase
+    [Migration("20221215214200_InitialMgr")]
+    partial class InitialMgr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "6.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -62,6 +62,10 @@ namespace BlenderParadise.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Penalties")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -199,11 +203,11 @@ namespace BlenderParadise.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasMaxLength(600)
+                        .HasColumnType("nvarchar(600)");
 
                     b.Property<int>("Geometry")
-                        .HasMaxLength(26)
+                        .HasMaxLength(20)
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -216,7 +220,7 @@ namespace BlenderParadise.Data.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<int>("Polygons")
-                        .HasMaxLength(26)
+                        .HasMaxLength(20)
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -224,7 +228,7 @@ namespace BlenderParadise.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Vertices")
-                        .HasMaxLength(26)
+                        .HasMaxLength(20)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
