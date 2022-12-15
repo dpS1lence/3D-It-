@@ -1,18 +1,19 @@
 ﻿@using BlenderParadise.Models.Product;
 @model DownloadProductModel
 @{
-    ViewData["Title"] = "Avalable Models";
+    ViewData["Title"] = $"{Model.Name}";
 }
-<h1>@ViewData["Title"]</h1>
-
+@if (User.IsInRole("Administrator"))
+{
+    <form method="post" asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-userId="@Model.UserId" asp-route-productId="@Model.Id">
+        <button type="submit" class="btn btn-danger">Delete Model</button>
+    </form>
+}
 <span>@Model.Name</span>
 <span>@Model.Description</span>
 <span>@Model.Polygons</span>
 <span>@Model.Vertices</span>
 <span>@Model.Geometry</span>
-@*<form method="post" asp-controller="User" asp-action="UserProfile" asp-route-value="@Model.UserId">
-    <button type="submit" class="text-black">@Model.UserName</button>
-</form>*@
 @Html.ActionLink($"{Model.UserName}", "UserProfile", "Profile", new { userName = Model.UserName })
 <img src="@Model.CoverPhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
 @foreach (var item in Model.Photos)
