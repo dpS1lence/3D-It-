@@ -9,7 +9,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
     public class UploadServiceTests : TestsBase
     {
         [Test]
-        public void GetUserData_Should_Get_User_Data()
+        public void UploadProductAsync_Should_Get_User_Data()
         {
             var model = testDb.productModel;
 
@@ -25,7 +25,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if the model parameter is null.
-        public void GetUserData_Should_Return_False_If_The_Model_Is_Null()
+        public void UploadProductAsync_Should_Return_False_If_The_Model_Is_Null()
         {
             var model = new ProductModel();
 
@@ -40,7 +40,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if the userId parameter is null.
-        public void GetUserData_Should_Return_False_If_The_UserId_Is_Null()
+        public void UploadProductAsync_Should_Return_False_If_The_UserId_Is_Null()
         {
             var model = testDb.productModel;
 
@@ -55,7 +55,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if the desiredCategory variable is null.
-        public void GetUserData_Should_Return_False_If_The_DesiredCategory_Is_Null_Or_Empty()
+        public void UploadProductAsync_Should_Return_False_If_The_DesiredCategory_Is_Null_Or_Empty()
         {
             var model = testDb.productModel;
             model.Category = String.Empty;
@@ -71,7 +71,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if the desiredUser variable is null.
-        public void GetUserData_Should_Return_False_If_The_DesiredUser_Is_Null_Or_Empty()
+        public void UploadProductAsync_Should_Return_False_If_The_DesiredUser_Is_Null_Or_Empty()
         {
             var model = testDb.productModel;
 
@@ -86,7 +86,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if an exception is thrown when adding the contentEntity to the repository and saving changes.
-        public void GetUserData_Should_Return_False_If_An_Exception_Is_Thrown_When_Adding_The_Invalid_ContentEntity()
+        public void UploadProductAsync_Should_Return_False_If_An_Exception_Is_Thrown_When_Adding_The_Invalid_ContentEntity()
         {
             var model = testDb.productModel;
             model.PhotosZip = new FormFileCollection();
@@ -103,7 +103,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
         [Test]
         //Test that the method returns false if an exception is thrown when adding the productEntity to the repository and saving changes.
-        public void GetUserData_Should_Return_False_If_An_Exception_Is_Thrown_When_Adding_The_Invalid_ProductEntity()
+        public void UploadProductAsync_Should_Return_False_If_An_Exception_Is_Thrown_When_Adding_The_Invalid_ProductEntity()
         {
             var model = testDb.productModel;
             model.CoverPhoto = new FormFileCollection();

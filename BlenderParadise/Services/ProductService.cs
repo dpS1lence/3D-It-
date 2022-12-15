@@ -28,6 +28,11 @@ namespace BlenderParadise.Services
 
                 var desiredCategory = await _repository.GetByIdAsync<Category>(item.CategoryId);
 
+                if(desiredCategory == null)
+                {
+                    throw new ArgumentException("Invalid request.");
+                }
+
                 var base64 = Convert.ToBase64String(item.Photo);
 
                 var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
@@ -38,7 +43,7 @@ namespace BlenderParadise.Services
                     UserName = owner.UserName,
                     UserPhoto = owner.ProfilePicture,
                     Description = item.Description,
-                    Category = desiredCategory?.Name ?? "-1",
+                    Category = desiredCategory.Name,
                     Photo = imgSrc
                 });
             }
@@ -71,7 +76,7 @@ namespace BlenderParadise.Services
 
             var productPhotos = _repository.All<Photo>().Where(a => a.ProductId == productEntity.Id).ToList();
 
-            if (productPhotos == null)
+            if (!productPhotos.Any())
             {
                 throw new ArgumentException("Invalid request.");
             }
@@ -108,7 +113,7 @@ namespace BlenderParadise.Services
                 Geometry = productEntity.Geometry,
                 UserId = user.Id,
                 UserName = user.UserName,
-                Category = desiredCategory?.Name ?? "-1",
+                Category = desiredCategory.Name,
                 CoverPhoto = imgSrc,
                 Photos = photos
             };

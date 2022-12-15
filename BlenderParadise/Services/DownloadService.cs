@@ -39,26 +39,18 @@ namespace BlenderParadise.Services
 
             var contentEntity = await _repository.GetByIdAsync<Content>(productEntity.ContentId);
 
-            if (contentEntity == null || contentEntity?.PhotosZip == null)
+            if (contentEntity == null || contentEntity.PhotosZip == null || contentEntity.PhotosZip.Equals(Array.Empty<byte>()))
             {
                 throw new ArgumentException("Invalid request.");
             }
 
-            byte[] byteArr = contentEntity?.PhotosZip ?? null!;
+            byte[] byteArr = contentEntity.PhotosZip;
             string mimeType = "application/rar";
 
-            try
+            return new FileContentResult(byteArr, mimeType)
             {
-                return new FileContentResult(byteArr, mimeType)
-                {
-                    FileDownloadName = $"{contentEntity?.FileName.Replace(" ", "_")}_textures.rar"
-                };
-
-            }
-            catch (Exception)
-            {
-                throw new ArgumentException("Invalid request.");
-            }
+                FileDownloadName = $"{contentEntity?.FileName.Replace(" ", "_")}_textures.rar"
+            };
         }
     }
 }

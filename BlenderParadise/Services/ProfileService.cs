@@ -50,6 +50,11 @@ namespace BlenderParadise.Services
             {
                 var product = await _repository.GetByIdAsync<Product>(userProduct.Id);
 
+                if (product == null)
+                {
+                    throw new ArgumentException("Invalid request.");
+                }
+
                 var category = await _repository.GetByIdAsync<Category>(product.CategoryId);
 
                 if (category == null)

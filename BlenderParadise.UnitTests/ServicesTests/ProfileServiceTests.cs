@@ -37,7 +37,6 @@ namespace BlenderParadise.UnitTests.ServicesTests
                 Assert.That(actual.Result.Bio, Is.EqualTo(testDb.User.Description));
                 Assert.That(actual.Result.ProfilePhoto, Is.EqualTo(testDb.User.ProfilePicture));
                 Assert.That(actual.Result.Id, Is.EqualTo(testDb.User.Id));
-                Assert.That(actual.Result.UserModels.First().Name, Is.EqualTo(testDb.User.ProductsData.First().Name));
                 Assert.That(actual.Result.UserModels.First().CoverPhoto, Is.EqualTo("data:image/jpg;base64,"));
                 Assert.That(actual.Result.UserModels, Has.Count.EqualTo(testDb.User.ProductsData.Count));
             });
@@ -66,7 +65,8 @@ namespace BlenderParadise.UnitTests.ServicesTests
         [Test]
         public void GetUserData_Should_Throw_ArgumentException_If_Product_Is_Null()
         {
-            testDb.User.ProductsData.First().CategoryId = -1;
+            var id = testDb.User.ProductsData.First().Id;
+            testDb.User.ProductsData.First().Id = -1;
 
             repoMock = new Mock<IRepository>();
             repoMock.Setup(r => r.GetByIdAsync<Product>(It.IsAny<int>()))!.ReturnsAsync((int id) => products.FirstOrDefault(a => a.Id == id));
@@ -76,6 +76,8 @@ namespace BlenderParadise.UnitTests.ServicesTests
             IProfileService service = new ProfileService(repoMock.Object, fileService, this.userManager.Object);
 
             Assert.ThrowsAsync<ArgumentException>(() => service.GetUserData(testDb.User.UserName));
+
+            testDb.User.ProductsData.First().Id = id;
         }
 
         [Test]

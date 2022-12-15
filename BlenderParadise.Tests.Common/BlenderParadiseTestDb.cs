@@ -6,12 +6,6 @@ namespace BlenderParadise.Tests.Common
 {
     public class BlenderParadiseTestDb
     {
-        public BlenderParadiseTestDb()
-        {
-            User.ProductsData = products;
-            User2.ProductsData = products;
-        }
-
         public ApplicationUser User = new()
         {
             Id = "1",
@@ -57,10 +51,10 @@ namespace BlenderParadise.Tests.Common
 
         public readonly List<Content> content = new()
             {
-                new Content { Id = 1, PhotosZip = Array.Empty<byte>(), FileName = "str" },
-                new Content { Id = 2, PhotosZip = Array.Empty<byte>(), FileName = "str2" },
-                new Content { Id = 3, PhotosZip = Array.Empty<byte>(), FileName = "str3" },
-                new Content { Id = 4, PhotosZip = Array.Empty < byte >(), FileName = "str4" }
+                new Content { Id = 1, PhotosZip = new byte[2]{ 2, 1}, FileName = "str" },
+                new Content { Id = 2, PhotosZip = new byte[2]{ 2, 1}, FileName = "str2" },
+                new Content { Id = 3, PhotosZip = new byte[2] { 2, 1 }, FileName = "str3" },
+                new Content { Id = 4, PhotosZip = new byte[2]{ 2, 1}, FileName = "str4" }
             };
 
         public readonly List<ApplicationUser> users = new()
