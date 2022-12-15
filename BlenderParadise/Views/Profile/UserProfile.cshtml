@@ -10,6 +10,26 @@
 
 <link href="~/css/finalCard.css" rel="stylesheet" />
 
+<style>
+    .right-column {
+        width: 35%;
+        margin-top: 60px;
+    }
+
+    .product-description {
+        border-bottom: 1px solid #E1E8EE;
+        margin-bottom: 20px;
+    }
+
+        .product-description p {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 300;
+            color: #86939E;
+            line-height: 24px;
+        }
+</style>
+
 @if (Model.Id == userId)
 {
     <h1>Your Profile</h1>
@@ -17,9 +37,13 @@
         <button type="submit" class="buttonTag buttonTag-teal">Edit Profile</button>
     </form>
 }
-<img src="@Model.ProfilePhoto" alt="ProfilePhoto"/>
-<span>@Model.UserName</span>
-<span>@Model.Bio</span>
+<div class="right-column">
+    <img src="@Model.ProfilePhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+    <div class="product-description">
+        <p>@Model.Bio</p>
+        <p>Contact me  @Model.Email</p>
+    </div>
+</div>
 
 <div class="text-center row">
     @foreach (var product in Model.UserModels)

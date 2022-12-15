@@ -9,21 +9,52 @@
         <button type="submit" class="btn btn-danger">Delete Model</button>
     </form>
 }
-<span>@Model.Name</span>
-<span>@Model.Description</span>
-<span>@Model.Polygons</span>
-<span>@Model.Vertices</span>
-<span>@Model.Geometry</span>
-@Html.ActionLink($"{Model.UserName}", "UserProfile", "Profile", new { userName = Model.UserName })
-<img src="@Model.CoverPhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-@foreach (var item in Model.Photos)
-{
-    <img src="@item" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-}
 
-<form method="post" asp-area="" asp-controller="Download" asp-action="GetDownloadModel" asp-route-id="@Model.Id">
-    <button type="submit" class="btn btn-primary">Download Model</button>
-</form>
-<form method="post" asp-area="" asp-controller="Download" asp-action="GetDownloadZip" asp-route-id="@Model.Id">
-    <button type="submit" class="btn btn-primary">Download Textures</button>
-</form>
+
+<link href="~/css/productpage.css" rel="stylesheet" />
+
+
+<!-- Right Column -->
+<div class="right-column">
+
+    <!-- Product Description -->
+    <div class="product-description">
+        <span>@Model.Category</span>
+        <h1>@Model.Name</h1>
+        <p>@Model.Description</p>
+    </div>
+    <div style="display:flex">
+        <img src="@Model.CoverPhoto" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+        @foreach (var item in Model.Photos)
+        {
+            <img src="@item" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+        }
+    </div>
+
+    <!-- Product Configuration -->
+    <div class="product-configuration">
+
+        <!-- Cable Configuration -->
+        <div class="cable-config">
+            <span>Properties</span>
+
+            <div class="cable-choose">
+                <button>@Model.Polygons</button>
+                <button>@Model.Vertices</button>
+                <button>@Model.Geometry</button>
+            </div>
+        </div>
+        <h5>Made By</h5>
+        <h4>@Html.ActionLink($"{Model.UserName}", "UserProfile", "Profile", new { userName = Model.UserName })</h4>
+    </div>
+
+    <!-- Product Pricing -->
+    <div class="product-price">
+        <form method="post" asp-area="" asp-controller="Download" asp-action="GetDownloadModel" asp-route-id="@Model.Id">
+            <button type="submit" class="btn btn-primary">Download Model</button>
+        </form>
+        <form method="post" asp-area="" asp-controller="Download" asp-action="GetDownloadZip" asp-route-id="@Model.Id">
+            <button type="submit" class="btn btn-primary">Download Textures</button>
+        </form>
+    </div>
+</div>

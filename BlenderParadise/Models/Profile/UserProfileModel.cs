@@ -11,6 +11,7 @@ namespace BlenderParadise.Models.Profile
         [Required]
         [MinLength(ValidationConstants.REGISTER_MIN_LENGTH)]
         public string? UserName { get; set; }
+        public string? Email { get; set; }
 
         public string? Bio { get; set; }
 

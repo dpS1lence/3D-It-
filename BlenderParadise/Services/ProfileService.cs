@@ -81,6 +81,7 @@ namespace BlenderParadise.Services
                 Id = user?.Id,
                 UserName = user?.UserName,
                 Bio = user?.Description,
+                Email = user?.Email,
                 ProfilePhoto = user?.ProfilePicture,
                 UserModels = userProducts
             };
