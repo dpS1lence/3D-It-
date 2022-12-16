@@ -145,16 +145,11 @@ namespace BlenderParadise.Services
             _repository.Delete(product);
             _repository.DeleteRange(photos);
 
-            if (userProduct != null)
-            {
-                user.ProductsData.Remove(userProduct);
+            user.ProductsData.Remove(userProduct);
 
-                await _repository.SaveChangesAsync();
-            }
+            await _repository.SaveChangesAsync();
 
-            var model = await GetUserData(user.UserName);
-
-            return model;
+            return await GetUserData(user.UserName);
         }
 
         public async Task<EditProductModel> EditUserUploadAsync(int productId)
@@ -195,9 +190,9 @@ namespace BlenderParadise.Services
             return true;
         }
 
-        public async Task<EditProfileModel> EditUserProfileAsync(string id)
+        public async Task<EditProfileModel> EditUserProfileAsync(string userId)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(userId);
 
             if (user == null)
             {

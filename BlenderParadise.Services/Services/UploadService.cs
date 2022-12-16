@@ -71,7 +71,6 @@ namespace BlenderParadise.Services
 
             try
             {
-                var a = contentEntity.PhotosZip;
                 await _repository.AddAsync(contentEntity);
                 await _repository.SaveChangesAsync();
             }
@@ -111,7 +110,6 @@ namespace BlenderParadise.Services
 
             try
             {
-                var a = productEntity.ApplicationUser;
                 await _repository.AddAsync(productEntity);
                 await _repository.SaveChangesAsync();
             }
@@ -122,11 +120,9 @@ namespace BlenderParadise.Services
 
             var photo = new Photo();
 
-            var stream = new MemoryStream();
-
             foreach (var item in model.Photos)
             {
-                stream = new MemoryStream();
+                var stream = new MemoryStream();
 
                 item.CopyTo(stream);
 
@@ -141,7 +137,6 @@ namespace BlenderParadise.Services
 
                 try
                 {
-                    var a = photo.PhotoFile;
                     await _repository.AddAsync(photo);
                     await _repository.SaveChangesAsync();
                 }

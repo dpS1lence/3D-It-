@@ -18,7 +18,7 @@ namespace BlenderParadise.Services.Contracts
 
         Task<bool> EditUserProfileAsync(EditProfileModel model);
 
-        Task<EditProfileModel> EditUserProfileAsync(string profileId);
+        Task<EditProfileModel> EditUserProfileAsync(string userId);
 
     }
 }

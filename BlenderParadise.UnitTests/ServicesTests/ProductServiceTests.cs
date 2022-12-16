@@ -99,7 +99,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
                 Assert.That(actual.Result.UserName, Is.EqualTo(testDb.users.FirstOrDefault(a => a.Id == testDb.products.First().UserId)?.UserName));
                 Assert.That(actual.Result.Category, Is.EqualTo(testDb.categories.FirstOrDefault(a => a.Id == testDb.products.First().CategoryId)?.Name));
                 Assert.That(actual.Result.CoverPhoto, Is.EqualTo("data:image/jpg;base64,"));
-                Assert.That(actual.Result.Photos.Count, Is.EqualTo(photos.Where(a => a.ProductId == products.First().Id).ToList().Count));
+                Assert.That(actual.Result.Photos, Has.Count.EqualTo(photos.Where(a => a.ProductId == products.First().Id).ToList().Count));
                 foreach (var item in actual.Result.Photos)
                 {
                     Assert.That(item, Is.EqualTo("data:image/jpg;base64,"));

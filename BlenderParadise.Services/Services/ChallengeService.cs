@@ -47,7 +47,7 @@ namespace BlenderParadise.Services
 
             if(all.Count > 2)
             {
-                var prevChallenge = all.TakeLast(2).ToList().First();
+                var prevChallenge = all.TakeLast(2).First();
                 repo.Delete(prevChallenge);
             }
 
@@ -57,13 +57,15 @@ namespace BlenderParadise.Services
 
         public async Task<IndexModel> GetChallengeAsync()
         {
-            var challengeLast = (await repo.All<Challange>().ToListAsync()).Last();
-            var challengePrev = (await repo.All<Challange>().ToListAsync()).TakeLast(2).First();
+            var challenges = await repo.All<Challange>().ToListAsync();
 
-            if(challengeLast == null || challengePrev == null)
+            if (!challenges.Any())
             {
                 throw new ArgumentException("Invalid request.");
             }
+
+            var challengeLast = challenges.Last();
+            var challengePrev = challenges.TakeLast(2).First();
 
             return new IndexModel()
             {
