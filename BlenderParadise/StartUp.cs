@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BlenderParadise.Repositories.Contracts;
 using BlenderParadise.Repositories;
+using Quartz;
 using Microsoft.AspNetCore.Mvc;
 using BlenderParadise.Infrastucture;
 using BlenderParadise.Areas.Admin.Services.Contracts;
 using BlenderParadise.Areas.Admin.Services;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,9 +37,8 @@ builder.Services.AddScoped<IDownloadService, DownloadService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IControlService, ControlService>();
+builder.Services.AddScoped<IChallengeService, ChallengeService>();
 builder.Services.AddScoped<IRepository, Repository>();
-/*builder.Services.AddScoped<IFileService>(_ =>
-    new LocalStorageFileService(builder.Environment.WebRootPath));*/
 builder.Services.AddScoped<IFileService>(_ =>
     new AzureFileService(builder.Configuration.GetConnectionString("BlobStorageConnection")));
 

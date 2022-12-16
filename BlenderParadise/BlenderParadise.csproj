@@ -20,6 +20,8 @@
     </PackageReference>
     <PackageReference Include="MimeKit" Version="3.4.3" />
     <PackageReference Include="MockQueryable.Moq" Version="6.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Quartz" Version="3.5.0" />
   </ItemGroup>
 
   <ItemGroup>
