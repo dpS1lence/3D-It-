@@ -78,11 +78,11 @@ namespace BlenderParadise.Services
 
             var model = new UserProfileModel()
             {
-                Id = user?.Id,
-                UserName = user?.UserName,
-                Bio = user?.Description,
-                Email = user?.Email,
-                ProfilePhoto = user?.ProfilePicture,
+                Id = user.Id,
+                UserName = user.UserName,
+                Bio = user.Description,
+                Email = user.Email,
+                ProfilePhoto = user.ProfilePicture,
                 UserModels = userProducts
             };
 

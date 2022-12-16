@@ -28,7 +28,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
 
             // Assert that the result is not null and has the expected type
             Assert.That(actual, Is.Not.Null);
-            Assert.IsAssignableFrom<string>(actual);
+            Assert.IsAssignableFrom<IndexModel>(actual);
         }
     }
 }
