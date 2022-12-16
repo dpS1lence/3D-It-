@@ -21,11 +21,7 @@ namespace BlenderParadise.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var challenge = await _challengeService.GetChallengeAsync();
-            var model = new IndexModel()
-            {
-                Challenge = challenge
-            };
+            var model = await _challengeService.GetChallengeAsync();
 
             return View(model);
         }
@@ -48,9 +44,9 @@ namespace BlenderParadise.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(string details)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, Details = details });
         }
     }
 }

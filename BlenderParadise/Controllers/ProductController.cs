@@ -32,7 +32,7 @@ namespace BlenderParadise.Controllers
             }
             catch (ArgumentException ex)
             {
-                return NotFound(ex.Message);
+                return RedirectToAction("Error", "Home", new { details = ex.Message });
             }
         }
     }

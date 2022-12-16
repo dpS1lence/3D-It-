@@ -1,8 +1,10 @@
-﻿namespace BlenderParadise.Services.Contracts
+﻿using BlenderParadise.Models;
+
+namespace BlenderParadise.Services.Contracts
 {
     public interface IChallengeService
     {
         Task GenerateChallengeAsync(string url, string apiKey);
-        Task<string> GetChallengeAsync();
+        Task<IndexModel> GetChallengeAsync();
     }
 }

@@ -74,11 +74,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
-    app.UseStatusCodePages();
+    app.UseStatusCodePagesWithRedirects("/Home/Error");
 }
 else
 {
     app.UseExceptionHandler("/Home/Error");
+    app.UseStatusCodePagesWithRedirects("/Home/Error");
     app.UseHsts();
 }
 

@@ -41,12 +41,12 @@ namespace BlenderParadise.Controllers
 
                 if(userId == null)
                 {
-                    return NotFound();
+                    return RedirectToAction("Error", "Home", new { details = "" });
                 }
 
                 if((await uploadService.UploadProductAsync(model, userId)).Equals(false))
                 {
-                    return NotFound();
+                    return RedirectToAction("Error", "Home", new { details = "" });
                 }
 
                 TempData["message"] = $"You have successfully uploaded a product.";

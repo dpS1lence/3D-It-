@@ -1,4 +1,5 @@
 ﻿using BlenderParadise.Data.Models;
+using BlenderParadise.Models;
 using BlenderParadise.Models.Product;
 using BlenderParadise.Repositories.Contracts;
 using BlenderParadise.Services.Contracts;
@@ -42,20 +43,34 @@ namespace BlenderParadise.Services
                 Link = result.Link
             };
 
+            var all = repo.All<Challange>().ToList();
+
+            if(all.Count > 2)
+            {
+                var prevChallenge = all.TakeLast(2).ToList().First();
+                repo.Delete(prevChallenge);
+            }
+
             await repo.AddAsync(challenge);
             await repo.SaveChangesAsync();
         }
 
-        public async Task<string> GetChallengeAsync()
+        public async Task<IndexModel> GetChallengeAsync()
         {
-            var challenge = (await repo.All<Challange>().ToListAsync()).Last();
+            var challengeLast = (await repo.All<Challange>().ToListAsync()).Last();
+            var challengePrev = (await repo.All<Challange>().ToListAsync()).TakeLast(2).First();
 
-            if(challenge == null)
+            if(challengeLast == null || challengePrev == null)
             {
                 throw new ArgumentException("Invalid request.");
             }
 
-            return challenge.Name;
+            return new IndexModel()
+            {
+                Challenge = challengeLast.Name,
+                PrevChallenge = challengePrev.Name,
+                Link = challengeLast.Link
+            };
         }
     }
 }

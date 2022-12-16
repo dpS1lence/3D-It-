@@ -28,7 +28,7 @@ namespace BlenderParadise.Controllers
             }
             catch(ArgumentException ex)
             {
-                return NotFound(ex.Message);
+                return RedirectToAction("Error", "Home", new { details = ex.Message });
             }
         }
 
@@ -42,7 +42,7 @@ namespace BlenderParadise.Controllers
 
                 if(userId == null)
                 {
-                    return NotFound("User not found");
+                    return RedirectToAction("Error", "Home", new { details = "" });
                 }
 
                 var model = await _profileService.RemoveUserUploadAsync(userId, id);
@@ -53,7 +53,7 @@ namespace BlenderParadise.Controllers
             }
             catch(ArgumentException ex)
             {
-                return NotFound(ex.Message);
+                return RedirectToAction("Error", "Home", new { details = ex.Message });
             }
         }
 
@@ -69,7 +69,7 @@ namespace BlenderParadise.Controllers
             }
             catch(ArgumentException ex)
             {
-                return NotFound(ex.Message);
+                return RedirectToAction("Error", "Home", new { details = ex.Message });
             }
         }
 
@@ -86,7 +86,7 @@ namespace BlenderParadise.Controllers
             {
                 if ((await _profileService.EditUserUploadAsync(model)).Equals(false))
                 {
-                    return NotFound();
+                    return RedirectToAction("Error", "Home", new { details = "" });
                 }
 
                 TempData["message"] = $"You have successfully edited the product.";
@@ -95,7 +95,10 @@ namespace BlenderParadise.Controllers
             }
             catch(ArgumentException ex)
             {
-                return NotFound(ex.Message);
+                return RedirectToAction("Error", "Home", new
+                {
+                    details = ex.Message
+                });
             }
         }
 
@@ -111,7 +114,7 @@ namespace BlenderParadise.Controllers
             }
             catch (ArgumentException ex)
             {
-                return NotFound(ex.Message);
+                return RedirectToAction("Error", "Home", new { details = ex.Message });
             }
         }
 
@@ -137,7 +140,7 @@ namespace BlenderParadise.Controllers
             }
             catch (ArgumentException ex)
             {
-                return NotFound(ex.Message);
+                return RedirectToAction("Error", "Home", new { details = ex.Message });
             }
         }
     }
