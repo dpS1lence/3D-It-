@@ -20,32 +20,19 @@ namespace BlenderParadise.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(int productId, string userId)
         {
-            try
+            if (userId == null)
             {
-                if (userId == null)
-                {
-                    return NotFound("User not found");
-                }
-
-                var model = await _profileService.RemoveUserUploadAsync(userId, productId);
-
-                try
-                {
-                    await _controlService.AddPenalty(userId);
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
-
-                TempData["message"] = $"You have successfully deleted {model.UserName}'s product (with id {productId}).";
-
-                return RedirectToAction("All", "Product", new { area = ""});
+                throw new ArgumentException("Invalid user.");
             }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex.Message);
-            }
+
+            var model = await _profileService.RemoveUserUploadAsync(userId, productId);
+
+
+            await _controlService.AddPenalty(userId);
+
+            TempData["message"] = $"You have successfully deleted {model.UserName}'s product (with id {productId}).";
+
+            return RedirectToAction("All", "Product", new { area = "" });
         }
     }
 }

@@ -72,14 +72,13 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    //app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
-    app.UseStatusCodePagesWithRedirects("/Home/Error");
+    app.UseExceptionHandler("/Home/Error");
 }
 else
 {
     app.UseExceptionHandler("/Home/Error");
-    app.UseStatusCodePagesWithRedirects("/Home/Error");
     app.UseHsts();
 }
 

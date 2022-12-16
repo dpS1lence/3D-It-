@@ -20,57 +20,36 @@ namespace BlenderParadise.Controllers
         [Route("UserProfile/{userName}")]
         public async Task<IActionResult> UserProfile(string userName)
         {
-            try
-            {
-                var model = await _profileService.GetUserData(userName);
+            var model = await _profileService.GetUserData(userName);
 
-                return View(model);
-            }
-            catch(ArgumentException ex)
-            {
-                return RedirectToAction("Error", "Home", new { details = ex.Message });
-            }
+            return View(model);
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            try
+            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
             {
-                var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
-
-                if(userId == null)
-                {
-                    return RedirectToAction("Error", "Home", new { details = "" });
-                }
-
-                var model = await _profileService.RemoveUserUploadAsync(userId, id);
-
-                TempData["message"] = $"You have successfully deleted the product.";
-
-                return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
+                throw new ArgumentException("Invalid user.");
             }
-            catch(ArgumentException ex)
-            {
-                return RedirectToAction("Error", "Home", new { details = ex.Message });
-            }
+
+            var model = await _profileService.RemoveUserUploadAsync(userId, id);
+
+            TempData["message"] = $"You have successfully deleted the product.";
+
+            return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
         }
 
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> EditProduct(int id)
         {
-            try
-            {
-                var model = await _profileService.EditUserUploadAsync(id);
+            var model = await _profileService.EditUserUploadAsync(id);
 
-                return View(model);
-            }
-            catch(ArgumentException ex)
-            {
-                return RedirectToAction("Error", "Home", new { details = ex.Message });
-            }
+            return View(model);
         }
 
         [HttpPost]
@@ -82,40 +61,23 @@ namespace BlenderParadise.Controllers
                 return View();
             }
 
-            try
+            if ((await _profileService.EditUserUploadAsync(model)).Equals(false))
             {
-                if ((await _profileService.EditUserUploadAsync(model)).Equals(false))
-                {
-                    return RedirectToAction("Error", "Home", new { details = "" });
-                }
-
-                TempData["message"] = $"You have successfully edited the product.";
-
-                return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
+                throw new ArgumentException("Invalid request.");
             }
-            catch(ArgumentException ex)
-            {
-                return RedirectToAction("Error", "Home", new
-                {
-                    details = ex.Message
-                });
-            }
+
+            TempData["message"] = $"You have successfully edited the product.";
+
+            return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
         }
 
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> EditProfile(string id)
         {
-            try
-            {
-                var model = await _profileService.EditUserProfileAsync(id);
+            var model = await _profileService.EditUserProfileAsync(id);
 
-                return View(model);
-            }
-            catch (ArgumentException ex)
-            {
-                return RedirectToAction("Error", "Home", new { details = ex.Message });
-            }
+            return View(model);
         }
 
         [HttpPost]
@@ -127,21 +89,15 @@ namespace BlenderParadise.Controllers
                 return View();
             }
 
-            try
+            if ((await _profileService.EditUserProfileAsync(model)).Equals(false))
             {
-                if ((await _profileService.EditUserProfileAsync(model)).Equals(false))
-                {
-                    return NotFound();
-                }
-
-                TempData["message"] = $"You have successfully edited your profile.";
-
-                return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
+                throw new ArgumentException("Invalid request.");
             }
-            catch (ArgumentException ex)
-            {
-                return RedirectToAction("Error", "Home", new { details = ex.Message });
-            }
+
+            TempData["message"] = $"You have successfully edited your profile.";
+
+            return RedirectToAction(nameof(UserProfile), new { userName = User?.Identity?.Name });
+
         }
     }
 }

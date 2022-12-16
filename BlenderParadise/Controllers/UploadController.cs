@@ -35,30 +35,22 @@ namespace BlenderParadise.Controllers
                 return View();
             }
 
-            try
+            var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
             {
-                var userId = User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.NameIdentifier)?.Value;
-
-                if(userId == null)
-                {
-                    return RedirectToAction("Error", "Home", new { details = "" });
-                }
-
-                if((await uploadService.UploadProductAsync(model, userId)).Equals(false))
-                {
-                    return RedirectToAction("Error", "Home", new { details = "" });
-                }
-
-                TempData["message"] = $"You have successfully uploaded a product.";
-
-                return RedirectToAction("UserProfile", "Profile", new { userName = User?.Identity?.Name });
+                throw new ArgumentException("Invalid user.");
             }
-            catch (ArgumentException ex)
+
+            if ((await uploadService.UploadProductAsync(model, userId)).Equals(false))
             {
-                ModelState.AddModelError("", ex.Message);
-
-                return View();
+                throw new ArgumentException("Invalid request.");
             }
+
+            TempData["message"] = $"You have successfully uploaded a product.";
+
+            return RedirectToAction("UserProfile", "Profile", new { userName = User?.Identity?.Name });
+
         }
     }
 }

@@ -23,36 +23,22 @@ namespace BlenderParadise.Controllers
             this.fileService = fileService;
         }
 
-        [HttpPost] 
+        [HttpPost]
         public async Task<IActionResult> GetDownloadModel(int id)
         {
-            try
-            {
-                var fileName = await downloadService.GetNameAsync(id);
+            var fileName = await downloadService.GetNameAsync(id);
 
-                var file = await fileService.GetFile(fileName);
-                
-                return file;
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var file = await fileService.GetFile(fileName);
+
+            return file;
         }
 
         [HttpPost]
         public async Task<IActionResult> GetDownloadZip(int id)
         {
-            try
-            {
-                var file = await downloadService.GetZipAsync(id);
+            var file = await downloadService.GetZipAsync(id);
 
-                return file;
-            }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return file;
         }
     }
 }

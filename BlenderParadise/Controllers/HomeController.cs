@@ -1,6 +1,7 @@
 ﻿using BlenderParadise.Models;
 using BlenderParadise.Services;
 using BlenderParadise.Services.Contracts;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -44,9 +45,29 @@ namespace BlenderParadise.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(string details)
+        public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, Details = details });
+            IExceptionHandlerPathFeature? exceptionHandlerPathFeature = this.HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            Exception error = exceptionHandlerPathFeature?.Error!;
+
+            return error switch
+            {
+                ArgumentException => this.RedirectToAction("Error404"),
+                _ => this.RedirectToAction("Error500"),
+            };
+        }
+
+        [HttpGet]
+        public IActionResult Error404()
+        {
+            return this.View();
+        }
+
+        [HttpGet]
+        public IActionResult Error500()
+        {
+            return this.View();
         }
     }
 }

@@ -24,16 +24,9 @@ namespace BlenderParadise.Controllers
         [HttpGet]
         public async Task<IActionResult> One(int id)
         {
-            try
-            {
-                var model = await _productService.GetOneAsync(id);
+            var model = await _productService.GetOneAsync(id);
 
-                return View(model);
-            }
-            catch (ArgumentException ex)
-            {
-                return RedirectToAction("Error", "Home", new { details = ex.Message });
-            }
+            return View(model);
         }
     }
 }
