@@ -9,6 +9,7 @@
         public List<ApplicationUser> users;
         public List<Product> products;
         public List<Category> categories;
+        public List<Challange> challenges;
 
 
         [OneTimeSetUp]
@@ -24,6 +25,7 @@
             users = testDb.users;
             products = testDb.products;
             categories = testDb.categories;
+            challenges = testDb.challenges;
         }
     }
 }

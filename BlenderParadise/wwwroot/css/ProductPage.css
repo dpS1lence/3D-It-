@@ -67,12 +67,12 @@
     }
 
 
-    .color-choose input[type=&amp;quot;radio&amp;quot;] {
+    .color-choose  {
         display: none;
     }
 
 
-        .color-choose input[type=&amp;quot;radio&amp;quot;] + label span {
+        .color-choose + label span {
             display: inline-block;
             width: 40px;
             height: 40px;
@@ -83,26 +83,26 @@
         }
 
 
-        .color-choose input[type=&amp;quot;radio&amp;quot;] + label span {
+        .color-choose + label span {
             border: 2px solid #FFFFFF;
             box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33);
         }
 
 
-        .color-choose input[type=&amp;quot;radio&amp;quot;]#red + label span {
+        .color-choose#red + label span {
             background-color: #C91524;
         }
 
-        .color-choose input[type=&amp;quot;radio&amp;quot;]#blue + label span {
+        .color-choose#blue + label span {
             background-color: #314780;
         }
 
-        .color-choose input[type=&amp;quot;radio&amp;quot;]#black + label span {
+        .color-choose#black + label span {
             background-color: #323232;
         }
 
 
-        .color-choose input[type=&amp;quot;radio&amp;quot;]:checked + label span {
+        .color-choose:checked + label span {
             background-image: url(images/check-icn.svg);
             background-repeat: no-repeat;
             background-position: center;
@@ -149,11 +149,6 @@
         }
 
             .cable-config a:before {
-                content: &amp;
-                quot;
-                ?&amp;
-                quot;
-                ;
                 height: 15px;
                 width: 15px;
                 border-radius: 50%;

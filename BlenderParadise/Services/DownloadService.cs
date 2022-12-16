@@ -49,7 +49,7 @@ namespace BlenderParadise.Services
 
             return new FileContentResult(byteArr, mimeType)
             {
-                FileDownloadName = $"{contentEntity?.FileName.Replace(" ", "_")}_textures.rar"
+                FileDownloadName = $"{contentEntity.FileName.Replace(" ", "_")}_textures.rar"
             };
         }
     }

@@ -1,6 +1,7 @@
 ﻿using BlenderParadise.Models.Product;
 using BlenderParadise.Models.Profile;
 using BlenderParadise.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -32,6 +33,7 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             try
@@ -56,6 +58,7 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> EditProduct(int id)
         {
             try
@@ -71,6 +74,7 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditProduct(EditProductModel model)
         {
             if (!ModelState.IsValid)
@@ -96,6 +100,7 @@ namespace BlenderParadise.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> EditProfile(string id)
         {
             try
@@ -109,7 +114,9 @@ namespace BlenderParadise.Controllers
                 return NotFound(ex.Message);
             }
         }
+
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditProfile(EditProfileModel model)
         {
             if (!ModelState.IsValid)

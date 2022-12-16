@@ -133,5 +133,12 @@ namespace BlenderParadise.Tests.Common
                     new FormFile(new MemoryStream(), 1, 1, "a", "a")
                 }
         };
+
+        public List<Challange> challenges = new()
+        {
+            new Challange { Id = 1, Name = "a"},
+            new Challange { Id = 1, Name = "a"},
+            new Challange { Id = 1, Name = "a"}
+        };
     }
 }

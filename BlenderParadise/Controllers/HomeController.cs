@@ -10,16 +10,24 @@ namespace BlenderParadise.Controllers
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
+        private readonly IChallengeService _challengeService;
 
-        public HomeController(IProductService productService)
+        public HomeController(IProductService productService, IChallengeService challengeService)
         {
             _productService = productService;
+            _challengeService = challengeService;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var challenge = await _challengeService.GetChallengeAsync();
+            var model = new IndexModel()
+            {
+                Challenge = challenge
+            };
+
+            return View(model);
         }
 
         public IActionResult Index(string value)

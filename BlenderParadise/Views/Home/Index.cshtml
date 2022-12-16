@@ -1,4 +1,4 @@
-﻿@model List<IndexModel>
+﻿@model IndexModel
 @{
     ViewData["Title"] = "Home Page";
 
@@ -13,6 +13,10 @@
     <div class="text-center">
         <h1 class="display-4">Welcome to the blender paradise</h1>
         <h1 class="display-4">Enjoy your stay</h1>
+        <h1 style="padding: 20px" class="display-4"></h1>
+        <text style="font-size: 40px" class="display-4">Today's modeling challenge is</text>
+        <h6 style="color: darkcyan" class="display-4">@Model.Challenge</h6>
+            <text style="font-size: 30px" class="display-4">Start modeling and make sure to upload your creature!</text>
     </div>
     <div class="wrap">
         <div class="search">

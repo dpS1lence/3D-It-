@@ -28,9 +28,18 @@
         <div class="cable-config">
             <span>Properties</span>
             <div class="cable-choose">
-                <button>@Model.Polygons</button>
-                <button>@Model.Vertices</button>
-                <button>@Model.Geometry</button>
+                <button>
+                <span>Faces</span>
+                    @Model.Polygons
+                </button>
+                <button>
+                <span>Vertices</span>
+                    @Model.Vertices
+                </button>
+            <button>
+                <span>Edges</span>
+                @Model.Geometry
+            </button>
             </div>
         </div>
         <h5>Made By</h5>

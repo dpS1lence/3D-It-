@@ -1,6 +1,7 @@
 ﻿using BlenderParadise.Constants;
 using BlenderParadise.Models.Product;
 using BlenderParadise.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 
 namespace BlenderParadise.Controllers
 {
+    [Authorize]
     public class UploadController : Controller
     {
         private readonly IUploadService uploadService;

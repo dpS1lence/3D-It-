@@ -12,6 +12,7 @@ using BlenderParadise.Infrastucture;
 using BlenderParadise.Areas.Admin.Services.Contracts;
 using BlenderParadise.Areas.Admin.Services;
 using Microsoft.Extensions.Configuration;
+using BlenderParadise.Services.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,31 @@ builder.Services.AddScoped<IChallengeService, ChallengeService>();
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IFileService>(_ =>
     new AzureFileService(builder.Configuration.GetConnectionString("BlobStorageConnection")));
+
+builder.Services.AddQuartz(q =>
+{
+    q.SchedulerId = "Scheduler-Core";
+
+    q.UseMicrosoftDependencyInjectionJobFactory();
+    q.UseSimpleTypeLoader();
+    q.UseInMemoryStore();
+    q.UseDefaultThreadPool(tp =>
+    {
+        tp.MaxConcurrency = 10;
+    });
+
+    q.ScheduleJob<ChallengeJob>(trigger => trigger
+            .WithIdentity("Combined Configuration Trigger")
+            .StartNow()
+            //Will be changed to 1 day on release.
+            .WithDailyTimeIntervalSchedule(x => x.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0)).WithIntervalInMinutes(1))
+        );
+});
+
+builder.Services.AddQuartzHostedService(options =>
+{
+    options.WaitForJobsToComplete = true;
+});
 
 var app = builder.Build();
 
