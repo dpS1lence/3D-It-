@@ -3,7 +3,7 @@ using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlenderParadise.Services
+namespace BlenderParadise.Services.Services.FileServices
 {
 
     public class AzureFileService : IFileService

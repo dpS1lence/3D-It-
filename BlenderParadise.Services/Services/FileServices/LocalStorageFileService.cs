@@ -1,11 +1,10 @@
 ﻿using BlenderParadise.Data.Models;
 using BlenderParadise.Services.Contracts;
-using BlenderParadise.Services.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
 
-namespace BlenderParadise.Services
+namespace BlenderParadise.Services.Services.FileServices
 {
     public class LocalStorageFileService : IFileService
     {
@@ -28,7 +27,7 @@ namespace BlenderParadise.Services
         }
         public async Task<string> SaveFile(IFormFile fileData)
         {
-            string uniqueFileName = String.Empty;
+            string uniqueFileName = string.Empty;
 
             if (fileData != null)
             {

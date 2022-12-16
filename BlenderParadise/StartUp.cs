@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using BlenderParadise.Infrastucture;
 using BlenderParadise.Areas.Admin.Services.Contracts;
 using BlenderParadise.Areas.Admin.Services;
-using Microsoft.Extensions.Configuration;
 using BlenderParadise.Services.Jobs;
+using BlenderParadise.Services.Services.FileServices;
 
 var builder = WebApplication.CreateBuilder(args);
 

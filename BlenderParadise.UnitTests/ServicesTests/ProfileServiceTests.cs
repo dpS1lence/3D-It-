@@ -1,6 +1,6 @@
-﻿using BlenderParadise.Data.Models;
-using BlenderParadise.Models.Product;
+﻿using BlenderParadise.Models.Product;
 using BlenderParadise.Models.Profile;
+using BlenderParadise.Services.Services.FileServices;
 using MockQueryable.Moq;
 
 namespace BlenderParadise.UnitTests.ServicesTests

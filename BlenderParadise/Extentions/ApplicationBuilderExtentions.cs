@@ -19,7 +19,7 @@ namespace BlenderParadise.Infrastucture
             {
                 if (!await roleManager.RoleExistsAsync("Administrator"))
                 {
-                    IdentityRole role = new IdentityRole("Administrator");
+                    IdentityRole role = new("Administrator");
                     await roleManager.CreateAsync(role);
                 }
 

@@ -2,7 +2,6 @@
 using BlenderParadise.Models;
 using BlenderParadise.Services;
 using BlenderParadise.Services.Contracts;
-using BlenderParadise.Services.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
