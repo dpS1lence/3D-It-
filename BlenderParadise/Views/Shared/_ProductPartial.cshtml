@@ -1,0 +1,26 @@
+﻿@using BlenderParadise.Models.Product;
+@model ViewProductModel
+
+<div class="card">
+    <div class="card-header">
+        <img src="@Model.Photo" alt="rover" />
+    </div>
+    <div class="card-body">
+        <span class="tag tag-teal">@Model.Category</span>
+        <h4>
+            @Model.Name
+        </h4>
+        <span>
+            <form method="get" asp-area="" asp-controller="Product" asp-action="One" asp-route-id="@Model.Id">
+                <button type="submit" class="buttonTag buttonTag-teal">View</button>
+            </form>
+        </span>
+        <div class="user">
+            <img src="@Model.UserPhoto" alt="user" />
+            <div class="user-info">
+                <h5>@Model.UserName</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
