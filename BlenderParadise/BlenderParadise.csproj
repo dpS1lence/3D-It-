@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -29,6 +29,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\databaseFiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlenderParadise.Common\BlenderParadise.Common.csproj" />
+    <ProjectReference Include="..\BlenderParadise.Services\BlenderParadise.Services.csproj" />
   </ItemGroup>
 
 </Project>

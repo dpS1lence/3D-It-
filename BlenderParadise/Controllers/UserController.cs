@@ -4,10 +4,12 @@ using BlenderParadise.Repositories.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlenderParadise.Controllers
 {
-    public class UserController : Controller
+	[ExcludeFromCodeCoverage]
+	public class UserController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;

@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlenderParadise.Controllers
 {
-    public class HomeController : Controller
+	[ExcludeFromCodeCoverage]
+	public class HomeController : Controller
     {
         private readonly IProductService _productService;
         private readonly IChallengeService _challengeService;

@@ -4,13 +4,15 @@ using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 
 namespace BlenderParadise.Controllers
 {
     [Authorize]
-    public class UploadController : Controller
+	[ExcludeFromCodeCoverage]
+	public class UploadController : Controller
     {
         private readonly IUploadService uploadService;
 

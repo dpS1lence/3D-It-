@@ -2,10 +2,12 @@
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlenderParadise.Controllers
 {
-    public class ProductController : Controller
+	[ExcludeFromCodeCoverage]
+	public class ProductController : Controller
     {
         private readonly IProductService _productService;
 

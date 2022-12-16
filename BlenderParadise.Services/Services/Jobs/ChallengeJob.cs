@@ -1,4 +1,5 @@
 ﻿using BlenderParadise.Services.Contracts;
+using Microsoft.Extensions.Configuration;
 using Quartz;
 
 namespace BlenderParadise.Services.Jobs

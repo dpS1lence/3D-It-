@@ -1,10 +1,7 @@
 ﻿using Azure.Storage.Blobs;
 using BlenderParadise.Services.Contracts;
-using BlenderParadise.Services.Helpers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32.SafeHandles;
-using MimeKit;
-using System.IO;
 
 namespace BlenderParadise.Services
 {
@@ -45,7 +42,7 @@ namespace BlenderParadise.Services
                 buffer = ms.ToArray();
             }
 
-            return new FileContentResult(buffer, "application/blend"/*MimeTypes.GetMimeType(response.Headers.ContentType)*/)
+            return new FileContentResult(buffer, "application/blend")
             {
                 FileDownloadName = fileName
             };

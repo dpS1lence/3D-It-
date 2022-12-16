@@ -1,11 +1,8 @@
-﻿using BlenderParadise.Data;
-using BlenderParadise.Data.Models;
-using BlenderParadise.Models;
+﻿using BlenderParadise.Data.Models;
 using BlenderParadise.Repositories.Contracts;
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlenderParadise.Services
 {

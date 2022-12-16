@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
+using System.Diagnostics.CodeAnalysis;
 using System.IO.Compression;
 
 namespace BlenderParadise.Controllers
 {
     [Authorize]
+    [ExcludeFromCodeCoverage]
     public class DownloadController : Controller
     {
         private readonly IDownloadService downloadService;

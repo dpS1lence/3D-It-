@@ -24,8 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlenderParadise.Infrastructure\BlenderParadise.Infrastructure.csproj" />
+    <ProjectReference Include="..\BlenderParadise.Services\BlenderParadise.Services.csproj" />
     <ProjectReference Include="..\BlenderParadise.Tests.Common\BlenderParadise.Tests.Common.csproj" />
-    <ProjectReference Include="..\BlenderParadise\BlenderParadise.csproj" />
   </ItemGroup>
 
 </Project>

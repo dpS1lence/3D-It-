@@ -1,10 +1,9 @@
 ﻿using BlenderParadise.Data.Models;
 using BlenderParadise.Services.Contracts;
 using BlenderParadise.Services.Helpers;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32.SafeHandles;
-using MimeKit;
 
 namespace BlenderParadise.Services
 {

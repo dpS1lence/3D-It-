@@ -3,11 +3,13 @@ using BlenderParadise.Models.Profile;
 using BlenderParadise.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 
 namespace BlenderParadise.Controllers
 {
-    public class ProfileController : Controller
+	[ExcludeFromCodeCoverage]
+	public class ProfileController : Controller
     {
         private readonly IProfileService _profileService;
 

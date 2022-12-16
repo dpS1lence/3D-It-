@@ -5,9 +5,20 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise", "BlenderParadise\BlenderParadise.csproj", "{1CD72DF5-D25F-4F49-A8AF-D847C7262411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlenderParadise.UnitTests", "BlenderParadise.UnitTests\BlenderParadise.UnitTests.csproj", "{948DADD7-625C-4BD8-90B5-63F6D0A23C97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise.UnitTests", "BlenderParadise.UnitTests\BlenderParadise.UnitTests.csproj", "{948DADD7-625C-4BD8-90B5-63F6D0A23C97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlenderParadise.Tests.Common", "BlenderParadise.Tests.Common\BlenderParadise.Tests.Common.csproj", "{F5112698-80FE-4515-8232-D2C43D47E245}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise.Tests.Common", "BlenderParadise.Tests.Common\BlenderParadise.Tests.Common.csproj", "{F5112698-80FE-4515-8232-D2C43D47E245}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D7F0645C-14A9-43EC-B99B-77834A1C025A}"
+	ProjectSection(SolutionItems) = preProject
+		CodeCoverage.runsettings = CodeCoverage.runsettings
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise.Services", "BlenderParadise.Services\BlenderParadise.Services.csproj", "{937211F1-6241-473A-B14F-6CD4858E8955}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlenderParadise.Infrastructure", "BlenderParadise.Infrastructure\BlenderParadise.Infrastructure.csproj", "{403EB2A7-2286-419A-9F6B-5B201FAFFB75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlenderParadise.Common", "BlenderParadise.Common\BlenderParadise.Common.csproj", "{D3288CCD-38B1-48FF-A165-EB9672100033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +38,18 @@ Global
 		{F5112698-80FE-4515-8232-D2C43D47E245}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5112698-80FE-4515-8232-D2C43D47E245}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5112698-80FE-4515-8232-D2C43D47E245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{937211F1-6241-473A-B14F-6CD4858E8955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{937211F1-6241-473A-B14F-6CD4858E8955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{937211F1-6241-473A-B14F-6CD4858E8955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{937211F1-6241-473A-B14F-6CD4858E8955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403EB2A7-2286-419A-9F6B-5B201FAFFB75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403EB2A7-2286-419A-9F6B-5B201FAFFB75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403EB2A7-2286-419A-9F6B-5B201FAFFB75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403EB2A7-2286-419A-9F6B-5B201FAFFB75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3288CCD-38B1-48FF-A165-EB9672100033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3288CCD-38B1-48FF-A165-EB9672100033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3288CCD-38B1-48FF-A165-EB9672100033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3288CCD-38B1-48FF-A165-EB9672100033}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
