@@ -16,7 +16,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
             repoMock.Setup(r => r.GetByIdAsync<Content>(It.IsAny<int>()))!.ReturnsAsync((int id) => content.FirstOrDefault(a => a.Id == id));
             repoMock.Setup(r => r.GetByIdAsync<Product>(It.IsAny<int>()))!.ReturnsAsync((int id) => products.FirstOrDefault(a => a.Id == id));
 
-            IDownloadService service = new DownloadService(repoMock.Object, this.userManager.Object);
+            IDownloadService service = new DownloadService(repoMock.Object);
 
             var actual = service.GetNameAsync(products.First().Id);
 
@@ -41,7 +41,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
             repoMock.Setup(r => r.GetByIdAsync<Content>(It.IsAny<int>()))!.ReturnsAsync((int id) => content.FirstOrDefault(a => a.Id == id));
             repoMock.Setup(r => r.GetByIdAsync<Product>(It.IsAny<int>()))!.ReturnsAsync((int id) => new List<Product>() { product }.FirstOrDefault(a => a.Id == id));
 
-            IDownloadService service = new DownloadService(repoMock.Object, this.userManager.Object);
+            IDownloadService service = new DownloadService(repoMock.Object);
 
             Assert.ThrowsAsync<ArgumentException>(() => service.GetNameAsync(product.Id));
         }
@@ -57,7 +57,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
             repoMock.Setup(r => r.GetByIdAsync<Content>(It.IsAny<int>()))!.ReturnsAsync((int id) => content.FirstOrDefault(a => a.Id == id));
             repoMock.Setup(r => r.GetByIdAsync<Product>(It.IsAny<int>()))!.ReturnsAsync((int id) => products.FirstOrDefault(a => a.Id == id));
 
-            IDownloadService service = new DownloadService(repoMock.Object, this.userManager.Object);
+            IDownloadService service = new DownloadService(repoMock.Object);
 
             var actual = service.GetZipAsync(products.First().Id);
 
@@ -82,7 +82,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
             repoMock.Setup(r => r.GetByIdAsync<Content>(It.IsAny<int>()))!.ReturnsAsync((int id) => content.FirstOrDefault(a => a.Id == id));
             repoMock.Setup(r => r.GetByIdAsync<Product>(It.IsAny<int>()))!.ReturnsAsync((int id) => new List<Product>() { product }.FirstOrDefault(a => a.Id == id));
 
-            IDownloadService service = new DownloadService(repoMock.Object, this.userManager.Object);
+            IDownloadService service = new DownloadService(repoMock.Object);
 
             Assert.ThrowsAsync<ArgumentException>(() => service.GetZipAsync(product.Id));
         }
@@ -107,7 +107,7 @@ namespace BlenderParadise.UnitTests.ServicesTests
             repoMock.Setup(r => r.GetByIdAsync<Content>(It.IsAny<int>()))!.ReturnsAsync((int id) => new List<Content>() { content }.FirstOrDefault(a => a.Id == id));
             repoMock.Setup(r => r.GetByIdAsync<Product>(It.IsAny<int>()))!.ReturnsAsync((int id) => new List<Product>() { product }.FirstOrDefault(a => a.Id == id));
 
-            IDownloadService service = new DownloadService(repoMock.Object, this.userManager.Object);
+            IDownloadService service = new DownloadService(repoMock.Object);
 
             Assert.ThrowsAsync<ArgumentException>(() => service.GetZipAsync(product.Id));
         }

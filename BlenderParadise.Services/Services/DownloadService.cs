@@ -9,11 +9,9 @@ namespace BlenderParadise.Services
     public class DownloadService : IDownloadService
     {
         private readonly IRepository _repository;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public DownloadService(IRepository repository, UserManager<ApplicationUser> userManager)
+        public DownloadService(IRepository repository)
         {
             _repository = repository;
-            _userManager = userManager;
         }
 
         public async Task<string> GetNameAsync(int id)
