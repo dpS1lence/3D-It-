@@ -4,7 +4,7 @@
 
 <p id="description">The idea of the project is all about free blender models sharing.</p>
 
-  
+  [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=dpS1lence_3D-It-)](https://sonarcloud.io/summary/new_code?id=dpS1lence_3D-It-)
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
