@@ -90,7 +90,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.SeedAdmin();
+//uncomment when Administrator is added
+/*app.SeedAdmin();*/
 
 app.UseEndpoints(endpoints =>
 {
