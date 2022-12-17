@@ -92,13 +92,22 @@ namespace BlenderParadise.Services
 
                 var coverPhoto = target.ToArray();
 
+                var polygons = int.Parse(model.Polygons);
+                if(polygons < 0) polygons = 0;
+
+                var vertices = int.Parse(model.Vertices);
+                if (vertices < 0) vertices = 0;
+
+                var geometry = int.Parse(model.Geometry);
+                if (geometry < 0) geometry = 0;
+
                 productEntity = new Product()
                 {
                     Name = model.Name,
                     Description = model.Description,
-                    Polygons = int.Parse(model.Polygons),
-                    Vertices = int.Parse(model.Vertices),
-                    Geometry = int.Parse(model.Geometry),
+                    Polygons = polygons,
+                    Vertices = vertices,
+                    Geometry = geometry,
                     CategoryId = desiredCategory?.Id ?? 1,
                     Photo = coverPhoto,
                     UserId = userId,

@@ -32,6 +32,7 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/User/Login";
+    options.AccessDeniedPath = "/Home/Index";
 });
 builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IDownloadService, DownloadService>();
@@ -72,7 +73,6 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    //app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
     app.UseExceptionHandler("/Home/Error");
 }
