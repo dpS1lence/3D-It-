@@ -45,6 +45,21 @@ builder.Services.AddScoped<IFileService>(_ => new AzureFileService(builder.Confi
 ```
 builder.Services.AddScoped<IFileService>(_ => new LocalStorageFileService(builder.Environment.WebRootPath));
 ```
+
+<p>4. Also you must run this query in the database engine that you use.</p>
+
+```
+INSERT INTO Categories([Name])
+VALUES
+('Art'),
+('Character'),
+('Animal'),
+('Office'),
+('People'),
+('Food & Drink'),
+('Architecture'),
+('Technology')
+```
   
 <h2>💻 Built with</h2>
 
