@@ -22,17 +22,17 @@
             </div>
             <div class="text-center mb-3">
                 <label asp-for="@Model.Polygons">Faces</label>
-                <input type="number" class="form-control " autocomplete="username" aria-required="true" asp-for="@Model.Polygons" />
+                <input type="number" class="form-control" autocomplete="username" aria-required="true" asp-for="@Model.Polygons" />
                 <span asp-validation-for="@Model.Polygons" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
                 <label asp-for="@Model.Vertices">Vertices</label>
-                <input type="number" class="form-control " autocomplete="username" aria-required="true" asp-for="@Model.Vertices" />
+                <input type="number" class="form-control" autocomplete="username" aria-required="true" asp-for="@Model.Vertices" />
                 <span asp-validation-for="@Model.Vertices" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
                 <label asp-for="@Model.Geometry">Edges</label>
-                <input type="number" class="form-control " autocomplete="username" aria-required="true" asp-for="@Model.Geometry" />
+                <input type="number" class="form-control" autocomplete="username" aria-required="true" asp-for="@Model.Geometry" />
                 <span asp-validation-for="@Model.Geometry" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
@@ -72,7 +72,7 @@
                 <span asp-validation-for="@Model.PhotosZip" class="text-danger"></span>
             </div>
             <div class="text-center">
-                <form asp-controller="Upload" asp-action="Upload" class="input-group-sm">
+                <form asp-area="" asp-controller="Upload" asp-action="Upload" class="input-group-sm">
                     <input type="submit" value="Upload" class="uploadBtn" />
                 </form>
             </div>

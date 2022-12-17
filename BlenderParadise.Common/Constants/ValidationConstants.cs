@@ -12,7 +12,7 @@
 
         public const int PRODUCT_NUMERIC_FIELDS_MAX_LENGTH = 20;
 
-        public const int MULTIPART_BODY_LENGTH_LIMIT = 10000000;
+        public const int MULTIPART_BODY_LENGTH_LIMIT = 500000000;
 
         public const int PASSWORD_MAX_LENGTH = 40;
         public const int PASSWORD_MIN_LENGTH = 8;

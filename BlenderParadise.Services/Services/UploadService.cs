@@ -108,7 +108,7 @@ namespace BlenderParadise.Services
                     Polygons = polygons,
                     Vertices = vertices,
                     Geometry = geometry,
-                    CategoryId = desiredCategory?.Id ?? 1,
+                    CategoryId = desiredCategory.Id,
                     Photo = coverPhoto,
                     UserId = userId,
                     ApplicationUser = desiredUser,
