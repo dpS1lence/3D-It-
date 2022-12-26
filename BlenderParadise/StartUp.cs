@@ -16,7 +16,7 @@ using BlenderParadise.Services.Services.FileServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("AzureConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -59,8 +59,7 @@ builder.Services.AddQuartz(q =>
     q.ScheduleJob<ChallengeJob>(trigger => trigger
             .WithIdentity("Combined Configuration Trigger")
             .StartNow()
-            //Will be changed to 1 day on release.
-            .WithDailyTimeIntervalSchedule(x => x.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0)).WithIntervalInMinutes(1))
+            .WithDailyTimeIntervalSchedule(x => x.StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(0, 0)).OnEveryDay())
         );
 });
 
@@ -90,8 +89,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//uncomment when Administrator is added
-/*app.SeedAdmin();*/
+app.SeedAdmin();
 
 app.UseEndpoints(endpoints =>
 {
